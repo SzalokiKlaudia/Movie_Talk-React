@@ -3,7 +3,7 @@ import '../../style/Premiers.css';
 
 
 export default function Premier(props) {
-    console.log(props.movie)
+    //console.log(props.movie)
   return (
     <div className="col-6 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-center">
      
