@@ -1,0 +1,10 @@
+:root{
+    --logo-font-family: "Akaya Kanadaka", serif;
+    --nav-font-family:"Assistant", serif;
+    --bg-color:#ffffff;
+    /*--button-color: #78bcb2;*/
+    --btn-font-bg-color: #ffffff; /*ikon*/
+    --nav-bg-color: #222529;
+    --font-color: #ffffff;
+    --hover-font-color: #62568b;
+}

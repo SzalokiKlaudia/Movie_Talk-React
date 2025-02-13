@@ -1,0 +1,81 @@
+@import './importVariables.css';  
+
+/* styles.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.nav-link{
+  font-family: var(--nav-font-family)!important;
+}
+
+.btn-light {
+  background-color: var(--btn-font-bg-color)!important;
+  border: none !important;
+
+}
+.btn-light:hover {
+  background-color: var(--btn-font-bg-color)!important;
+  border-color: transparent !important;
+}
+
+.input-group .dropdown-menu {
+  background-color: var(--nav-bg-color);
+  position: absolute;
+  top: 100%; /* a dropdown a gomb alá kerüljön */
+  left: 0;
+  z-index: 1050; /* biztosítja, hogy a menü ne takarja el más elemeket */
+  width: 50%; /* biztosítja, hogy a dropdown menü teljes szélességben illeszkedjen az inputhoz */
+}
+
+.dropdown-item {
+  color: var(--font-color)!important; /* betűszín */
+}
+
+.dropdown-item:hover {
+  background-color: var(--nav-bg-color)!important; /* Nincs háttérszín változás */
+  color: var(--hover-font-color)!important;
+
+}
+
+#btn-title{
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+
+
+#search{
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+#logo:hover, .nav-link:hover{
+  color: var(--hover-font-color)!important;
+
+}
+
+#logo{
+  font-family: var(--logo-font-family);
+  font-weight: 400;
+
+}
+
+/* Alapértelmezetten rejtve van */
+.mobile-menu {
+  display: none;
+  width: 100%;
+}
+
+/*ah az osztály hozzá van adva, akkor jelenik meg */
+.mobile-menu.active {
+  display: block;
+}
+
+
+
+
+
+

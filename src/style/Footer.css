@@ -1,0 +1,11 @@
+
+.logo-footer{
+    width: 5rem;
+    height: 1.5rem;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

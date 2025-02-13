@@ -1,0 +1,40 @@
+
+
+import React from 'react'
+import useAuthContext from '../contexts/AuthContext'
+import Premiers from '../components/guest/Premiers'
+
+
+
+export default function HomeUser() {
+  const { pMovies } = useAuthContext() // Nem kell useContext-et újra meghívni
+  
+  return (
+     <main>
+          <div className='container'>
+        
+            <section className='section1'>
+            <h3 className='title'>
+              Premier filmek
+            </h3>
+           
+          
+            {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
+    
+    
+            </section>
+            <h3 className='title'>
+              Népszerű filmek
+            </h3>
+            <section className='section2'>
+          
+    
+            </section>
+    
+            <section className='section3'>
+    
+            </section>
+          </div>
+        </main>
+  )
+}
