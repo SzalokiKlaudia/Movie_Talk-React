@@ -29,14 +29,14 @@ export default function Login() {
   
   return (
           <div className="m-auto" style={{ maxWidth: "400px" }}>
-          <h1 className="text-center">Bejelentkezés</h1>
-          <form>
+          <h1 className="text-center">Movie Track</h1>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3 mt-3">
               <label htmlFor="email" className="form-label">
-                Email:
               </label>
               <input
                 type="email"
+             
                 // value beállítása a state értékére
                 value={email}
                 // state értékének módosítása ha változik a beviteli mező tartalma
@@ -56,7 +56,6 @@ export default function Login() {
             </div>
             <div className="mb-3">
               <label htmlFor="pwd" className="form-label">
-                Jelszó:
               </label>
               <input
                 type="password"
@@ -66,7 +65,7 @@ export default function Login() {
                 }}
                 className="form-control"
                 id="pwd"
-                placeholder="jelszó"
+                placeholder="password"
                 name="pwd"
               />
               <div>
@@ -82,9 +81,9 @@ export default function Login() {
               </button>
 
               <p>
-                Még nincs felhaszálóneve?
-                <Link className="nav-link text-info" to="">
-                  Regisztráció
+              New to Movie Tack?
+                <Link className="nav-link text-info" to="/register">
+                  Join now
                 </Link>
               </p>
             </div>

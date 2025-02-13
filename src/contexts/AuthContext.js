@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const {data} = await myAxios.get('/api/premier-movies')
         console.log(data)
-        //setPMovies(data)  // Itt tároljuk el a filmeket az állapotban
+        setPMovies(data)  // Itt tároljuk el a filmeket az állapotban!!!!!
      
       } catch (error) {
         console.error("No datas to the premiers:", error)
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
    
 
-    const logout = async () => {
+    const logOut = async () => {
       await csrf()
   
       myAxios.post("/logout").then((resp) => {
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg}}>
+        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut}}>
           {children}
         </AuthContext.Provider>
       )

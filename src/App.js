@@ -27,8 +27,8 @@ function App() {
             )}
 
             {user && ( // Bejelentkezett felhasználó nézet (Admin vagy User)
-                <Route path="/" element={user?.isAdmin === 1 ? <AdminLayout /> : <UserLayout />}>
-                  <Route index element={user.isAdmin === 1 ? <HomeUser /> : <HomeAdmin />} />
+                <Route path="/login" element={user?.isAdmin === 1 ? <AdminLayout /> : <UserLayout />}>
+                  <Route index element={user.isAdmin === 1 ? <HomeAdmin /> : < HomeUser/>} />
 
                 </Route>
             )}
