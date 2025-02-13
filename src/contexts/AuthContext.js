@@ -42,14 +42,14 @@ export const AuthProvider = ({ children }) => {
 
    
 
-    const logout = async () => {
+    /*const logout = async () => {
       await csrf()
   
       myAxios.post("/logout").then((resp) => {
         setUser(null)
         console.log(resp)
       })
-    }
+    }*/
 
    
    
@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }) => {
                   email: 'Invalid credentials',
                   password: 'Invalid credentials'
               });
+            }
           }
       }
 
@@ -91,8 +92,8 @@ export const AuthProvider = ({ children }) => {
           {children}
         </AuthContext.Provider>
       )
-    }
-  }
+    
+}
 
     export default function useAuthContext() {//egyedi hook az authcontext használatához
       return useContext(AuthContext)//így nem kell midnen komponensben importálni
