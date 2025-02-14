@@ -14,34 +14,32 @@ export default function HomeAdmin() {
    
 
     <main>
-      <div>
-        hello...
-      </div>
-          <div className='container'>
-        
-            <section className='section1'>
-            <h3 className='title'>
-              Premier filmek
-            </h3>
-           
-          
-            {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
-    
-    
-            </section>
-            <h3 className='title'>
-              Népszerű filmek
-            </h3>
-            <section className='section2'>
-          
-    
-            </section>
-    
-            <section className='section3'>
-    
-            </section>
+        <div className='container mt-5'>
+          <div>
+            <h2 className='ms-5'> Hello {user.name} !</h2>
           </div>
-        </main>
+            
+          <section className='section1'>
+            <h3 className='title'>
+                  Premier filmek
+            </h3>
+
+            {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
+        
+          </section>
+            <h3 className='title'>
+                  Népszerű filmek
+            </h3>
+          <section className='section2'>
+              
+          </section>
+        
+          <section className='section3'>
+        
+          </section>
+          
+        </div>
+      </main>
     
   )
 }

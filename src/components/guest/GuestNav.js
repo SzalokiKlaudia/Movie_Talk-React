@@ -108,7 +108,7 @@ export default function GuestNav() {
 
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link" id="nav-log">Login</Link>
+              <Link className="nav-link" id="nav-log" to="/login">Login</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" id="nav-reg">Join now</Link>

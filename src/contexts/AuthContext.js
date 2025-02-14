@@ -8,12 +8,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
-    const navigate = useNavigate()
+    const navigate = useNavigate()//hook segítségével átnavigálhatsz másik oldalra
     const [errors, setErrors] = useState({
-        name: "",
+        user_name: "",
         email: "",
         password: "",
         password_confirmation: "",
+        name: "",
+        gender: "",
+        birth_year: "",
+
 
     })
     
@@ -33,15 +37,12 @@ export const AuthProvider = ({ children }) => {
     const csrf = async () => myAxios.get("/sanctum/csrf-cookie")
 
    //bejelentkezett felhasználó adatainak lekérdezése
-  
    const getUser = async () => {
     const { data } = await myAxios.get("/api/user")
     console.log(data)
     setUser(data)
-  }
+    }
   
-
-   
 
     const logOut = async () => {
       await csrf()
@@ -52,7 +53,6 @@ export const AuthProvider = ({ children }) => {
       })
     }
 
-   
    
      // Komponens betöltésekor egyszer lefut
         useEffect(() => {

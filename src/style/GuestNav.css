@@ -22,7 +22,7 @@
 }
 
 .input-group .dropdown-menu {
-  background-color: var(--nav-bg-color);
+  background-color: var(--nav-hover-color);
   position: absolute;
   top: 100%; /* a dropdown a gomb alá kerüljön */
   left: 0;

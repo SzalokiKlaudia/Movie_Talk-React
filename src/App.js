@@ -14,6 +14,7 @@ import HomeGuest from './pages/HomeGuest';
 
 function App() {
     const {user} = useAuthContext()//meghívtuk 
+    console.log(user)
   return (
     
         <Routes>
@@ -26,12 +27,19 @@ function App() {
                 </Route>
             )}
 
-            {user && ( // Bejelentkezett felhasználó nézet (Admin vagy User)
-                <Route path="/login" element={user?.isAdmin === 1 ? <AdminLayout /> : <UserLayout />}>
-                  <Route index element={user.isAdmin === 1 ? <HomeAdmin /> : < HomeUser/>} />
+            {user?.is_admin === 1 && (
+                <Route element={<AdminLayout />}>
+                    <Route index element={<HomeAdmin />} />
 
                 </Route>
             )}
+
+            {user?.is_admin === 0 && (
+                <Route element={<UserLayout />}>
+                    <Route index element={<HomeUser />} />
+                </Route>
+            )}
+
         </Routes>
     )
     

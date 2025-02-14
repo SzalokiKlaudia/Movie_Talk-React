@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../contexts/AuthContext'
+import '../style/Registration.css'
+
 
 
 export default function Login() {
@@ -28,7 +30,8 @@ export default function Login() {
   }
   
   return (
-          <div className="m-auto" style={{ maxWidth: "400px" }}>
+        <main className='main'>
+          <div className="m-auto container" style={{ maxWidth: "400px" }}>
           <h1 className="text-center">Movie Track</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3 mt-3">
@@ -54,7 +57,7 @@ export default function Login() {
                 <span className="text-danger">{errors.email[0]}</span>
               )}
             </div>
-            <div className="mb-3">
+            <div className="mb-3 mt-3">
               <label htmlFor="pwd" className="form-label">
               </label>
               <input
@@ -75,19 +78,21 @@ export default function Login() {
               </div>
             </div>
 
-            <div className=" text-center">
-              <button type="submit" className="btn btn-primary w-100">
+            <div className="text-center mb-3 mt-5">
+              <button type="submit" className="btn btn-primary w-100 reg-btn">
                 Login
               </button>
-
-              <p>
+            </div>
+            <div className='d-flex justify-content-center'>
+            <p>
               New to Movie Tack?
-                <Link className="nav-link text-info" to="/register">
+                <Link className="nav-link text-info text-center" to="/register">
                   Join now
                 </Link>
               </p>
-            </div>
+              </div>
           </form>
           </div>
+        </main>
         )
 }

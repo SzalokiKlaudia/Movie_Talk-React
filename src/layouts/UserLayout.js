@@ -9,7 +9,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 export default function UserLayout() {
 
     const { user } = useAuthContext()
-    return user && user.role === 0 ?  <>  <UserNav /> <Outlet /> </> : <Navigate to="/login" />
+    return user && user.is_admin === 0 ?  <>  <UserNav /> <Outlet /> </> : <Navigate to="/" />;
 
 
 }

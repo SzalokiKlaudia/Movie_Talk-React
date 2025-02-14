@@ -1,0 +1,31 @@
+@import './importVariables.css';  
+
+
+.rotated {/*elforgatjuk 180 fokban a nyilat a lenyíló menüben*/
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom{
+    cursor: pointer;
+    color: var(--hover-font-color)!important;
+    background-color: var(--nav-hover-color)!important;
+
+
+
+}
+
+.text-white:hover{
+    color: var(--hover-font-color)!important;
+
+}
+
+.custom-bg{
+    background-color: var(--nav-hover-color)!important;
+}
+
+.custom:hover{
+    background-color: var(--nav-hover-color)!important;
+
+
+}
