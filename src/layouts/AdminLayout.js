@@ -9,7 +9,7 @@ import AdminNav from '../components/admin/AdminNav'
 export default function AdminLayout() {
   const { user } = useAuthContext()
 
-    return user && user.is_admin === 1 ?  <>  <AdminNav /> <Outlet /> </> : <Navigate to="/" />;
+    return user && user.is_admin === 1 ?  <>  <AdminNav /> <Outlet /> </> : <Navigate to="/" />
 
 }
 

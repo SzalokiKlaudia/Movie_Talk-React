@@ -7,8 +7,12 @@ import Premiers from '../components/guest/Premiers'
 
 
 export default function HomeUser() {
+
+  const {user} = useAuthContext()
   const { pMovies } = useAuthContext() // Nem kell useContext-et újra meghívni
-  
+
+  console.log(user)
+
   return (
       <main>
         <div className='container mt-5'>
@@ -34,7 +38,7 @@ export default function HomeUser() {
           <section className='section3'>
         
           </section>
-          
+
         </div>
       </main>
   )
