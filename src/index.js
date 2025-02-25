@@ -7,15 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter } from 'react-router-dom';
+import { FileProvider } from './contexts/FileContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <FileProvider>
       <AuthProvider>
         <App />
       </AuthProvider>
+      </FileProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

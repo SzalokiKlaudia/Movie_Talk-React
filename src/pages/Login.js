@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../contexts/AuthContext'
-import '../style/Registration.css'
+import '../style/LoginRegistration.css'
 
 
 
@@ -31,8 +31,9 @@ export default function Login() {
   
   return (
         <main className='main'>
-          <div className="m-auto container" style={{ maxWidth: "400px" }}>
-          <h1 className="text-center">Movie Track</h1>
+          <div className="container p-0 mt-5" style={{ maxWidth: "400px" }}>
+          <h1 className="text-center custom-brand">Movie Track</h1>
+        <div className='p-3'>
           <form onSubmit={handleSubmit}>
             <div className="mb-3 mt-3">
               <label htmlFor="email" className="form-label">
@@ -83,8 +84,8 @@ export default function Login() {
                 Login
               </button>
             </div>
-            <div className='d-flex justify-content-center'>
-            <p>
+            <div className='d-flex justify-content-center mt-5'>
+            <p className='text-log-reg'>
               New to Movie Tack?
                 <Link className="nav-link text-info text-center" to="/register">
                   Join now
@@ -92,6 +93,7 @@ export default function Login() {
               </p>
               </div>
           </form>
+        </div>
           </div>
         </main>
         )

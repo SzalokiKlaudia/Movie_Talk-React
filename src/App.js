@@ -10,6 +10,7 @@ import UserLayout from './layouts/UserLayout';
 import HomeAdmin from './pages/HomeAdmin';
 import HomeUser from './pages/HomeUser';
 import HomeGuest from './pages/HomeGuest';
+import ProfilAdmin from './pages/ProfilAdmin';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
             {user?.is_admin === 1 && (
                 <Route element={<AdminLayout />}>
                     <Route index element={<HomeAdmin />} />
+                    <Route path="/user" element={<ProfilAdmin />} />
+
+
 
                 </Route>
             )}

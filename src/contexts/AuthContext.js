@@ -26,13 +26,39 @@ export const AuthProvider = ({ children }) => {
     const getPremiers = async () => { //itt szedjük le külső apiból a premier filmeket
       try {
         const {data} = await myAxios.get('/api/premier-movies')
-        console.log(data)
+        //console.log(data)
         setPMovies(data)  // Itt tároljuk el a filmeket az állapotban!!!!!
      
       } catch (error) {
         console.error("No datas to the premiers:", error)
       }
     }
+
+    const [usersTopMovies, setUsersTopMovies] = useState([]);
+
+    const getUsersTopMovies = async () => {
+      try {
+        const {data} = await myAxios.get('api/movie/top-rated-movies')
+        //console.log(data)
+        setUsersTopMovies(data)
+
+      } catch (error) {
+        console.error("Could not find any data to the routes")
+      }
+    }
+
+    const [topUsers, setTopUsers] = useState([]);
+
+    const getTopUsers = async () => {
+      try {
+        const {data} = await myAxios.get('api/movie/top-users')
+        console.log(data)
+        setTopUsers(data)
+      }catch (error) {
+        console.error("Could not find any data to the routes")
+      }
+    }
+
 
     const csrf = async () => myAxios.get("/sanctum/csrf-cookie")
 
@@ -60,6 +86,8 @@ export const AuthProvider = ({ children }) => {
             getUser()
           }
           getPremiers(); // Filmek adatainak lekérése a komponens betöltésekor
+          getUsersTopMovies()
+          getTopUsers()
 
         }, []);
 
@@ -89,7 +117,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut}}>
+        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers}}>
           {children}
         </AuthContext.Provider>
       )

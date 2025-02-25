@@ -6,7 +6,9 @@ export const  myAxios=axios.create({
     baseURL: "http://localhost:8000",
 
 
-    withCredentials: true //kérések atzonosítása cookie-k segítségével
+    withCredentials: true, //kérések atzonosítása cookie-k segítségével
+    withXSRFToken :true, 
+
 
 })
 

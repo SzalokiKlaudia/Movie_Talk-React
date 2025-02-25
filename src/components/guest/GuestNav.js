@@ -1,7 +1,7 @@
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../../style/GuestNav.css';
 
 
@@ -13,6 +13,7 @@ export default function GuestNav() {
     const toggleMenu = () => {
       setMenuOpen(!menuOpen)
     }
+
   
 
     return (
@@ -27,6 +28,8 @@ export default function GuestNav() {
             </Link>
             
           </div>
+
+          
 
                 {/* Hamburger menü gomb (csak mobil nézetben látható) */}
           <button
@@ -114,7 +117,7 @@ export default function GuestNav() {
               <Link className="nav-link" id="nav-reg">Join now</Link>
             </li>
           </ul>
-                {/* KERESŐ FORM (MOBIL) */}
+                {/* mobil kereső form-ja */}
           <form className="mobile-search" role="search">
             <div className="input-group">
               <button id="btn-title" className="btn btn-light dropdown-toggle" type="button"
@@ -143,6 +146,8 @@ export default function GuestNav() {
               </button>
             </div>
           </form>
+        
+        
 
         </div>
       </header>
