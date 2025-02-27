@@ -1,16 +1,23 @@
 import React from 'react'
 import '../../style/TopUsers.css'
+import useFileContext from '../../contexts/FileContext';
 
 
 export default function TopUser(props) {
     //console.log(props.user)
+    const baseUrl = "http://localhost:8000/storage"
+    const imageUrl = baseUrl + `/${props.user.profile_picture_name}`
+    //console.log(props.user.profile_picture_name)
+    const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
 
-    const maxValue = 100; 
-    const percentage = Math.min((props.user.number / maxValue) * 100, 100)
+    const maxValue = 100
+    //itt számoljuk ki a szélességet a meternek dinamikusan
+    const percentage = Math.min((props.user.number / maxValue) * 100, 100)//nem haladja meg a 100% feletti értéket
+
   return (
     <li className='user'>
         <span className='avatar'>
-            <a href=""></a>
+            <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="" />
 
         </span>
         <div className='data'>

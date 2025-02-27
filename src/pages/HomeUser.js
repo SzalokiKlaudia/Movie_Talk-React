@@ -5,6 +5,7 @@ import useAuthContext from '../contexts/AuthContext'
 import Premiers from '../components/guest/Premiers'
 import UsersTopMovies from '../components/guest/UsersTopMovies'
 import TopUsers from '../components/guest/TopUsers'
+import useFileContext from '../contexts/FileContext'
 
 
 
@@ -12,6 +13,7 @@ export default function HomeUser() {
 
   const {user} = useAuthContext()
   const { pMovies, usersTopMovies, topUsers } = useAuthContext() // Nem kell useContext-et újra meghívni
+ 
 
   console.log(user)
 
