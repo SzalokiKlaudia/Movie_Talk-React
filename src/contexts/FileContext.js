@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { myAxios } from "../api/axios";
+import useAuthContext from "./AuthContext";
 
 
 
@@ -7,38 +8,58 @@ const FileContext = createContext()
 
 export const FileProvider = ({ children }) => {
 
-    const [pictureList, setPictureList] = useState([])
+    const [profilPicture, setProfilePicture] = useState(null)
+    const { user } = useAuthContext()
 
-    const getlist = async ( endPoint, callBack) => {
-        const { data } = await myAxios.get(endPoint)
-        console.log(data)
 
-        callBack(data)
+  
+   
+
+    const getProfilPicture = async () => {
+
+        try {
+            const { data } = await myAxios.get('api/user/profile-picture') // ő felel a kép lekérésére a usernek
+            console.log(data.picture)
+           setProfilePicture(data.picture)
+
+
+        } catch (error) {
+            console.error('Could not find the image',error)
+
+        }
+      
+
     }
 
-    const postData = async ({ ...data }, endPoint) => {   
+    const uploadProfilePicture = async (file) => {
         try {
-        await myAxios
-            .post(endPoint, data, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-            })
-            .then((resp) => {
-            console.log(resp);
-            setPictureList(resp.data);
+            const formData = new FormData();
+            formData.append("profile_picture", file);
+    
+            const { data } = await myAxios.post("api/user/profile-picture/upload", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", // Fájl típusú adat küldése
+                },
             });
+            console.log(data.picture)
+            setProfilePicture(data.picture) // Mivel a backend már a teljes URL-t adja vissza
         } catch (error) {
-        console.log(error);
+            console.error("Found error during the profile picture uploading:", error)
         }
     }
 
     useEffect(() => {
-        getlist("/file-upload", setPictureList);
-    }, [])
+        if (user) {
+            getProfilPicture()
+          } else {
+            setProfilePicture(null)
+          }
+    }, [user])
+
+  
 
     return (
-        <FileContext.Provider value={{ pictureList, postData }}>
+        <FileContext.Provider value={{profilPicture,uploadProfilePicture, setProfilePicture}}>
         {children}
         </FileContext.Provider>
     )
@@ -48,5 +69,5 @@ export const FileProvider = ({ children }) => {
 }
 
 export default function useFileContext() {
-    return useContext(FileContext);
+    return useContext(FileContext)
 }

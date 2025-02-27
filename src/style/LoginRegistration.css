@@ -24,6 +24,12 @@
     
 }
 
+.custom-info{
+  border-top: 4px solid var(--register-login-bg-color);
+  padding: 1rem;
+
+}
+
 .container{
     width: 100%;
     max-width: 400px;

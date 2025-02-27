@@ -15,7 +15,7 @@ export default function Login() {
   const navigate = useNavigate()
   const { loginReg, errors } = useAuthContext()
 
-  const handleSubmit = async (e) => {//őt még nemr aktam a formra
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
 
@@ -24,7 +24,6 @@ export default function Login() {
       password: password,
     }
 
-    console.log(adat)
 
     loginReg(adat, "/login")
   }
@@ -51,6 +50,7 @@ export default function Login() {
                 id="email"
                 placeholder="email"
                 name="email"
+                required
               />
             </div>
             <div>
@@ -71,6 +71,7 @@ export default function Login() {
                 id="pwd"
                 placeholder="password"
                 name="pwd"
+                required
               />
               <div>
                 {errors.password && (
@@ -84,7 +85,11 @@ export default function Login() {
                 Login
               </button>
             </div>
-            <div className='d-flex justify-content-center mt-5'>
+          
+          </form>
+        
+        </div>
+        <div className='d-flex justify-content-center mt-5 custom-info'>
             <p className='text-log-reg'>
               New to Movie Tack?
                 <Link className="nav-link text-info text-center" to="/register">
@@ -92,8 +97,6 @@ export default function Login() {
                 </Link>
               </p>
               </div>
-          </form>
-        </div>
           </div>
         </main>
         )

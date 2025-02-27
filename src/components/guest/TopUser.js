@@ -3,7 +3,7 @@ import '../../style/TopUsers.css'
 
 
 export default function TopUser(props) {
-    console.log(props.user)
+    //console.log(props.user)
 
     const maxValue = 100; 
     const percentage = Math.min((props.user.number / maxValue) * 100, 100)

@@ -11,11 +11,12 @@ import HomeAdmin from './pages/HomeAdmin';
 import HomeUser from './pages/HomeUser';
 import HomeGuest from './pages/HomeGuest';
 import ProfilAdmin from './pages/ProfilAdmin';
+import ProfilUser from './pages/ProfilUser';
 
 
 function App() {
     const {user} = useAuthContext()//meghívtuk 
-    console.log(user)
+    //console.log(user)
   return (
     
         <Routes>
@@ -41,6 +42,8 @@ function App() {
             {user?.is_admin === 0 && (
                 <Route element={<UserLayout />}>
                     <Route index element={<HomeUser />} />
+                    <Route path="/user" element={<ProfilUser />} />
+
                 </Route>
             )}
 

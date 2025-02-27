@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     const getTopUsers = async () => {
       try {
         const {data} = await myAxios.get('api/movie/top-users')
-        console.log(data)
+        //console.log(data)
         setTopUsers(data)
       }catch (error) {
         console.error("Could not find any data to the routes")
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
    //bejelentkezett felhasználó adatainak lekérdezése
    const getUser = async () => {
     const { data } = await myAxios.get("/api/user")
-    console.log(data)
+    //console.log(data)
     setUser(data)
     }
   

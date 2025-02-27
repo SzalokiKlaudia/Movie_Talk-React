@@ -9,7 +9,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
 
 
-export default function ProfilAdmin() {
+export default function ProfilUser() {
 
     const {user} = useAuthContext()
     const { profilPicture, uploadProfilePicture, setProfilePicture } = useFileContext()
@@ -38,7 +38,7 @@ export default function ProfilAdmin() {
     const text = user.created_at
     const data = new Date(text)
     const formattedText = data.toISOString().split("T")[0].replace(/-/g, ".")
-    console.log(formattedText)
+    //console.log(formattedText)
     
   return (
     <main className='main-profile-admin'>

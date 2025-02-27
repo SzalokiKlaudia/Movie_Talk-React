@@ -1,0 +1,49 @@
+
+.custom-border{
+    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+}
+
+.custom-label{
+    width: 120px;
+    font-weight: 500;
+}
+
+.profile-avatar{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.avatar-section{
+    width: 100px;  /* A label szélessége */
+  height: 100px; /* A label magassága */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.upload-button{
+    font-size: 2em;
+  width: 100%;  /* Kitölti a label szélességét */
+  height: 100%;  /* Kitölti a label magasságát */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-input{
+  background-color: var(--profile-inp-bg-color) !important;
+  border-radius: 0.8rem !important; 
+
+}
+
+@media (max-width: 480px) {
+  .custom-border{
+    box-shadow: none;
+  }
+
+}

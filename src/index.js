@@ -14,11 +14,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <AuthProvider>
       <FileProvider>
-      <AuthProvider>
         <App />
-      </AuthProvider>
       </FileProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

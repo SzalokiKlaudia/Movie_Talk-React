@@ -210,7 +210,11 @@ export default function Registration() {
                 Join now
               </button>
             </div>
-            <div className='d-flex justify-content-center mt-5'>
+           
+
+          </form>
+      </div>
+      <div className='d-flex justify-content-center mt-5 custom-info'>
               <p className='text-log-reg'>
                 Are you a member?
                   <Link className="nav-link text-info text-center custom-link" to="/login">
@@ -218,9 +222,6 @@ export default function Registration() {
                 </Link>
               </p>
               </div>
-
-          </form>
-      </div>
       </div>
     </main>
   )

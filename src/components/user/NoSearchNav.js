@@ -1,12 +1,10 @@
-
-
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function UserNav() {
+export default function NoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
   const [searchOpen, setSearchOpen] = useState(false) // Állapot a kereső nyitásához
@@ -28,7 +26,7 @@ export default function UserNav() {
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
 
-  console.log(user)
+  //console.log(user)
 
 
   return (
@@ -64,42 +62,7 @@ export default function UserNav() {
       <form
         className={`d-none d-lg-block justify-content-center w-50 mx-3 ${searchOpen ? "search-open" : ""}`}
         role="search">
-        <div className="input-group">
-          {/* Title dropdown */}
-          
-            <button
-              id="btn-title"
-              className="btn btn-light dropdown-toggle"
-              type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
-              onClick={() => setTitleOpen(!titleOpen)}
-            >
-              Title
-            </button>
-            {titleOpen && (
-              <ul className="dropdown-menu show">
-                <li>
-                  <Link className="dropdown-item" to="/advanced-search">
-                    Advanced Search
-                  </Link>
-                </li>
-              </ul>
-            )}
-          
-
-          {/* Kereső input */}
-          <input
-            className="form-control flex-grow-1"
-            type="search"
-            placeholder="Search..."
-            aria-label="Search"
-          />
-
-          {/* Kereső ikon */}
-          <button id="search" className="btn btn-light" type="button">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-        </div>
+       
       </form>
 
 
@@ -162,35 +125,7 @@ export default function UserNav() {
                     </button>
             </li>
           </ul>
-                {/* KERESŐ FORM (MOBIL) */}
-          <form className="mobile-search" role="search">
-            <div className="input-group">
-              <button id="btn-title" className="btn btn-light dropdown-toggle" type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
-              onClick={() => setTitleOpen(!titleOpen)}
-            >
-                Title
-              </button>
-              {titleOpen && (
-                    <ul className="dropdown-menu show w-100">
-                      <li>
-                        <Link className="dropdown-item" to="/advanced-search">
-                          Advanced Search
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-              <input
-                className="form-control flex-grow-1"
-                type="search"
-                placeholder="Search..."
-                aria-label="Search"
-              />
-              <button id="search" className="btn btn-light" type="button">
-                <FontAwesomeIcon icon={faSearch} />
-              </button>
-            </div>
-          </form>
+              
 
         </div>
 
