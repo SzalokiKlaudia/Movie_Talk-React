@@ -12,6 +12,7 @@ import HomeUser from './pages/HomeUser';
 import HomeGuest from './pages/HomeGuest';
 import ProfilAdmin from './pages/ProfilAdmin';
 import ProfilUser from './pages/ProfilUser';
+import AdminUsers from './pages/AdminUsers';
 
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
                 <Route element={<AdminLayout />}>
                     <Route index element={<HomeAdmin />} />
                     <Route path="/user" element={<ProfilAdmin />} />
+                    <Route path="/admin/users" element={<AdminUsers />} />
+
 
 
 
@@ -43,6 +46,7 @@ function App() {
                 <Route element={<UserLayout />}>
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
+
 
                 </Route>
             )}

@@ -128,8 +128,8 @@ export default function AdminNav() {
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover">
-                        My Movies
+                    <Link to="/admin/users" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                        Users
                     </Link>
                 </li>
 
@@ -154,7 +154,7 @@ export default function AdminNav() {
               <Link className="nav-link text-white" id="nav-log">Profil</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-reg">My Movies</Link>
+              <Link className="nav-link text-white" id="nav-reg" to="/admin/users">Users</Link>
             </li>
             <li className="nav-item">
             <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">

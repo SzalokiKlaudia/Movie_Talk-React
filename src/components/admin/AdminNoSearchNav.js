@@ -4,7 +4,7 @@ import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function NoSearchNav() {
+export default function AdminNoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
   const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
@@ -40,8 +40,8 @@ export default function NoSearchNav() {
       </div>
 
       
-             {/* Hamburger menü gomb (csak mobil nézetben látható) */}
-             <button
+        {/* Hamburger menü gomb (csak mobil nézetben látható) */}
+        <button
         className="navbar-toggler d-block d-lg-none"
         type="button"
         onClick={toggleMenu}
@@ -50,19 +50,15 @@ export default function NoSearchNav() {
         aria-controls="navbarCollapse"
         aria-expanded="false"
         aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-   
-
+        >
+            <span className="navbar-toggler-icon"></span>
+        </button>
 
       <form
         className={`d-none d-lg-block justify-content-center w-50 mx-3`}
         role="search">
        
       </form>
-
 
       {/* itt kezdődik a profil menüje */}
       <ul className="navbar-nav flex-row gap-3 d-none d-lg-flex">
@@ -89,8 +85,8 @@ export default function NoSearchNav() {
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover">
-                        My Movies
+                    <Link to="/admin/users" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                        Users
                     </Link>
                 </li>
 
@@ -105,17 +101,15 @@ export default function NoSearchNav() {
       </ul>
     </nav>
 
-
-
        {/*mobil nézet, csak mobil kijelzőn aktiválódik ha a hamburgerre katt active osztályt kap*/}
        <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}>
 
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log">Profil</Link>
+              <Link className="nav-link text-white" id="nav-log" to="/user">Profil</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-reg">My Movies</Link>
+              <Link className="nav-link text-white" id="nav-reg" to="/admin/users">Users</Link>
             </li>
             <li className="nav-item">
             <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">

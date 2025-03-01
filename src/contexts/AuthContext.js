@@ -79,17 +79,33 @@ export const AuthProvider = ({ children }) => {
       })
     }
 
+    const [allUsers, setAllUsers] = useState([]);
+
+    const getAllUsers = async () => {
+      try {
+        const {data} = await myAxios.get('api/admin/users')
+        console.log(data)
+        setAllUsers(data)
+
+      } catch (error) {
+        console.error("Could not find any data to the routes")
+      }
+    }
+
+
+
    
-     // Komponens betöltésekor egyszer lefut
         useEffect(() => {
           if (!user) {
             getUser()
           }
-          getPremiers(); // Filmek adatainak lekérése a komponens betöltésekor
+          
+          getPremiers()
           getUsersTopMovies()
           getTopUsers()
+          getAllUsers()
 
-        }, []);
+        }, [])
 
       const loginReg = async ({...data}, route) => { //bej vagy reg
         try {
@@ -117,7 +133,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers}}>
+        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers, allUsers}}>
           {children}
         </AuthContext.Provider>
       )

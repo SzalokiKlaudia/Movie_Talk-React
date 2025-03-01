@@ -21,7 +21,7 @@ export default function ProfilAdmin() {
 
 
     //console.log(user)
-    console.log(profilPicture) //akt profilkép elérési útja
+    //console.log(profilPicture) //akt profilkép elérési útja
 
 
     const handleImageChange = (event) => {// a kiválasztott fájlt beállítjuk az imagefilba
@@ -38,7 +38,7 @@ export default function ProfilAdmin() {
     const text = user.created_at
     const data = new Date(text)
     const formattedText = data.toISOString().split("T")[0].replace(/-/g, ".")
-    console.log(formattedText)
+    //console.log(formattedText)
     
   return (
     <main className='main-profile-admin'>

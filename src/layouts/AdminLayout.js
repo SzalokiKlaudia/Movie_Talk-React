@@ -5,7 +5,7 @@ import useAuthContext from '../contexts/AuthContext'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import AdminNav from '../components/admin/AdminNav'
 import GuestFooter from '../components/guest/GuestFooter'
-import NoSearchNav from '../components/user/NoSearchNav'
+import AdminNoSearchNav from '../components/admin/AdminNoSearchNav'
 
 
 export default function AdminLayout() {
@@ -15,7 +15,7 @@ export default function AdminLayout() {
 
     return user && user.is_admin === 1 ?  
       <>
-        {location.pathname === '/user' ? ( <NoSearchNav /> 
+        {location.pathname === '/user' || location.pathname === '/admin/users' ? ( <AdminNoSearchNav /> 
           ) : ( <AdminNav /> ) } 
 
         <Outlet />

@@ -19,7 +19,7 @@ export const FileProvider = ({ children }) => {
 
         try {
             const { data } = await myAxios.get('api/user/profile-picture') // ő felel a kép lekérésére a usernek
-            console.log(data.picture)
+            //console.log(data.picture)
            setProfilePicture(data.picture)
 
 
