@@ -3,7 +3,7 @@ import useAuthContext from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import useFileContext from '../contexts/FileContext'
 import '../style/Profil.css'
-import Avatar from '@mui/material/Avatar'; // Ha a Material UI-t használod
+import Avatar from '@mui/material/Avatar'; // material UI
 import { IconButton } from '@mui/material'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
@@ -41,8 +41,8 @@ export default function ProfilAdmin() {
     //console.log(formattedText)
     
   return (
-    <main className='main-profile-admin'>
-    <div className="container p-0 custom-border" style={{ maxWidth: "700px" }}>
+    
+    <div className="container p-0 custom-border">
       <div className='p-5'>
         <form>
 
@@ -53,13 +53,7 @@ export default function ProfilAdmin() {
              
             <label htmlFor="upload" className='avatar-section'>
                 <IconButton className="upload-button" color="primary" aria-label="upload picture" component="span">
-                    <Avatar id="avatar"className='profile-avatar' src={profileImage}
-                        sx={{
-                          width: 100,  
-                          height: 100,  
-                          borderRadius: '50%'  
-                        }}  
-                    />
+                    <Avatar id="avatar"className='profile-avatar' src={profileImage}/>
 
                 </IconButton>
             </label>
@@ -152,6 +146,6 @@ export default function ProfilAdmin() {
         </form>
     </div>
     </div>
-  </main>
+  
   )
 }

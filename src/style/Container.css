@@ -1,0 +1,17 @@
+/*konténernek egésznek kell{
+    min-height: 100vh;
+    padding: 0 !important;
+    background-color: #bcb7cd;
+}*/
+
+/*<div className='container-fluid own d-flex flex-column justify-content-between'> */
+
+.admin-cont, .user-cont{
+    display: flex;
+    justify-content:space-between;
+    min-height: 100vh;
+    padding: 0 !important;
+    /*background-color:var(--home-bg-color);*/
+
+
+}

@@ -1,0 +1,116 @@
+
+.buttons .del-btn, .buttons .res-btn {
+    width: 150px;
+    padding: 0.3rem;
+    border: 1px solid grey;
+    border-radius: 1.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.res-btn{
+    background-color: var(--rest-btn-color) !important;
+    color: var(--btn-font-color) !important;
+}
+
+.res-btn:hover{
+    color: var(--btn-font-bg-color) !important;
+}
+
+.del-btn{
+    background-color: var(--del-btn-color) !important;
+    color: var(--btn-font-color) !important;
+    width: 5rem;
+
+}
+
+.del-btn:hover{
+    color: var(--btn-font-bg-color) !important;
+}
+
+.custom-t-container{
+   height: 80vh;
+
+}
+
+table{
+    box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
+    cursor:pointer;
+
+}
+
+.table td, .table th {
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  .table-container{
+    flex-wrap: nowrap !important;
+    gap: 0;
+}
+
+@media (max-width: 1100px) {
+
+    .custom-t-container{
+        min-width: 100%;
+    }
+    .table-container {
+      flex-direction: column;
+      align-items: center;
+   
+    }
+  
+    .custom-aside, .table-responsive {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 20px; 
+    }
+  
+    .custom-aside {
+      order: 1; 
+      min-width: 100%;
+    
+    }
+
+    .custom-aside > * { /* a gyerekeket felel fele aránybann osztja el a szülő*/
+        flex: 1;
+        flex-wrap: wrap;
+    }
+  
+    .table-responsive {
+      order: 2; 
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 950px) {
+    .custom-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    }
+
+    .text-search{
+        align-content: normal;
+    }
+
+    .custom-form{
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    }
+    .custom-search-cont form {
+    flex-grow: 1; 
+    }
+
+    .custom-search-cont .buttons {
+    flex-shrink: 0; 
+    }
+
+    .custom-t-container{
+     height: 100vh;
+    }
+
+     
+
+  }
+

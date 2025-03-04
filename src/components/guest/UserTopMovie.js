@@ -9,7 +9,7 @@ export default function UserTopMovie(props) {
         <div className="card h-100">
             <img src={props.movie.image_url} className="card-img-top" alt="poster"/>
             <div className="card-body p-2 d-flex flex-column">
-                <h5 className="card-title">{props.movie.title}</h5>
+                <p className="card-title">{props.movie.title}</p>
             </div>
         </div>
     </div>

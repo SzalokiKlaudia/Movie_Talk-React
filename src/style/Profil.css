@@ -1,8 +1,9 @@
 
 .custom-border{
-    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 70vh;
 
 }
 
@@ -18,8 +19,8 @@
 }
 
 .avatar-section{
-    width: 100px;  /* A label szélessége */
-  height: 100px; /* A label magassága */
+  width: 100px;  
+  height: 100px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +28,7 @@
 }
 
 .upload-button{
-    font-size: 2em;
+  font-size: 2em;
   width: 100%;  /* Kitölti a label szélességét */
   height: 100%;  /* Kitölti a label magasságát */
   display: flex;
@@ -39,6 +40,20 @@
   background-color: var(--profile-inp-bg-color) !important;
   border-radius: 0.8rem !important; 
 
+}
+
+.main-profile-admin{
+  /*background-color: var(--profil-bg-color);*/
+}
+
+#avatar{
+  width: 100px;
+  height: 100px;  
+  border-radius: 50%;
+}
+
+.pro-title{
+  padding-left: 5rem;
 }
 
 @media (max-width: 480px) {

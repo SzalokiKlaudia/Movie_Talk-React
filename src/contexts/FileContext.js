@@ -17,16 +17,23 @@ export const FileProvider = ({ children }) => {
 
     const getProfilPicture = async () => {
 
-        try {
-            const { data } = await myAxios.get('api/user/profile-picture') // ő felel a kép lekérésére a usernek
-            //console.log(data.picture)
-           setProfilePicture(data.picture)
+        if(user){
+            try {
+                const { data } = await myAxios.get('api/user/profile-picture') // ő felel a kép lekérésére a usernek
+                //console.log(data.picture)
+               setProfilePicture(data.picture)
+    
+    
+            } catch (error) {
+                console.error('Could not find the image',error)
+    
+            }
 
 
-        } catch (error) {
-            console.error('Could not find the image',error)
 
         }
+
+   
       
 
     }

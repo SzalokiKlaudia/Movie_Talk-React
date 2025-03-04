@@ -19,7 +19,7 @@ export default function HomeUser() {
 
   return (
       <main>
-        <div className='container mt-5'>
+        <div className='container pt-5'>
           <div>
             <h2 className='ms-5'> Hello {user.name} !</h2>
           </div>

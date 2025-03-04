@@ -6,6 +6,8 @@ import useAuthContext from '../contexts/AuthContext'
 import { Navigate, Outlet, useLocation} from 'react-router-dom'
 import GuestFooter from '../components/guest/GuestFooter'
 import NoSearchNav from '../components/user/NoSearchNav'
+import '../style/Container.css'
+
 
 
 export default function UserLayout() {
@@ -14,14 +16,14 @@ export default function UserLayout() {
     const location = useLocation()
 
     return user && user.is_admin === 0 ?  
-        <>  
+        <main className='user-cont container-fluid flex-column'> 
             {location.pathname === '/user' ? ( <NoSearchNav /> 
             ) : ( <UserNav /> ) }
             
             
             <Outlet />
             <GuestFooter />
-        </> : <Navigate to="/" />
+        </main> : <Navigate to="/" />
 
 
 }

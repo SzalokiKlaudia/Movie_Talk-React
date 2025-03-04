@@ -10,7 +10,7 @@ export default function Premier(props) {
             <div className="card h-100">
                 <img src={props.movie.poster_path} className="card-img-top" alt="poster"/>
                 <div className="card-body p-2 d-flex flex-column">
-                    <h5 className="card-title">{props.movie.title}</h5>
+                    <p className="card-title">{props.movie.title}</p>
                     <p className="description">{props.movie.release_date}</p>
                 </div>
             </div>

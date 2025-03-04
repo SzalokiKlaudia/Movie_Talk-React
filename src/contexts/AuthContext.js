@@ -79,9 +79,9 @@ export const AuthProvider = ({ children }) => {
       })
     }
 
-    const [allUsers, setAllUsers] = useState([]);
+    //const [allUsers, setAllUsers] = useState([]);
 
-    const getAllUsers = async () => {
+   /* const getAllUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users')
         console.log(data)
@@ -90,11 +90,66 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
+    }*/
+
+    const [selectedValue, setSelectedValue] = useState("active")
+
+
+    const [activeUsers, setActiveUsers] = useState([]);
+
+    const getActiveUsers = async () => {
+      try {
+        const {data} = await myAxios.get('api/admin/users/0')
+        //console.log(data)
+        setActiveUsers(data)
+
+      } catch (error) {
+        console.error("Could not find any data to the routes")
+      }
     }
 
+    const [inActiveUsers, setInActiveUsers] = useState([]);
 
+    const getInActiveUsers = async () => {
+      try {
+        const {data} = await myAxios.get('api/admin/users/1')
+        console.log(data)
+        setInActiveUsers(data)
 
-   
+      } catch (error) {
+        console.error("Could not find any data to the routes")
+      }
+    }
+
+    
+    const deleteUser = async (id) => {
+
+      try{
+          const response = await myAxios.delete(`api/admin/users/${id}`)
+          console.log(response.data)
+          
+          alert("User is succesfully deleted");
+
+      } catch (error){
+        console.error('Could not find the user!')
+
+      }
+  }
+
+  const restoreUser = async (id) => {
+
+    try{
+        const response = await myAxios.patch(`api/admin/users/${id}/restore`)
+        console.log(response.data)
+        
+        alert("User is succesfully restored");
+
+    } catch (error){
+      console.error('Could not find the user!')
+
+    }
+}
+
         useEffect(() => {
           if (!user) {
             getUser()
@@ -103,9 +158,15 @@ export const AuthProvider = ({ children }) => {
           getPremiers()
           getUsersTopMovies()
           getTopUsers()
-          getAllUsers()
+          getActiveUsers()
 
-        }, [])
+          if(selectedValue == 'active'){
+            getActiveUsers()
+          }else if(selectedValue == 'inactive'){
+            getInActiveUsers()
+          }
+
+        }, [selectedValue])
 
       const loginReg = async ({...data}, route) => { //bej vagy reg
         try {
@@ -133,7 +194,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers, allUsers}}>
+        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers,selectedValue, setSelectedValue, activeUsers, inActiveUsers, deleteUser, restoreUser}}>
           {children}
         </AuthContext.Provider>
       )

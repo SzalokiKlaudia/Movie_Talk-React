@@ -25,6 +25,8 @@ export default function GuestLayout() {//layout tartalmazza  aközös részeket,
         )}
         <Outlet />
         {location.pathname !== "/login" && location.pathname !== "/register" && <GuestFooter />}
-        </>    
+        </>  
+         
     )
+   
 }
