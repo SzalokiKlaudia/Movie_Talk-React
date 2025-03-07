@@ -4,6 +4,7 @@ import GuestNav from '../components/guest/GuestNav'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import GuestFooter from '../components/guest/GuestFooter'
 import LoginRegisterNav from '../components/guest/LoginRegisterNav'
+import '../style/Container.css'
 
 
 
@@ -17,7 +18,7 @@ export default function GuestLayout() {//layout tartalmazza  aközös részeket,
 
   return (//ha nincs bejelentkezve a felhazsnáló megjelenik a vendég nav és az aktuális oldal?
         // tehát, ha login vagy register oldalon vagyunk akkor jelenjen csak meg az ő navuk ha nem akkor a guest sima
-        <> 
+        <main className='guest-cont container-fluid flex-column guest-custom'>
         {location.pathname === '/login' || location.pathname === '/register' ? (
         <LoginRegisterNav /> )
         : (
@@ -25,7 +26,7 @@ export default function GuestLayout() {//layout tartalmazza  aközös részeket,
         )}
         <Outlet />
         {location.pathname !== "/login" && location.pathname !== "/register" && <GuestFooter />}
-        </>  
+        </main>  
          
     )
    

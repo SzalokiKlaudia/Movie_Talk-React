@@ -3,19 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import '../../style/NoSearchNav.css'
 
 export default function AdminNoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
-  const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
-  const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
-
   const navigate = useNavigate() // Navigációhoz szükséges hook
 
+  const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
+  const toggleMenuProfil = () => {
+    setIsOpen(!isOpen) // Menü lenyitása
+  }
 
-  const toggleMenuProfil = () => setIsOpen(!isOpen); // Menü lenyitása
-
-  const toggleMenu = () => { //
+  const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
+  const toggleMenu = () => { 
     setMenuOpen(!menuOpen)
   }
 
@@ -41,17 +42,13 @@ export default function AdminNoSearchNav() {
 
       
         {/* Hamburger menü gomb (csak mobil nézetben látható) */}
-        <button
+      <button
         className="navbar-toggler d-block d-lg-none"
         type="button"
         onClick={toggleMenu}
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        >
-            <span className="navbar-toggler-icon"></span>
+        aria-expanded={menuOpen ? "true" : "false"}> 
+        <span className="navbar-toggler-icon">
+        </span>
         </button>
 
       <form
@@ -65,6 +62,8 @@ export default function AdminNoSearchNav() {
         <li className="nav-item position-relative">
             {/* Felhasználói menü */}
           <div className="d-flex align-items-center gap-2 bg-dark text-white py-2 px-4 rounded-pill custom"
+            aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
+
              onClick={toggleMenuProfil}>
              
               <FontAwesomeIcon icon={faUserCircle} />  {/* felhasználó kör ikonja */}
@@ -79,13 +78,15 @@ export default function AdminNoSearchNav() {
           {isOpen && (
             <ul className="position-absolute top-100 end-0 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
                 <li className="list-unstyled">
-                    <Link to="/user" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                    <Link to="/user" className="d-block px-4 py-2 text-white text-decoration-none hover"
+                     onClick={() => setIsOpen(false)}> 
                         Profil
                     </Link>
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="/admin/users" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                    <Link to="/admin/users" className="d-block px-4 py-2 text-white text-decoration-none hover"
+                     onClick={() => setIsOpen(false)}>
                         Users
                     </Link>
                 </li>
@@ -106,10 +107,16 @@ export default function AdminNoSearchNav() {
 
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log" to="/user">Profil</Link>
+              <Link className="nav-link text-white" id="nav-log" to="/user"
+               onClick={() => setIsOpen(false)}>
+                Profil
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-reg" to="/admin/users">Users</Link>
+              <Link className="nav-link text-white" id="nav-reg" to="/admin/users"
+               onClick={() => setIsOpen(false)}>
+                Users
+              </Link>
             </li>
             <li className="nav-item">
             <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">

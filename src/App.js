@@ -13,6 +13,7 @@ import HomeGuest from './pages/HomeGuest';
 import ProfilAdmin from './pages/ProfilAdmin';
 import ProfilUser from './pages/ProfilUser';
 import AdminUsers from './pages/AdminUsers';
+import GuestMoviesResults from './pages/GuestMoviesResults';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/" element={<HomeGuest />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Registration />} />
+                    <Route path='/movie/title' element={<GuestMoviesResults />}/>
                     
                 </Route>
             )}
@@ -46,6 +48,7 @@ function App() {
                 <Route element={<UserLayout />}>
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
+                    {/*nem működik a profil mobilban */}
 
 
                 </Route>

@@ -26,7 +26,7 @@ export default function HomeUser() {
             
           <section className='section1'>
             <h3 className='title'>
-                  Premier filmek
+                  Premier movies
             </h3>
 
             {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
@@ -35,7 +35,7 @@ export default function HomeUser() {
           
           <section className='section2'>
              <h3 className='title'>
-                        Felhasználók Top filmei
+                        Top rated movies by users
                       </h3>
             
                     {usersTopMovies ? <UsersTopMovies usersTopMovies={usersTopMovies} /> : "No movies found"}
@@ -45,7 +45,7 @@ export default function HomeUser() {
         
           <section className='section3'>
              <h3 className='title'>
-                        Legaktívabb tagjaink
+                        Top users
                       </h3>
             
                       {topUsers ? <TopUsers users={topUsers} /> : "Could not find any data"}

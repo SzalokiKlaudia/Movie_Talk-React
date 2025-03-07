@@ -11,11 +11,11 @@ import InactiveUser from '../components/admin/InactiveUser'
 
 export default function AdminUsers() {
 
-  const [searchUser, setSearchUser] = useState("")
-  const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser } = useAuthContext()
-  const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a suerek id-ai
+  const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers, currentPage,totalPages, setCurrentPage } = useAuthContext()
+  const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a userek id-ai checkbox miatt kell
 
-  const handleCheckBoxChange = (e, userId) => { //esemény ami tárolja a változásokat
+  //checkbox-ot kezeljük
+  const handleCheckBoxChange = (e, userId) => { //esemény ami tárolja a változásokat a checkboxban
     if(e.target.checked) { // ha pipa van
       setSelectedUsers (prevSelectedUsers => [...selectedUsers, userId]) //létrehozunk a tömbről másolatot ami tartalmazza az id-ket
     }else {// ha kipipáljuk
@@ -23,38 +23,61 @@ export default function AdminUsers() {
       //1 oylan új tömböt ad vissza ami nem tartalmazza azokat a usereket akiket kipipáltunk,  akiv user eltávolítjuk
     }
   }
-
+  //a törlés a pipa során
   const handleDelete = async () => {
     try {
       for (const userId of selectedUsers) {
-        await deleteUser(userId); // vár amíg midnen törlés befejeződik
+        await deleteUser(userId) // vár amíg midnen törlés befejeződik
       }
   
-      alert('A felhasználók sikeresen törölve!')
+      alert('User is succesfully deleted!')
     } catch (error) {
       console.error(error);
-      alert('Hiba történt a felhasználók törlése közben.')
+      alert('Find an error during the delete proccess.')
     }
   }
 
+  //visszaállítja a felh-kat
   const handleRestore = async () => {
     try {
       for (const userId of selectedUsers) {
         await restoreUser(userId); // vár amíg midnen törlés befejeződik
       }
   
-      alert('A felhasználók sikeresen visszaállítva!')
+      alert('The user is succesfully restored!')
     } catch (error) {
       console.error(error);
-      alert('Hiba történt a felhasználók közben.')
+      alert('Find an error during the restore proccess.')
     }
   }
 
+  const [searchUser, setSearchUser] = useState("") // a keresett felh neve amit inputban adunk, itt tároljuk
+
+
+    //a keresés kezelése ha beírun kegy user nevet
+    const handleSearch = (e) => {
+      setSearchUser(e.target.value) //setteljük az input értékét
+    }
+
+    let filteredActiveUsers = activeUsers.filter(user => //végigmegyünk az aktívakon, és ellenőrizzük h egyezik az input értékkel ha igen, visszatérünk vele
+      user.user_name.toLowerCase().includes(searchUser.toLowerCase())  
+    )
+
+    let filteredInActiveUsers = inActiveUsers.filter(user =>
+      user.user_name.toLowerCase().includes(searchUser.toLowerCase())  
+    )
+
+    let usersToShow
+
+    if (selectedValue === 'active') {
+      usersToShow = filteredActiveUsers
+    } else {
+      usersToShow = filteredInActiveUsers
+    }
+
+
 
  
-
-
-
     
   return (
     <div className='container custom-t-container'>
@@ -69,6 +92,8 @@ export default function AdminUsers() {
               <input 
               className='form-control flex-grow-1'
               type="search" 
+              value={searchUser}
+              onChange = {handleSearch}
               placeholder='search..'
               />
             </form>
@@ -119,23 +144,26 @@ export default function AdminUsers() {
                   </thead>
                   <tbody>
                            
-                      {selectedValue === 'active' ? (
-                      activeUsers.map((user) => (
-                        <ActiveUser key={user.id} user={user}  handleCheckBoxChange={handleCheckBoxChange}/>
-                      ))
-                    ) : (
-                      inActiveUsers.map((user) => (
-                        <InactiveUser key={user.id} user={user}  handleCheckBoxChange={handleCheckBoxChange}/> 
-                      ))
-                    )}
-          
-          
+                  {usersToShow.length > 0 ? (
+                usersToShow.map((user) => {
+                  if (selectedValue === 'active') {
+                    return <ActiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
+                  } else if (selectedValue === 'inactive') {
+                    return <InactiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
+                  }
+                  return null
+                })
+              ) : (
+                <tr><td colSpan="8">No users found</td></tr>
+              )}
                   </tbody>
           
-              </table>
+            </table>
         </div>
-     
+
+      
       </div>
+      
 
 
 

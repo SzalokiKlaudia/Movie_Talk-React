@@ -64,9 +64,17 @@ export const AuthProvider = ({ children }) => {
 
    //bejelentkezett felhasználó adatainak lekérdezése
    const getUser = async () => {
-    const { data } = await myAxios.get("/api/user")
-    //console.log(data)
-    setUser(data)
+      try{
+        const { data } = await myAxios.get("/api/user")
+        setUser(data)
+        //console.log(data)
+      }catch(error){
+        if(error.response && error.response.status == 401){
+          setUser(null) //nem oldotta meg a 401-es hibát csak a konzolon jelenik meg...
+        }else{
+          console.error('Wrong api call',error)
+        }
+      }
     }
   
 
@@ -92,29 +100,29 @@ export const AuthProvider = ({ children }) => {
       }
     }*/
 
-    const [selectedValue, setSelectedValue] = useState("active")
+    const [selectedValue, setSelectedValue] = useState("active")//ő tartalmazza h aktív vagy nem aktív egy user
 
 
-    const [activeUsers, setActiveUsers] = useState([]);
+    const [activeUsers, setActiveUsers] = useState([]) //itt tárolódnak az aktív felhazsnálók
 
     const getActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/0')
         //console.log(data)
-        setActiveUsers(data)
+        setActiveUsers(data) //frissítsük az aktív user lsitánkat
 
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
     }
 
-    const [inActiveUsers, setInActiveUsers] = useState([]);
+    const [inActiveUsers, setInActiveUsers] = useState([]) //itt tároljuk az inaktív usereket
 
     const getInActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/1')
         console.log(data)
-        setInActiveUsers(data)
+        setInActiveUsers(data)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
 
       } catch (error) {
         console.error("Could not find any data to the routes")
@@ -128,7 +136,8 @@ export const AuthProvider = ({ children }) => {
           const response = await myAxios.delete(`api/admin/users/${id}`)
           console.log(response.data)
           
-          alert("User is succesfully deleted");
+          alert("User is succesfully deleted")
+          getActiveUsers()
 
       } catch (error){
         console.error('Could not find the user!')
@@ -136,19 +145,46 @@ export const AuthProvider = ({ children }) => {
       }
   }
 
-  const restoreUser = async (id) => {
+    const restoreUser = async (id) => {
 
-    try{
-        const response = await myAxios.patch(`api/admin/users/${id}/restore`)
-        console.log(response.data)
-        
-        alert("User is succesfully restored");
+      try{
+          const response = await myAxios.patch(`api/admin/users/${id}/restore`)
+          console.log(response.data)
+          
+          alert("User is succesfully restored")
+          getInActiveUsers()
 
-    } catch (error){
-      console.error('Could not find the user!')
+      } catch (error){
+        console.error('Could not find the user!')
 
+      }
     }
-}
+
+    //egyszerű keresés
+      
+    const [ foundMovies, setFoundMovies ] = useState([]) //ide gyűjtjük a találatokat
+    
+    //itt történik a backend-el való kommunikáció
+    const postSearchByTitle = async (title) => {
+      if (!title.trim()) {
+        setFoundMovies([]) // ha nem írtünk be semmit az inputba töröljük a tömböt
+        return
+      }
+      try{
+        const response = await myAxios.post('api/movie/title', {title})//mert tesztelésnél is megkell adni ezeket az adatokat
+        console.log(response.data)
+        setFoundMovies(response.data) //beállítjuk a találatokat a tömbünkbe
+        
+      }catch(error){
+        console.log('No movies have been found')
+      }
+    }
+
+
+
+
+
+
 
         useEffect(() => {
           if (!user) {
@@ -158,9 +194,9 @@ export const AuthProvider = ({ children }) => {
           getPremiers()
           getUsersTopMovies()
           getTopUsers()
-          getActiveUsers()
+          //getActiveUsers()
 
-          if(selectedValue == 'active'){
+          if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
             getActiveUsers()
           }else if(selectedValue == 'inactive'){
             getInActiveUsers()
@@ -194,7 +230,8 @@ export const AuthProvider = ({ children }) => {
       }
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers,selectedValue, setSelectedValue, activeUsers, inActiveUsers, deleteUser, restoreUser}}>
+        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers,selectedValue, setSelectedValue, 
+        activeUsers, inActiveUsers, deleteUser, restoreUser, postSearchByTitle, foundMovies, setFoundMovies}}>
           {children}
         </AuthContext.Provider>
       )

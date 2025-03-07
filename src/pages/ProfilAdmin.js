@@ -59,7 +59,7 @@ export default function ProfilAdmin() {
             </label>
               <div className='m-3'>
                 <h3>{user.name}</h3>
-                <span className='fw-bold'>Tagság kezdete: </span>
+                <span className='fw-bold'>Membership since: </span>
                 <span>{formattedText}</span>
               </div>
             <label htmlFor="avatar"/>
@@ -67,7 +67,7 @@ export default function ProfilAdmin() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label">Profil name</label>
+            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label">Username</label>
             <input
               type="text"
               value={user.user_name}
@@ -81,7 +81,7 @@ export default function ProfilAdmin() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="email" className="form-label me-2 text-nowrap custom-label">Email</label>
+            <label htmlFor="email" className="form-label me-2 text-nowrap custom-label">Email address</label>
             <input
               type="email"
               value={user.email}

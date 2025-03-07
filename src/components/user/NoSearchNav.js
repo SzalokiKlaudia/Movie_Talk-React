@@ -3,19 +3,22 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import '../../style/NoSearchNav.css'
+
 
 export default function NoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
-  const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
-  const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
 
   const navigate = useNavigate() // Navigációhoz szükséges hook
 
+  const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
+  const toggleMenuProfil = () => {
+    setIsOpen(!isOpen) // Menü lenyitása
+  }
 
-  const toggleMenuProfil = () => setIsOpen(!isOpen); // Menü lenyitása
-
-  const toggleMenu = () => { //
+  const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
+  const toggleMenu = () => { 
     setMenuOpen(!menuOpen)
   }
 
@@ -41,16 +44,11 @@ export default function NoSearchNav() {
 
       
              {/* Hamburger menü gomb (csak mobil nézetben látható) */}
-             <button
+      <button
         className="navbar-toggler d-block d-lg-none"
         type="button"
         onClick={toggleMenu}
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+        aria-expanded={menuOpen ? "true" : "false"}> 
         <span className="navbar-toggler-icon"></span>
       </button>
 
@@ -83,13 +81,15 @@ export default function NoSearchNav() {
           {isOpen && (
             <ul className="position-absolute top-100 end-0 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
                 <li className="list-unstyled">
-                    <Link to="/user" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                    <Link className="d-block px-4 py-2 text-white text-decoration-none hover" id="nav-log" to="/user"
+                     onClick={() => setIsOpen(false)}>
                         Profil
                     </Link>
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover"
+                     onClick={() => setIsOpen(false)}>
                         My Movies
                     </Link>
                 </li>
@@ -112,10 +112,18 @@ export default function NoSearchNav() {
 
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log">Profil</Link>
+              <Link className="nav-link text-white" id="nav-log"
+                to="/user"
+                onClick={() => setIsOpen(false)}>
+                  Profil
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-reg">My Movies</Link>
+              <Link className="nav-link text-white" id="nav-reg"
+                to=""
+               onClick={() => setIsOpen(false)}>
+                My Movies
+              </Link>
             </li>
             <li className="nav-item">
             <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">

@@ -69,7 +69,7 @@
   width: 100%;
 }
 
-/*ah az osztály hozzá van adva, akkor jelenik meg */
+/*ah az osztály hozzá van adva, akkor jelenik meg a hamburger menüpontjai */
 .mobile-menu.active {
   display: block;
 }

@@ -1,0 +1,32 @@
+
+.movie-image-wrapper{
+    width: 100px;
+    height: 120px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgb(171 157 156);
+
+}
+
+.movie-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.custom-list-border{
+    border-bottom: 1px solid gray;
+    margin-bottom: 1rem;
+}
+
+.results-movies{
+    list-style-type: none;
+    margin-top: 2rem;
+    box-shadow: 0 0px 6px rgba(158, 156, 156, 0.985);
+    border-radius: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+}
+
+

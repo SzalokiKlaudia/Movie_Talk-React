@@ -7,18 +7,19 @@ import '../../style/AdminNav.css'
 
 export default function AdminNav() {
 
-      const {user, logOut} = useAuthContext()//meghívtuk 
-      const [searchOpen, setSearchOpen] = useState(false) // Állapot a kereső nyitásához
-      const [titleOpen, setTitleOpen] = useState(false) // A Title lenyitása
+      const {user, logOut} = useAuthContext()//meghívtuk a hook-ot, és kinyertük a fgv-t és objektumot
+      const [titleOpen, setTitleOpen] = useState(false) // A Title lenyitása a keresőben
       const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
-      const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
 
-      const navigate = useNavigate() // Navigációhoz szükséges hook
+      const navigate = useNavigate() // hook ami az oldalak közötti navigációt segíti
 
 
-      const toggleMenuProfil = () => setIsOpen(!isOpen); // Menü lenyitása
+      const [isOpen, setIsOpen] = useState(false) // A nyíl állapotát határozza meg, ha turue lesz hozzáadjuk a rotated osztályt, ami elforgatja a nyilat 180%-ban
+      const toggleMenuProfil = () => { // a metódus profil menü állapotát állítja be, alapártelmezetten zárt lesz, kattintásra nyitott
+        setIsOpen(!isOpen)
+      } 
 
-      const toggleMenu = () => { //
+      const toggleMenu = () => { //a metódus mobil nézetben a hamburger ikont nyitja ki, és zárja be true, false értékekkel
         setMenuOpen(!menuOpen)
       }
 
@@ -33,7 +34,8 @@ export default function AdminNav() {
   return (
 
     <header className="navbar navbar-dark bg-dark navbar-expand-lg h-navbar p-3">
-    {/*desktop nézet*/}
+
+    {/*desktop nézete a navnak itt kezdődik*/}
     <nav className="container-xxl flex-lg-nowrap custom-navbar">
 
       <div>
@@ -42,41 +44,35 @@ export default function AdminNav() {
         </Link>
         
       </div>
-
       
-             {/* Hamburger menü gomb (csak mobil nézetben látható) */}
-             <button
-        className="navbar-toggler d-block d-lg-none"
-        type="button"
-        onClick={toggleMenu}
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
+        {/* Hamburger menü gomb (csak mobil nézetben látható) kattintásra nyitja és zárja a menüt */}
+        <button //
+          className="navbar-toggler d-block d-lg-none hamburger-button" //d-lg-none eltüntei nagy kijelzőn, bootstrap-el formázzuk
+          type="button"
+          aria-expanded={menuOpen ? "true" : "false"} //az olvashatóság miatt kell,itt látjuk h a menü nyitva van-e vagy sem, a menueOpen értékét ami false alapban
+          onClick={toggleMenu}
+        >
+        <span className="navbar-toggler-icon"></span> 
       </button>
 
    
 
-
+      {/*ez a kereső sávja ami csak nagyobb kijelzőkön látható, kisebb kijelzőkön a hamburger nyitott menüjében van */}
       <form
-        className={`d-none d-lg-block justify-content-center w-50 mx-3 ${searchOpen ? "search-open" : ""}`}
-        role="search">
+        className={`d-none d-lg-block justify-content-center w-50 mx-3`}>
         <div className="input-group">
-          {/* Title dropdown */}
-          
+
+          {/* Title dropdown menüje itt van */}
             <button
               id="btn-title"
               className="btn btn-light dropdown-toggle"
               type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
-              onClick={() => setTitleOpen(!titleOpen)}
+              aria-expanded={titleOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a titleOpen értékét ami false alapban
+              onClick={() => setTitleOpen(!titleOpen)} //kattra változtatja a titleOpen értékét az ellenkezőjére
             >
               Title
             </button>
-            {titleOpen && (
+            {titleOpen && ( //ha kinyitjuk true lesz akkor az ul megjelenik, ha false nem látjuk, logikai és operátor
               <ul className="dropdown-menu show">
                 <li>
                   <Link className="dropdown-item" to="/advanced-search">
@@ -103,22 +99,23 @@ export default function AdminNav() {
       </form>
 
 
-      {/* itt kezdődik a profil menüje */}
+      {/* itt kezdődik a profil menüje amit csak nagyobb klpernyőn látunk d-lg-flex, kicsin pedig d-none*/}
       <ul className="navbar-nav flex-row gap-3 d-none d-lg-flex">
         <li className="nav-item position-relative">
-            {/* Felhasználói menü */}
+            {/* Felhasználói menü ha katt a divre akkor a falseból true lesz*/}
           <div className="d-flex align-items-center gap-2 bg-dark text-white py-2 px-4 rounded-pill custom"
-             onClick={toggleMenuProfil}>
+              aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
+              onClick={toggleMenuProfil}>
              
               <FontAwesomeIcon icon={faUserCircle} />  {/* felhasználó kör ikonja */}
                
               <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 
-                {/* nyíl, ami kattintásra lenyitja a menüt */}
-              <FontAwesomeIcon icon={faChevronDown} className={`fs-5 ${isOpen ? "rotated" : ""}`} />
+                {/* nyíl, ha isOpen true állapot  akkor hozzáadja a rotated osztályt és elforgatja a nyilat 180 %-ban */}
+              <FontAwesomeIcon icon={faChevronDown} className={`fs-5 ${isOpen ? "rotated" : ""}`} /> 
             </div>
 
-          {/* lenyíló profil menü */}
+          {/* lenyíló profil menü ha az isopen true megjelenik az ul vagyis a menüpontok nagy kijelzőn */}
           {isOpen && (
             <ul className="position-absolute top-100 end-0 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2">
                 <li className="list-unstyled">
@@ -146,32 +143,37 @@ export default function AdminNav() {
 
 
 
-       {/*mobil nézet, csak mobil kijelzőn aktiválódik ha a hamburgerre katt active osztályt kap*/}
-       <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}>
+       {/*csak mobil kijelzőn aktiválódik ha a hamburgerre katt active osztályt kap ezek a menüpontok
+        alapértelmezetten display none, ha katt  hanburgerre ez a menüpontok active osztályt kapnak és 
+        block elem lesz a mobile-menu-active osztálya
+
+       */}
+      
+       <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}> 
 
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log">Profil</Link>
+              <Link className="nav-link text-white" id="nav-log"  to="/user">Profil</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" id="nav-reg" to="/admin/users">Users</Link>
             </li>
             <li className="nav-item">
             <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">
-                        Log out
-                    </button>
+              Log out
+            </button>
             </li>
           </ul>
-                {/* KERESŐ FORM (MOBIL) */}
-          <form className="mobile-search" role="search">
+                {/* mobil nézet keresője */}
+          <form className="mobile-search">
             <div className="input-group">
               <button id="btn-title" className="btn btn-light dropdown-toggle" type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
+              aria-expanded={titleOpen ? "true" : "false"} //jelzi h menü éppen nyta van vagy nem, titleopen értékét mutatja meg
               onClick={() => setTitleOpen(!titleOpen)}
             >
                 Title
               </button>
-              {titleOpen && (
+              {titleOpen && ( //ha true értéket kap megjelik a lenyíló össz kereső
                     <ul className="dropdown-menu show w-100">
                       <li>
                         <Link className="dropdown-item" to="/advanced-search">
