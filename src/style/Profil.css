@@ -1,9 +1,26 @@
 
 .custom-border{
-    box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    height: 70vh;
+    padding-bottom: 2rem !important;
+   
+
+}
+
+.custom-border-user{
+  margin-bottom: 2rem;
+
+}
+
+.profil-cont{
+  max-width: 1150px;
+  height: 75vh;
+  box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem;
+  margin-top: 1rem;
+
 
 }
 
@@ -42,9 +59,11 @@
 
 }
 
-.main-profile-admin{
-  /*background-color: var(--profil-bg-color);*/
+#upload{
+  display: none;
 }
+
+
 
 #avatar{
   width: 100px;
@@ -56,8 +75,10 @@
   padding-left: 5rem;
 }
 
-@media (max-width: 480px) {
-  .custom-border{
+
+
+@media (max-width: 570px) {
+  .profil-cont{
     box-shadow: none;
   }
 

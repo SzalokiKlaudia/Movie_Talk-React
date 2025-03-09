@@ -11,10 +11,6 @@ export const FileProvider = ({ children }) => {
     const [profilPicture, setProfilePicture] = useState(null)
     const { user } = useAuthContext()
 
-
-  
-   
-
     const getProfilPicture = async () => {
 
         if(user){
@@ -23,32 +19,26 @@ export const FileProvider = ({ children }) => {
                 //console.log(data.picture)
                setProfilePicture(data.picture)
     
-    
             } catch (error) {
                 console.error('Could not find the image',error)
     
             }
 
-
-
         }
-
-   
-      
 
     }
 
     const uploadProfilePicture = async (file) => {
         try {
-            const formData = new FormData();
-            formData.append("profile_picture", file);
+            const formData = new FormData() //form-data formában tudjuk csak posztolni adatbázisba a képet, üres kulcs érték párt tartalmazó objekt
+            formData.append("profile_picture", file)
     
             const { data } = await myAxios.post("api/user/profile-picture/upload", formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data", // Fájl típusú adat küldése
-                },
-            });
-            console.log(data.picture)
+                    "Content-Type": "multipart/form-data", // jelezzük a szervernek h fájl típusú adatot küldönk, az axios ezt aut kezeli
+                }
+            })
+            //console.log(data.picture)
             setProfilePicture(data.picture) // Mivel a backend már a teljes URL-t adja vissza
         } catch (error) {
             console.error("Found error during the profile picture uploading:", error)

@@ -5,6 +5,7 @@ import useFileContext from '../../contexts/FileContext';
 
 export default function TopUser(props) {
     //console.log(props.user)
+    //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
     const baseUrl = "http://localhost:8000/storage"
     const imageUrl = baseUrl + `/${props.user.profile_picture_name}`
     //console.log(props.user.profile_picture_name)
@@ -23,7 +24,7 @@ export default function TopUser(props) {
         <div className='data'>
             <h4>{props.user.user_name}</h4>
             <div className='meter-all'>
-                <div  className='meter'style={{ '--width': `${percentage}%` }}></div>
+                <div  className='meter'style={{width: `${percentage}%` }}></div>
                 <h6 className='number'>{props.user.number}</h6>
               
             </div>

@@ -1,10 +1,13 @@
 @import './importVariables.css';  
 
-/* styles.css */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.custom-navbar{
+  justify-content: space-evenly;
 }
 
 .nav-link{
@@ -60,6 +63,7 @@
 #logo{
   font-family: var(--logo-font-family);
   font-weight: 400;
+  font-size: larger;
 
 }
 
@@ -72,6 +76,39 @@
 /*ah az osztály hozzá van adva, akkor jelenik meg a hamburger menüpontjai */
 .mobile-menu.active {
   display: block;
+}
+
+.custom-navbar{
+  justify-content: space-evenly !important;
+}
+
+.mobile-search{
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  .custom-navbar {
+      
+     margin-top: 0 !important;
+     flex-direction:row !important;
+     justify-content: space-between !important;
+
+    }
+
+   .title{
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    text-align: center;
+    margin-top: 2rem;
+   }
+
+   .container{
+    margin-top: 0 !important;
+   }
+
+  
+
+    
 }
 
 

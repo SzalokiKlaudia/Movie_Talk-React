@@ -10,6 +10,7 @@
 .res-btn{
     background-color: var(--rest-btn-color) !important;
     color: var(--btn-font-color) !important;
+    font-weight: 600;
 }
 
 .res-btn:hover{
@@ -20,6 +21,7 @@
     background-color: var(--del-btn-color) !important;
     color: var(--btn-font-color) !important;
     width: 5rem;
+    font-weight: 600;
 
 }
 
@@ -28,14 +30,22 @@
 }
 
 .custom-t-container{
-   height: 80vh;
+  height: 800px;
+   max-width: 1150px !important;
+   padding-top: 1rem;
+   padding-bottom: 1rem;
+ 
+}
+
+
+
+table{
+    cursor:pointer;
 
 }
 
-table{
-    box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
-    cursor:pointer;
-
+.custom-table{
+  margin-bottom: 0 !important;
 }
 
 .table td, .table th {
@@ -46,6 +56,30 @@ table{
   .table-container{
     flex-wrap: nowrap !important;
     gap: 0;
+    box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
+
+
+}
+
+.custom-search-cont{
+  padding-bottom: 0;
+
+}
+
+.custom-form{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+}
+
+.search-input{
+  background-color: var(--profile-inp-bg-color) !important;
+}
+
+.text-search{
+  padding-top: 0.5rem;
+  box-shadow: 0 0px 6px rgba(191, 188, 188, 0.985);
+
 }
 
 @media (max-width: 1100px) {
@@ -62,7 +96,6 @@ table{
     .custom-aside, .table-responsive {
       display: flex;
       flex-direction: row;
-      margin-bottom: 20px; 
     }
   
     .custom-aside {
@@ -90,7 +123,7 @@ table{
     }
 
     .text-search{
-        align-content: normal;
+        padding-top: 0.5rem;
     }
 
     .custom-form{
@@ -106,11 +139,7 @@ table{
     flex-shrink: 0; 
     }
 
-    .custom-t-container{
-     height: 100vh;
-    }
 
-     
 
   }
 

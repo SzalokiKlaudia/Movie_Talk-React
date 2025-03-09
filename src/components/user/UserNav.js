@@ -147,7 +147,7 @@ export default function UserNav() {
        <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}>
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log">Profil</Link>
+              <Link className="nav-link text-white" id="nav-log" to="/user">Profil</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" id="nav-reg">My Movies</Link>

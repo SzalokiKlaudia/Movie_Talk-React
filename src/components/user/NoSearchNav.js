@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import '../../style/NoSearchNav.css'
 
 
 export default function NoSearchNav() {
@@ -114,14 +113,14 @@ export default function NoSearchNav() {
             <li className="nav-item">
               <Link className="nav-link text-white" id="nav-log"
                 to="/user"
-                onClick={() => setIsOpen(false)}>
+                onClick={() => setMenuOpen(false)}>
                   Profil
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" id="nav-reg"
                 to=""
-               onClick={() => setIsOpen(false)}>
+               onClick={() => setMenuOpen(false)}>
                 My Movies
               </Link>
             </li>

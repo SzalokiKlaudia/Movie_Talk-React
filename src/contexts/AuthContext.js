@@ -108,13 +108,17 @@ export const AuthProvider = ({ children }) => {
     const getActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/0')
-        //console.log(data)
+        console.log(data)
         setActiveUsers(data) //frissítsük az aktív user lsitánkat
+        console.log(activeUsers)
+   
 
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
     }
+
+  
 
     const [inActiveUsers, setInActiveUsers] = useState([]) //itt tároljuk az inaktív usereket
 
@@ -123,6 +127,8 @@ export const AuthProvider = ({ children }) => {
         const {data} = await myAxios.get('api/admin/users/1')
         console.log(data)
         setInActiveUsers(data)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
+        console.log(inActiveUsers)
+        console.log(selectedValue)
 
       } catch (error) {
         console.error("Could not find any data to the routes")
@@ -180,12 +186,6 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
-
-
-
-
-
-
         useEffect(() => {
           if (!user) {
             getUser()
@@ -194,7 +194,7 @@ export const AuthProvider = ({ children }) => {
           getPremiers()
           getUsersTopMovies()
           getTopUsers()
-          //getActiveUsers()
+         //getActiveUsers() 
 
           if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
             getActiveUsers()
@@ -231,7 +231,7 @@ export const AuthProvider = ({ children }) => {
 
       return (
         <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers,selectedValue, setSelectedValue, 
-        activeUsers, inActiveUsers, deleteUser, restoreUser, postSearchByTitle, foundMovies, setFoundMovies}}>
+        activeUsers, inActiveUsers, deleteUser, restoreUser, postSearchByTitle, foundMovies, setFoundMovies, getActiveUsers, getInActiveUsers}}>
           {children}
         </AuthContext.Provider>
       )

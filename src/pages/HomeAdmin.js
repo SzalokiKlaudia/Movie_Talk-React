@@ -18,7 +18,7 @@ export default function HomeAdmin() {
     <main>
         <div className='container pt-5'>
           <div>
-            <h2 className='ms-5'> Hello {user.name} !</h2>
+            <h2 className='welcome-text'> Hello {user.name} !</h2>
           </div>
             
           <section className='section1'>
@@ -26,7 +26,7 @@ export default function HomeAdmin() {
                   Premier movies
             </h3>
 
-            {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
+              <Premiers premiers={pMovies} /> 
         
           </section>
           
@@ -35,7 +35,7 @@ export default function HomeAdmin() {
                 Top rated movies by users
             </h3>
                         
-            {usersTopMovies ? <UsersTopMovies usersTopMovies={usersTopMovies} /> : "No movies found"}
+            <UsersTopMovies usersTopMovies={usersTopMovies} />
               
           </section>
         
@@ -44,7 +44,7 @@ export default function HomeAdmin() {
               Top users
             </h3>
                         
-            {topUsers ? <TopUsers users={topUsers} /> : "Could not find any data"}
+            <TopUsers users={topUsers} /> 
         
           </section>
           

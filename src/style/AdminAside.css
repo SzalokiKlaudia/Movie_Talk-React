@@ -1,24 +1,25 @@
-.custom-radio .form-check-input:checked {
-    background-color: var(--radio-btn-color);
-    border-color: var(--radio-btn-color);
-}
-
 
 .custom-radio{
     padding: 0.5rem;
+    cursor: pointer;
 
+}
+
+.custom-radio.active{
+    background-color: var(--radio-btn-color);
+    color: var(--font-color);
+}
+
+.input-label{
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .custom-aside{
     padding: 0 !important;
+    box-shadow: 6px 0px 6px rgba(191, 188, 188, 0.5);
+
 } 
-
-.custom-radio.option-hover.active {
-    background-color: var(--rest-btn-color);
-  }
-
-
-
 
 
 .form-check{
@@ -26,6 +27,7 @@
 }
 
 .input-custom{
+    display: none;
     cursor: pointer !important;
 }
 .input-group {

@@ -3,7 +3,7 @@ import useAuthContext from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import useFileContext from '../contexts/FileContext'
 import '../style/Profil.css'
-import Avatar from '@mui/material/Avatar'; // Ha a Material UI-t használod
+import Avatar from '@mui/material/Avatar'; // material ui használat...
 import { IconButton } from '@mui/material'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
@@ -21,7 +21,7 @@ export default function ProfilUser() {
 
 
     //console.log(user)
-    console.log(profilPicture) //akt profilkép elérési útja
+    //console.log(profilPicture) //akt profilkép elérési útja
 
 
     const handleImageChange = (event) => {// a kiválasztott fájlt beállítjuk az imagefilba
@@ -46,18 +46,27 @@ export default function ProfilUser() {
     
     <main className='main-profile-admin'>
    
-    <div className="container p-0 custom-border">
-      <div className='p-5'>
+    <div className="container p-0 custom-border-user">
+      <div className='profil-cont'>
         <form>
 
           <div className='update-image-section d-flex align-items-center'>
-              <input type="file" onChange={handleImageChange} id="upload" accept="image/*" style={{display: "none"}}
-                name="profile_picture"  // nagyon fontos h megegyezzen a backenden ezt validáljuk is
+              <input type="file" 
+                  onChange={handleImageChange} 
+                  id="upload" 
+                  accept="image/*" 
+                  name="profile_picture"  // nagyon fontos h megegyezzen a backenden ezt validáljuk is
               />
              
             <label htmlFor="upload" className='avatar-section'>
-                <IconButton className="upload-button" color="primary" aria-label="upload picture" component="span">
-                    <Avatar id="avatar"className='profile-avatar' src={profileImage}/>
+                <IconButton className="upload-button" 
+                color="primary" 
+                aria-label="upload picture" 
+                component="span">
+                  <Avatar id="avatar"
+                    className='profile-avatar' 
+                    src={profileImage}
+                  />
 
                 </IconButton>
             </label>
@@ -71,11 +80,10 @@ export default function ProfilUser() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label">Username</label>
+            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label d-none d-md-block">Username</label>
             <input
               type="text"
               value={user.user_name}
-             
               className="form-control custom-input"
               id="user_name"
               placeholder="Disabled input"
@@ -85,11 +93,10 @@ export default function ProfilUser() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="email" className="form-label me-2 text-nowrap custom-label">Email address</label>
+            <label htmlFor="email" className="form-label me-2 text-nowrap custom-label d-none d-md-block">Email address</label>
             <input
               type="email"
               value={user.email}
-            
               className="form-control w-100 custom-input"
               id="email"
               placeholder="email"
@@ -99,7 +106,7 @@ export default function ProfilUser() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label">Birth name</label>
+            <label htmlFor="name" className="form-label me-2 text-nowrap custom-label d-none d-md-block">Birth name</label>
             <input
               type="text"
               value={user.name}
@@ -113,7 +120,7 @@ export default function ProfilUser() {
           </div>
 
           <div className="mb-3 mt-3 d-flex align-items-center">
-            <label htmlFor="gender" className="form-label me-2 text-nowrap custom-label">Gender</label>
+            <label htmlFor="gender" className="form-label me-2 text-nowrap custom-label d-none d-md-block">Gender</label>
             <input
               type="text"
               value={user.gender}
@@ -127,7 +134,7 @@ export default function ProfilUser() {
           </div>
 
           <div className='mb-3 mt-3 d-flex align-items-center'>
-            <label htmlFor="birth_year" className='form-label me-2 text-nowrap custom-label'>Birth year</label>
+            <label htmlFor="birth_year" className='form-label me-2 text-nowrap custom-label d-none d-md-block'>Birth year</label>
             <input
               type="number"
               id="birth_year"
@@ -140,10 +147,11 @@ export default function ProfilUser() {
             
           </div>
 
-          <div>
+          <div className='mt-5'>
             <label>
-              <input type="checkbox" checked={isChecked} readOnly />
-               Are you an admin?
+            Are you an admin?
+
+              <input className='ms-3 pipe' type="checkbox" checked={isChecked}/>
             </label>
           </div>
 

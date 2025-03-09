@@ -25,23 +25,19 @@ export default function GuestNav() {
     //egyszerű kereséhez hozzárendeljük a button-höz
       const handleSearch = () => {
         //console.log(searchTitle)
-        if(searchTitle.trim() == ''){
+        if(searchTitle.trim() == ''){ //string metódus, eltávolítja a whitespaceket
           setFoundMovies([]) //ha üres az input kereső ürítjük a találat tömböt
         }else{
           postSearchByTitle(searchTitle) //api hívással lekérjük az input értékét
           localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
-
-
         }
-       
-      
       }
 
     return (
 
-      <header className="navbar navbar-dark bg-dark navbar-expand-lg h-navbar p-3">
+      <header className="navbar navbar-dark bg-dark p-3">
         {/*desktop nézet*/}
-        <nav className="container-xxl flex-lg-nowrap custom-navbar">
+        <nav className="container flex-lg-nowrap custom-navbar bg-dark">
 
           <div>
             <Link className="navbar-brand" to="/" id="logo">
@@ -49,8 +45,6 @@ export default function GuestNav() {
             </Link>
             
           </div>
-
-          
 
                 {/* Hamburger menü gomb (csak mobil nézetben látható) */}
           <button
@@ -162,12 +156,19 @@ export default function GuestNav() {
                   )}
               <input
                 className="form-control flex-grow-1"
+                value={searchTitle}
+                onChange={(e) => setSearchTitle(e.target.value)} //mindig frissíti az input karaktereket
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
               />
-              <button id="search" className="btn btn-light" type="button">
-                <FontAwesomeIcon icon={faSearch} />
+              <button id="search" 
+                className="btn btn-light" 
+                type="button"
+                onClick={handleSearch}>
+                <Link className="search-btn" to= '/movie/title'>
+                  <FontAwesomeIcon icon={faSearch} />
+                </Link>
               </button>
             </div>
           </form>

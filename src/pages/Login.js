@@ -30,7 +30,7 @@ export default function Login() {
   
   return (
         <main className='main'>
-          <div className="container p-0 mt-5" style={{ maxWidth: "400px" }}>
+          <div className="p-0 login-cont">
           <h1 className="text-center custom-brand">Movie Track</h1>
         <div className='p-3'>
           <form onSubmit={handleSubmit}>
@@ -46,7 +46,7 @@ export default function Login() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="form-control"
+                className="form-control log-input"
                 id="email"
                 placeholder="email"
                 name="email"
@@ -67,7 +67,7 @@ export default function Login() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                className="form-control"
+                className="form-control log-input"
                 id="pwd"
                 placeholder="password"
                 name="pwd"
@@ -81,7 +81,7 @@ export default function Login() {
             </div>
 
             <div className="text-center mb-3 mt-5">
-              <button type="submit" className="btn btn-primary w-100 reg-btn">
+              <button type="submit" className="log-reg-btn">
                 Login
               </button>
             </div>

@@ -21,7 +21,7 @@ export default function HomeUser() {
       <main>
         <div className='container pt-5'>
           <div>
-            <h2 className='ms-5'> Hello {user.name} !</h2>
+            <h2 className='welcome-text'> Hello {user.name} !</h2>
           </div>
             
           <section className='section1'>

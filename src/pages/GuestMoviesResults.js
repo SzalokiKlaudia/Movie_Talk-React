@@ -10,8 +10,11 @@ export default function GuestMoviesResults() {
     const { foundMovies } = useAuthContext() //áthozzuk a filmes találatokat megjelenítésre
     //console.log(foundMovies)
     const movies = foundMovies?.data || [] //ha létezik a tömb akkor az értékét mentsük a datát, ha nem akkor csak egy üres tömb
-    
-    const searchTitle = localStorage.getItem('searchTitle') || ''; // elmentett keresési értéket használjuk
+
+    let message;
+    const searchTitle = localStorage.getItem('searchTitle') || ''; // elmentett keresési értéket használjuk, amit meghívhatunk megjelenítsére
+
+
 
 
 
@@ -24,15 +27,22 @@ export default function GuestMoviesResults() {
             </section>
 
             <section className='movie-results-container col-8'>
+
+            {movies.length === 0 ? (
+                <div className='mt-5 text-center'>
+                    <p className='no-results p-0'>Nos results have found: {searchTitle}</p>
+                </div>
+            ) : (
                 <ul className='results-movies'>
-
-                    {movies.map((movie) => {
-                        return  <MovieCard  movie = {movie} key = {movie.id}/>
-
-                    })}
-                  
-
+                    {movies.map((movie) => (
+                        <MovieCard movie={movie} key={movie.id} />
+                    ))}
                 </ul>
+            )}
+
+                
+            
+               
 
             </section>
 

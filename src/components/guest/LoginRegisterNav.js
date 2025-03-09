@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 export default function LoginRegisterNav() {
   return (
-    <header className="navbar navbar-dark bg-dark navbar-expand-lg h-navbar p-3">
+    <header className="navbar navbar-dark bg-dark p-2">
 
-        <nav className="container-xxl flex-lg-nowrap custom-navbar">
+        <nav className="container-fluid d-flex">
 
         <div>
             <Link className="navbar-brand" to="/" id="logo">

@@ -4,6 +4,7 @@ import '../../style/AdminUsers.css'
 
 
 export default function ActiveUser(props) {
+  //console.log(props.user.created_at)
   
     const text = props.user.created_at
     const data = new Date(text)

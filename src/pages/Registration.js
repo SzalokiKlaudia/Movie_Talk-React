@@ -50,7 +50,7 @@ export default function Registration() {
 
   return (
     <main className='main-reg'>
-      <div className="container p-0" style={{ maxWidth: "400px" }}>
+      <div className="p-0 reg-cont">
         <h1 className="text-center custom-brand">Movie Track</h1>
         <div className='p-3'>
           <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ export default function Registration() {
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
-                className="form-control"
+                className="form-control reg-input"
                 id="user_name"
                 placeholder="Username"
                 name="user_name"
@@ -85,7 +85,7 @@ export default function Registration() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="form-control"
+                className="form-control reg-input"
                 id="email"
                 placeholder="email"
                 name="email"
@@ -107,7 +107,7 @@ export default function Registration() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                className="form-control"
+                className="form-control reg-input"
                 id="pwd"
                 placeholder="password"
                 name="pwd"
@@ -129,7 +129,7 @@ export default function Registration() {
                 onChange={(e) => {
                   setPasswordConfirmation(e.target.value);
                 }}
-                className="form-control"
+                className="form-control reg-input"
                 id="pwd2"
                 placeholder="password confirmation"
                 name="pwd2"
@@ -152,7 +152,7 @@ export default function Registration() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                className="form-control"
+                className="form-control reg-input"
                 id="pwd2"
                 placeholder="Name"
                 name="name"
@@ -170,7 +170,7 @@ export default function Registration() {
               <label htmlFor="gender" className="form-label">
                 
               </label>
-              <select class="form-select" aria-label="gender" value={gender}
+              <select class="form-select reg-input" aria-label="gender" value={gender}
                 onChange={handleGenderChange}>
                 <option value="female">female</option>
                 <option value="male">male</option>
@@ -189,7 +189,7 @@ export default function Registration() {
               <input
                 type="number"
                 id="birth_year"
-                className="form-control"
+                className="form-control reg-input"
                 min="1900" 
                 max={new Date().getFullYear()}
                 value={birth_year} 
@@ -205,8 +205,8 @@ export default function Registration() {
               </div>
             </div>
 
-            <div className='mb-3 mt-5'>
-              <button type="submit" className="btn btn-primary w-100 reg-btn">
+            <div className='mb-3 mt-5 reg-btn-cont'>
+              <button type="submit" className="log-reg-btn">
                 Join now
               </button>
             </div>
