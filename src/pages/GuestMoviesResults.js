@@ -1,13 +1,13 @@
 import React from 'react'
-import useAuthContext from '../contexts/AuthContext'
 import MovieCard from '../components/guest/MovieCard'
 import '../style/MovieCard.css'
 import GuestAdvencedSearch from '../components/guest/GuestAdvencedSearch'
+import useMovieDataContext from '../contexts/MovieDataContext'
 
 
 
 export default function GuestMoviesResults() {
-    const { foundMovies } = useAuthContext() //áthozzuk a filmes találatokat megjelenítésre
+    const { foundMovies } = useMovieDataContext() //áthozzuk a filmes találatokat megjelenítésre
     //console.log(foundMovies)
     const movies = foundMovies?.data || [] //ha létezik a tömb akkor az értékét mentsük a datát, ha nem akkor csak egy üres tömb
 

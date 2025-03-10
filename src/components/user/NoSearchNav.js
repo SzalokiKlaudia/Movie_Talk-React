@@ -76,7 +76,7 @@ export default function NoSearchNav() {
               <FontAwesomeIcon icon={faChevronDown} className={`fs-5 ${isOpen ? "rotated" : ""}`} />
             </div>
 
-          {/* lenyíló profil menü */}
+          {/* ha true bekerül a DOMba */}
           {isOpen && (
             <ul className="position-absolute top-100 end-0 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
                 <li className="list-unstyled">

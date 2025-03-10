@@ -69,7 +69,7 @@ export default function UserNav() {
             >
               Title
             </button>
-            {titleOpen && ( //ha kinyitjuk true lesz akkor az ul megjelenik, ha false nem látjuk, logikai és operátor
+            {titleOpen && ( //ha kinyitjuk true lesz és bekerül a DOM-ba akkor az ul megjelenik, ha false nem látjuk, logikai és operátor
               <ul className="dropdown-menu show">
                 <li>
                   <Link className="dropdown-item" to="/advanced-search">
@@ -113,9 +113,9 @@ export default function UserNav() {
             <FontAwesomeIcon icon={faChevronDown} className={`fs-5 ${isOpen ? "rotated" : ""}`} />
           </div>
 
-          {/* lenyíló profil menü ha az isopen true megjelenik az ul vagyis a menüpontok nagy kijelzőn*/}
+          {/* lenyíló profil menü ha az isopen true megjelenik az ul a DOM-ban vagyis a menüpontok nagy kijelzőn*/}
           {isOpen && (
-            <ul className="position-absolute top-100 end-0 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
+            <ul className="position-absolute top-100 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
                 <li className="list-unstyled">
                     <Link to="/user" className="d-block px-4 py-2 text-white text-decoration-none hover">
                         Profil
@@ -143,7 +143,7 @@ export default function UserNav() {
     {/*csak mobil kijelzőn aktiválódik ha a hamburgerre katt active osztályt kap ezek a menüpontok
         alapértelmezetten display none, ha katt  hanburgerre ez a menüpontok active osztályt kapnak és 
         block elem lesz a mobile-menu-active osztálya*/}  
-            
+        
        <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}>
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">

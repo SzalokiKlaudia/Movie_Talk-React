@@ -1,17 +1,17 @@
 
 
 import React, { useContext } from 'react'
-import useAuthContext from '../contexts/AuthContext'
 import Premiers from '../components/guest/Premiers'
 import '../style/Premiers.css';
 import UsersTopMovies from '../components/guest/UsersTopMovies';
 import TopUsers from '../components/guest/TopUsers';
+import useMovieDataContext from '../contexts/MovieDataContext';
 
 
 export default function HomeGuest() {
 
 //meghívódik a Context-ből az apiData, és a kategoriaData, hogfy megtudjuk jeleníteni  a termékeket, és a kategóriákat a komponenseken keresztül
-const { pMovies, usersTopMovies,topUsers } = useAuthContext() // Nem kell useContext-et újra meghívni
+const { pMovies, usersTopMovies,topUsers } = useMovieDataContext() // Nem kell useContext-et újra meghívni
   //console.log(usersTopMovies)
 
 
@@ -24,9 +24,7 @@ const { pMovies, usersTopMovies,topUsers } = useAuthContext() // Nem kell useCon
             Premier movies
           </h3>
        
-      
         {pMovies ? <Premiers premiers={pMovies} /> : "No premiers found"}
-
 
         </section>
        
@@ -37,7 +35,6 @@ const { pMovies, usersTopMovies,topUsers } = useAuthContext() // Nem kell useCon
 
         {usersTopMovies ? <UsersTopMovies usersTopMovies={usersTopMovies} /> : "No movies found"}
       
-
         </section>
 
         <section className='section3'>
@@ -47,8 +44,6 @@ const { pMovies, usersTopMovies,topUsers } = useAuthContext() // Nem kell useCon
 
           {topUsers ? <TopUsers users={topUsers} /> : "Could not find any data"}
 
-
-        
         </section>
       </div>
     </main>

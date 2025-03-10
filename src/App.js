@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import AdminLayout from './layouts/AdminLayout';
 import UserLayout from './layouts/UserLayout';
-import HomeAdmin from './pages/HomeAdmin';
 import HomeUser from './pages/HomeUser';
 import HomeGuest from './pages/HomeGuest';
 import ProfilUser from './pages/ProfilUser';
@@ -33,7 +32,7 @@ function App() {
 
             {user?.is_admin === 1 && (
                 <Route element={<AdminLayout />}>
-                    <Route index element={<HomeAdmin />} />
+                    <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
                     <Route path="/admin/users" element={<AdminUsers />} />
 

@@ -7,7 +7,7 @@ export default function AdminAside() {
     const { selectedValue, setSelectedValue, activeUsers, inActiveUsers } = useAuthContext()
     //console.log(activeUsers)
     //console.log(inActiveUsers)
-    console.log(selectedValue)
+    //console.log(selectedValue)
 
 
   return (

@@ -11,25 +11,30 @@ import ActiveUser from '../components/admin/ActiveUser'
 export default function AdminUsers() {
 
   const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers } = useAuthContext()
+  const [ usersToShow, setUsersToShow ] = useState([]) //ide mentjük az aktuálisan megjeleítendő usereket
   //checkbox-ot kezeljük
   const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a userek id-ai checkbox miatt kell
   const [searchUser, setSearchUser] = useState("") // a keresett felh neve amit inputban adunk, itt tároljuk
-  const [ usersToShow, setUsersToShow ] = useState([])
-
   
+
+  //itt jelenítem meg az aktív és  inaktív userek aszerint h melyik gombra kattintanak acitive vagy inakvtiv
   useEffect(() => {
+    getActiveUsers()
 
     if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
+      getActiveUsers()
       setUsersToShow(activeUsers)
-    
     }else if(selectedValue == 'inactive'){
+      getInActiveUsers()
       setUsersToShow(inActiveUsers)
     }
-  },[selectedValue, activeUsers, inActiveUsers])
 
-  console.log(selectedValue)
-  console.log(activeUsers)
-  console.log(inActiveUsers)
+
+  },[selectedValue])
+
+  //console.log(selectedValue)
+  //console.log(activeUsers)
+  //console.log(inActiveUsers)
 
 
   const handleCheckBoxChange = (e, userId) => { //esemény ami tárolja a változásokat a checkboxban

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../../style/GuestNav.css';
 import { myAxios } from "../../api/axios";
-import useAuthContext from "../../contexts/AuthContext";
+import useMovieDataContext from "../../contexts/MovieDataContext";
 
 
 
@@ -19,7 +19,7 @@ export default function GuestNav() {
 
       
     //egyszerű keresés!
-    const { postSearchByTitle, foundMovies, setFoundMovies } = useAuthContext()
+    const { postSearchByTitle, foundMovies, setFoundMovies } = useMovieDataContext()
     const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
 
     //egyszerű kereséhez hozzárendeljük a button-höz

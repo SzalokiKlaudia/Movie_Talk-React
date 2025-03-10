@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter } from 'react-router-dom';
 import { FileProvider } from './contexts/FileContext';
+import { MovieDataProvider } from './contexts/MovieDataContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,9 +16,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <AuthProvider>
+      <MovieDataProvider>
       <FileProvider>
         <App />
       </FileProvider>
+      </MovieDataProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

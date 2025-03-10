@@ -21,44 +21,6 @@ export const AuthProvider = ({ children }) => {
 
     })
     
-    const [pMovies, setPMovies] = useState([]);
-
-    const getPremiers = async () => { //itt szedjük le külső apiból a premier filmeket
-      try {
-        const {data} = await myAxios.get('/api/premier-movies')
-        //console.log(data)
-        setPMovies(data)  // Itt tároljuk el a filmeket az állapotban!!!!!
-     
-      } catch (error) {
-        console.error("No datas to the premiers:", error)
-      }
-    }
-
-    const [usersTopMovies, setUsersTopMovies] = useState([]);
-
-    const getUsersTopMovies = async () => {
-      try {
-        const {data} = await myAxios.get('api/movie/top-rated-movies')
-        //console.log(data)
-        setUsersTopMovies(data)
-
-      } catch (error) {
-        console.error("Could not find any data to the routes")
-      }
-    }
-
-    const [topUsers, setTopUsers] = useState([]);
-
-    const getTopUsers = async () => {
-      try {
-        const {data} = await myAxios.get('api/movie/top-users')
-        //console.log(data)
-        setTopUsers(data)
-      }catch (error) {
-        console.error("Could not find any data to the routes")
-      }
-    }
-
 
     const csrf = async () => myAxios.get("/sanctum/csrf-cookie")
 
@@ -76,8 +38,33 @@ export const AuthProvider = ({ children }) => {
         }
       }
     }
-  
 
+    const loginReg = async ({...data}, route) => { //bej vagy reg
+      try {
+          await csrf()//lekérjük a tokent
+          await myAxios.post(route, data)
+          console.log("Succes!!")
+          //sikeres bejelentkezés/regisztráció esetén
+        
+          getUser()//frissítjük a feh-i adatokat
+          navigate("/")//átírányítás a főoldalra
+    
+        } catch (error) {
+          console.log(error)
+          if (error.response.status === 422) {
+            setErrors(error.response.data.errors)
+          }
+          if (error.response.status === 401) {
+            console.error("Unauthorized: Hibás bejelentkezési adatok")
+            setErrors({
+                email: 'Invalid credentials',
+                password: 'Invalid credentials'
+            });
+          }
+        }
+    }
+  
+//KIJELENTKEZÉS
     const logOut = async () => {
       await csrf()
   
@@ -87,18 +74,6 @@ export const AuthProvider = ({ children }) => {
       })
     }
 
-    //const [allUsers, setAllUsers] = useState([]);
-
-   /* const getAllUsers = async () => {
-      try {
-        const {data} = await myAxios.get('api/admin/users')
-        console.log(data)
-        setAllUsers(data)
-
-      } catch (error) {
-        console.error("Could not find any data to the routes")
-      }
-    }*/
 
     const [selectedValue, setSelectedValue] = useState("active")//ő tartalmazza h aktív vagy nem aktív egy user
 
@@ -108,9 +83,9 @@ export const AuthProvider = ({ children }) => {
     const getActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/0')
-        console.log(data)
+        //console.log(data)
         setActiveUsers(data) //frissítsük az aktív user lsitánkat
-        console.log(activeUsers)
+        //console.log(activeUsers)
    
 
       } catch (error) {
@@ -125,10 +100,10 @@ export const AuthProvider = ({ children }) => {
     const getInActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/1')
-        console.log(data)
+        //console.log(data)
         setInActiveUsers(data)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
-        console.log(inActiveUsers)
-        console.log(selectedValue)
+        //console.log(inActiveUsers)
+        //console.log(selectedValue)
 
       } catch (error) {
         console.error("Could not find any data to the routes")
@@ -166,72 +141,16 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
-    //egyszerű keresés
-      
-    const [ foundMovies, setFoundMovies ] = useState([]) //ide gyűjtjük a találatokat
-    
-    //itt történik a backend-el való kommunikáció
-    const postSearchByTitle = async (title) => {
-      if (!title.trim()) {
-        setFoundMovies([]) // ha nem írtünk be semmit az inputba töröljük a tömböt
-        return
-      }
-      try{
-        const response = await myAxios.post('api/movie/title', {title})//mert tesztelésnél is megkell adni ezeket az adatokat
-        console.log(response.data)
-        setFoundMovies(response.data) //beállítjuk a találatokat a tömbünkbe
-        
-      }catch(error){
-        console.log('No movies have been found')
-      }
-    }
-
         useEffect(() => {
           if (!user) {
             getUser()
           }
-          
-          getPremiers()
-          getUsersTopMovies()
-          getTopUsers()
-         //getActiveUsers() 
 
-          if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
-            getActiveUsers()
-          }else if(selectedValue == 'inactive'){
-            getInActiveUsers()
-          }
-
-        }, [selectedValue])
-
-      const loginReg = async ({...data}, route) => { //bej vagy reg
-        try {
-            await csrf()//lekérjük a tokent
-            await myAxios.post(route, data)
-            console.log("Succes!!")
-            //sikeres bejelentkezés/regisztráció esetén
-          
-            getUser()//frissítjük a feh-i adatokat
-            navigate("/")//átírányítás a főoldalra
-      
-          } catch (error) {
-            console.log(error)
-            if (error.response.status === 422) {
-              setErrors(error.response.data.errors)
-            }
-            if (error.response.status === 401) {
-              console.error("Unauthorized: Hibás bejelentkezési adatok")
-              setErrors({
-                  email: 'Invalid credentials',
-                  password: 'Invalid credentials'
-              });
-            }
-          }
-      }
+        }, [])
 
       return (
-        <AuthContext.Provider value={{ errors,user,pMovies, loginReg, logOut, usersTopMovies, topUsers,selectedValue, setSelectedValue, 
-        activeUsers, inActiveUsers, deleteUser, restoreUser, postSearchByTitle, foundMovies, setFoundMovies, getActiveUsers, getInActiveUsers}}>
+        <AuthContext.Provider value={{ errors,user,loginReg, logOut,selectedValue, setSelectedValue, activeUsers, 
+        inActiveUsers, deleteUser, restoreUser,getActiveUsers, getInActiveUsers}}>
           {children}
         </AuthContext.Provider>
       )
