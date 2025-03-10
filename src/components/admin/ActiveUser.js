@@ -17,7 +17,7 @@ export default function ActiveUser(props) {
       <td>
         <input
               type="checkbox"
-              onChange={(e) => props.handleCheckBoxChange(e, props.user.id)} 
+              onChange={(e) => props.handleCheckBoxChange(e, props.user.id)} //átadjuk a user id-ját ha ki. be pipálunk egy usert
         />
       </td>
       <td>{props.user.id}</td>

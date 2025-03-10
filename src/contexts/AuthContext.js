@@ -104,7 +104,6 @@ export const AuthProvider = ({ children }) => {
         setInActiveUsers(data)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
         //console.log(inActiveUsers)
         //console.log(selectedValue)
-
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
@@ -145,6 +144,7 @@ export const AuthProvider = ({ children }) => {
           if (!user) {
             getUser()
           }
+          getActiveUsers()
 
         }, [])
 

@@ -15,7 +15,7 @@ export default function HomeUser() {
   const { pMovies, usersTopMovies, topUsers } = useMovieDataContext() // Nem kell useContext-et újra meghívni
  
 
-  console.log(user)
+  //console.log(user)
 
   return (
       <main>

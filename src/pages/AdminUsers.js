@@ -10,8 +10,8 @@ import ActiveUser from '../components/admin/ActiveUser'
 
 export default function AdminUsers() {
 
-  const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers } = useAuthContext()
-  const [ usersToShow, setUsersToShow ] = useState([]) //ide mentjük az aktuálisan megjeleítendő usereket
+  const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers, user } = useAuthContext()
+  const [ usersToShow, setUsersToShow ] = useState([]) //ide mentjük az aktuálisan megjeleítendő usereket, aktív vagy inaktív
   //checkbox-ot kezeljük
   const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a userek id-ai checkbox miatt kell
   const [searchUser, setSearchUser] = useState("") // a keresett felh neve amit inputban adunk, itt tároljuk
@@ -36,22 +36,37 @@ export default function AdminUsers() {
   //console.log(activeUsers)
   //console.log(inActiveUsers)
 
-
+//frissíti a kiválasztott iuserek listáját
   const handleCheckBoxChange = (e, userId) => { //esemény ami tárolja a változásokat a checkboxban
-    if(e.target.checked) { // ha pipa van
-      setSelectedUsers ([...usersToShow, userId]) //létrehozunk a tömbről másolatot ami tartalmazza az id-ket
-    }else {// ha kipipáljuk
-      setSelectedUsers(usersToShow.filter(id => id != userId))
-    }
+  if(e.target.checked) { // ha pipa van
+    setSelectedUsers ([...selectedUsers, userId])
+  }else {
+    setSelectedUsers(selectedUsers.filter((id) => id !== userId))
   }
+}
+
+
   //a törlés a pipa során
   const handleDelete = async () => {
+    const currentUserId = user.id
     try {
+      console.log(selectedUsers)
       for (const userId of selectedUsers) {
+        if(userId == currentUserId){
+          alert('Sorry, you can not delete yourself!')
+          return
+        }
         await deleteUser(userId) // vár amíg midnen törlés befejeződik
       }
   
       alert('User is succesfully deleted!')
+
+      const updatedUsersToShow = usersToShow.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
+
+      setUsersToShow(updatedUsersToShow) //frissítjük
+      getInActiveUsers()
+      setSelectedUsers([])
+
     } catch (error) {
       console.error(error);
       alert('Find an error during the delete proccess.')
@@ -64,36 +79,51 @@ export default function AdminUsers() {
       for (const userId of selectedUsers) {
         await restoreUser(userId)// vár amíg midnen törlés befejeződik
       }
-  
       alert('The user is succesfully restored!')
+      const updatedUsersToShow = usersToShow.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
+
+      setUsersToShow(updatedUsersToShow) //frissítjük
+      getActiveUsers()
+      setSelectedUsers([])
+
     } catch (error) {
       console.error(error);
       alert('Find an error during the restore proccess.')
     }
   }
 
-
-
     //a keresés kezelése ha beírun kegy user nevet
     const handleSearch = (e) => {
       setSearchUser(e.target.value) //setteljük az input értékét
+      console.log(searchUser)
+
+      if(e.target.value == ""){
+        if(selectedValue === 'active'){
+          setUsersToShow(activeUsers)
+        }else{
+          setUsersToShow(inActiveUsers)
+        }
+      }else{
+           //console.log(e.target.value)
+           const filteredUsers = usersToShow.filter(user => {
+            return user.user_name.toLowerCase().includes(searchUser.toLowerCase())
+          })
+    
+          setUsersToShow(filteredUsers) //itt állítjuk be a megjelenítést
+      }
+
     }
 
+  let restoreButtonDisabled = false
+  let deleteButtonDisabled = false
 
-
-    let filteredActiveUsers = activeUsers.filter(user => //végigmegyünk az aktívakon, és ellenőrizzük h egyezik az input értékkel ha igen, visszatérünk vele
-      user.user_name.toLowerCase().includes(searchUser.toLowerCase())  
-    )
-    //console.log(filteredActiveUsers) //szűrt adatok
-
-
-    let filteredInActiveUsers = inActiveUsers.filter(user =>
-      user.user_name.toLowerCase().includes(searchUser.toLowerCase())  
-    )
-
-    //console.log(filteredInActiveUsers)
-
-
+  if(selectedValue === 'active'){
+    restoreButtonDisabled = true
+  }else{
+    deleteButtonDisabled = true
+    
+  }
+  
     
   return (
     <div className='container custom-t-container'>
@@ -118,6 +148,7 @@ export default function AdminUsers() {
           <div className='d-flex buttons'>
           <button 
           className='del-btn'
+          disabled= {deleteButtonDisabled}
           onClick = {handleDelete} >
             Delete
           </button>
@@ -126,6 +157,7 @@ export default function AdminUsers() {
           <div className='d-flex buttons'>
           <button className='res-btn'
           onClick = {handleRestore}
+          disabled= {restoreButtonDisabled}
           
           >Restore</button>
           </div>
@@ -159,19 +191,16 @@ export default function AdminUsers() {
                       </tr>
                   
                   </thead>
-                <tbody>
-                           
+                <tbody> 
+
                   {usersToShow.length > 0 ? (
                   usersToShow.map((user) => {
-               /*    if (selectedValue === 'active') { */
                     return <ActiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
-                /*   } else if (selectedValue === 'inactive') {
-                    return <InactiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
-                  } */
-                })
+                
+                  })
                   ) : (
-                <tr><td colSpan="8">No users found</td></tr>
-                )}
+                  <tr><td colSpan="8">No users found</td></tr> //kitölti a táblázatot
+                  )}
                
               </tbody>
           
