@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     }
 
 
-    const [selectedValue, setSelectedValue] = useState("active")//ő tartalmazza h aktív vagy nem aktív egy user
+    const [selectedValue, setSelectedValue] = useState("")//ő tartalmazza h aktív vagy nem aktív egy user
 
 
     const [activeUsers, setActiveUsers] = useState([]) //itt tárolódnak az aktív felhazsnálók
@@ -144,7 +144,6 @@ export const AuthProvider = ({ children }) => {
           if (!user) {
             getUser()
           }
-          getActiveUsers()
 
         }, [])
 

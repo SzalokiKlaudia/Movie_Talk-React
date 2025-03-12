@@ -9,10 +9,10 @@ export default function GuestAdvencedSearch() {
         'War', 'Music', 'Family'
     ]
 
-    const [title, setTitle] = useState('');
-    const [dateFrom, setDateFrom] = useState('');
-    const [dateTo, setDateTo] = useState('');
-    const [genre, setGenre] = useState('');
+    const [title, setTitle] = useState('')
+    const [dateFrom, setDateFrom] = useState('')
+    const [dateTo, setDateTo] = useState('')
+    const [genre, setGenre] = useState('')
     const [keyword, setKeyword] = useState('')
 
   return (

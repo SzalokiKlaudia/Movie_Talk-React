@@ -1,11 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../style/MovieCard.css'
 
 export default function MovieCard(props) {
+
+  const navigate = useNavigate()
+
+
+
+  //a film adatait a state objektumban küldjük át, dinamikus az id az urlben!!
   return (
     <li className='d-flex custom-list-border'>
-        <Link className='d-flex w-100 text-decoration-none text-dark'>
+        <Link className='d-flex w-100 text-decoration-none text-dark' 
+          to={`/movie/${props.movie.id}/details`} state={{ movie: props.movie}}>
             <div className='movie-image-wrapper mb-2'>
                 <img src={props.movie.image_url} 
                 alt={props.movie.title}

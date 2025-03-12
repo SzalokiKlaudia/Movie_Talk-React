@@ -6,7 +6,7 @@ const MovieDataContext = createContext();
 export const MovieDataProvider = ({ children }) => {
 
     //lekérjük  apremier filmeket backendről
-        const [pMovies, setPMovies] = useState([]);
+        const [pMovies, setPMovies] = useState([])
     
         const getPremiers = async () => { //itt szedjük le külső apiból a premier filmeket
           try {
@@ -30,6 +30,7 @@ export const MovieDataProvider = ({ children }) => {
     
           } catch (error) {
             console.error("Could not find any data to the routes")
+            
           }
         }
     
@@ -52,19 +53,29 @@ export const MovieDataProvider = ({ children }) => {
             
             //itt történik a backend-el való kommunikáció
          const postSearchByTitle = async (title) => {
-            if (!title.trim()) {
-                setFoundMovies([]) // ha nem írtünk be semmit az inputba töröljük a tömböt
-                return
-            }
             try{
                 const response = await myAxios.post('api/movie/title', {title})//mert tesztelésnél is megkell adni ezeket az adatokat
-                console.log(response.data)
-                setFoundMovies(response.data) //beállítjuk a találatokat a tömbünkbe
+                console.log(response.data.data)
+                setFoundMovies(response.data.data) //beállítjuk a találatokat a tömbünkbe
                 
             }catch(error){
                 console.log('No movies have been found')
+                setFoundMovies([])
             }
         }
+
+       /* const [movieDetails, setMovieDetails ] = useState([])
+
+        const getMovieKeywordsAndGenres = async (id) => {
+          try{
+            const response = await myAxios.get(`api/movie/${id}/details`)
+              console.log(response.data)
+              setMovieDetails(response.data)
+
+          }catch(error){
+            console.log('No datas have been found')
+          }
+        }*/
 
 
         
@@ -72,14 +83,14 @@ export const MovieDataProvider = ({ children }) => {
             getPremiers()
             getUsersTopMovies()
             getTopUsers()
-        
-             
-        
+            setFoundMovies([])
+            //getMovieKeywordsAndGenres()
+           
         }, [])
 
         
       return (
-        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle}}>
+        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, foundMovies}}>
           {children}
         </MovieDataContext.Provider>
       )

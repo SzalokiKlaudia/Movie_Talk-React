@@ -5,11 +5,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useMovieDataContext from '../../contexts/MovieDataContext';
+import '../../style/GuestNav.css'
 
 export default function UserNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
-  const [titleOpen, setTitleOpen] = useState(false) // A Title lenyitása
   const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
 
   const navigate = useNavigate() // Navigációhoz szükséges hook
@@ -28,7 +29,37 @@ export default function UserNav() {
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
 
-  console.log(user)
+  //console.log(user)
+
+  //egyszerű keresés
+
+  const { postSearchByTitle, setFoundMovies } = useMovieDataContext()
+  const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
+  const [ typingTimeOut, setTypingTimeOut ] = useState(null)
+
+  const handleSearch = (e) => {
+    const value = e.target.value
+    setSearchTitle(value) //frissít input érték
+
+    if (typingTimeOut) {//töröljük a korábbi állapotot
+      clearTimeout(typingTimeOut)
+    }
+
+    const timeout = setTimeout(() => {//késleltetett keresés, vár 500 ms-ig és csak utána megy az api hívás, így nem fog karakterenként api keresés történni
+      if (value === '') {
+        setFoundMovies([]) 
+      } else {
+        postSearchByTitle(value)
+      }
+    }, 2000)
+
+    setTypingTimeOut(timeout)
+
+      localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
+
+    
+ 
+  }
 
 
   return (
@@ -59,38 +90,33 @@ export default function UserNav() {
         role="search">
         <div className="input-group">
 
-          {/* Title dropdown */}
             <button
-              id="btn-title"
-              className="btn btn-light dropdown-toggle"
+              id="btn-title-user-mobile"
+              className="btn btn-light"
               type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
-              onClick={() => setTitleOpen(!titleOpen)}
             >
               Title
             </button>
-            {titleOpen && ( //ha kinyitjuk true lesz és bekerül a DOM-ba akkor az ul megjelenik, ha false nem látjuk, logikai és operátor
-              <ul className="dropdown-menu show">
-                <li>
-                  <Link className="dropdown-item" to="/advanced-search">
-                    Advanced Search
-                  </Link>
-                </li>
-              </ul>
-            )}
-          
-
+    
           {/* Kereső input */}
           <input
+            id='search-input-user'
             className="form-control flex-grow-1"
             type="search"
             placeholder="Search..."
             aria-label="Search"
+            value={searchTitle}
+            onChange={handleSearch}
           />
 
           {/* Kereső ikon */}
-          <button id="search" className="btn btn-light" type="button">
-            <FontAwesomeIcon icon={faSearch} />
+          <button id="search" 
+            className="btn btn-light" 
+            onClick={handleSearch}
+            type="button">
+            <Link className="search-btn" to= '/movie/title'>
+              <FontAwesomeIcon icon={faSearch} className='search-icon' />
+            </Link>
           </button>
         </div>
       </form>
@@ -161,29 +187,28 @@ export default function UserNav() {
                 {/* mobil nézet keresője */}
           <form className="mobile-search" role="search">
             <div className="input-group">
-              <button id="btn-title" className="btn btn-light dropdown-toggle" type="button"
-              aria-expanded={titleOpen ? "true" : "false"}
-              onClick={() => setTitleOpen(!titleOpen)}
+              <button id="btn-title-user-mobile" 
+                className="btn btn-light" 
+                type="button"
             >
                 Title
               </button>
-              {titleOpen && (  //ha true értéket kap megjelik a lenyíló össz kereső
-                    <ul className="dropdown-menu show w-100">
-                      <li>
-                        <Link className="dropdown-item" to="/advanced-search">
-                          Advanced Search
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
+  
               <input
+                id="search-input-user"
                 className="form-control flex-grow-1"
+                value={searchTitle}
+                onChange={handleSearch}
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
               />
-              <button id="search" className="btn btn-light" type="button">
-                <FontAwesomeIcon icon={faSearch} />
+              <button id="search"
+              onClick={handleSearch}
+                className="btn btn-light" 
+                type="button">
+              
+                <FontAwesomeIcon icon={faSearch} className='search-icon' />
               </button>
             </div>
           </form>

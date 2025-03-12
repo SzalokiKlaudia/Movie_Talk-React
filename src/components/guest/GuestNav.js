@@ -1,6 +1,6 @@
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import '../../style/GuestNav.css';
 import { myAxios } from "../../api/axios";
@@ -10,7 +10,6 @@ import useMovieDataContext from "../../contexts/MovieDataContext";
 
 export default function GuestNav() {
 
-    const [titleOpen, setTitleOpen] = useState(false) // A Title lenyitása
 
     const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
     const toggleMenu = () => {
@@ -19,18 +18,35 @@ export default function GuestNav() {
 
       
     //egyszerű keresés!
-    const { postSearchByTitle, foundMovies, setFoundMovies } = useMovieDataContext()
+    const { postSearchByTitle, setFoundMovies} = useMovieDataContext()
     const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
+    const [ typingTimeOut, setTypingTimeOut ] = useState(null)
 
-    //egyszerű kereséhez hozzárendeljük a button-höz
-      const handleSearch = () => {
-        //console.log(searchTitle)
-        if(searchTitle.trim() == ''){ //string metódus, eltávolítja a whitespaceket
-          setFoundMovies([]) //ha üres az input kereső ürítjük a találat tömböt
-        }else{
-          postSearchByTitle(searchTitle) //api hívással lekérjük az input értékét
-          localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
+  
+
+    //egyszerű kereséhez hozzárendeljük a button-höz, (nagyon lassan kell törölnöm karaktereket h ürítse  afoundmovies tömböt)
+      const handleSearch = (e) => {
+        const value = e.target.value
+        setSearchTitle(value) //frissít input érték
+
+        if (typingTimeOut) {//töröljük a korábbi állapotot
+          clearTimeout(typingTimeOut)
         }
+
+        const timeout = setTimeout(() => {//késleltetett keresés, vár 500 ms-ig és csak utána megy az api hívás, így nem fog karakterenként api keresés történni
+          if (value === '') {
+            setFoundMovies([]) 
+          } else {
+            postSearchByTitle(value)
+          }
+        }, 2000)
+    
+        setTypingTimeOut(timeout)
+
+          //localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
+
+        
+     
       }
 
     return (
@@ -62,33 +78,23 @@ export default function GuestNav() {
             className={`d-none d-lg-block justify-content-center w-50 mx-3`}>
             <div className="input-group">
 
-              {/* Title dropdown menüü */}
                 <button
-                  id="btn-title"
-                  className="btn btn-light dropdown-toggle"
+                  id="btn-title-mobile"
+                  className="btn btn-light title-btn"
                   type="button"
-                  aria-expanded={titleOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a titleOpen értékét ami false alapban
-                  onClick={() => setTitleOpen(!titleOpen)} //kattra változtatja a titleOpen értékét az ellenkezőjére
                 >
                   Title
                 </button>
-                {titleOpen && ( //ha kinyitjuk true lesz akkor az ul megjelenik, ha false nem látjuk, logikai és operátor
-                  <ul className="dropdown-menu show">
-                    <li>
-                      <Link className="dropdown-item" to="/advanced-search">
-                        Advanced Search
-                      </Link>
-                    </li>
-                  </ul>
-                )}
+          
               
 
               {/* Kereső input a filmek keresésére */}
               <input
+              id="search-input-guest"
                 className="form-control flex-grow-1"
                 type="search"
                 value={searchTitle}
-                onChange={(e) => setSearchTitle(e.target.value)} //mindig frissíti az input karaktereket
+                onChange={handleSearch} //mindig frissíti az input karaktereket
                 placeholder="Search..."
                 aria-label="Search"
               />
@@ -99,7 +105,7 @@ export default function GuestNav() {
                 className="btn btn-light" 
                 type="button">
                 <Link className="search-btn" to= '/movie/title'>
-                <FontAwesomeIcon icon={faSearch} />
+                <FontAwesomeIcon icon={faSearch} className="search-icon" />
                 </Link>
               
               </button>
@@ -139,25 +145,18 @@ export default function GuestNav() {
                 {/* mobil kereső form-ja */}
           <form className="mobile-search">
             <div className="input-group">
-              <button id="btn-title" className="btn btn-light dropdown-toggle" type="button"
-              aria-expanded={titleOpen ? "true" : "false"}  //jelzi h menü éppen nyta van vagy nem, titleopen értékét mutatja meg
-              onClick={() => setTitleOpen(!titleOpen)}
-            >
+              <button id="btn-title-mobile" 
+                className="btn btn-light title-btn" 
+                type="button"
+              >
                 Title
               </button>
-              {titleOpen && (  //ha true értéket kap megjelik a lenyíló össz kereső
-                    <ul className="dropdown-menu show w-100">
-                      <li>
-                        <Link className="dropdown-item" to="/advanced-search">
-                          Advanced Search
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
+
               <input
                 className="form-control flex-grow-1"
+                id="search-input-guest"
                 value={searchTitle}
-                onChange={(e) => setSearchTitle(e.target.value)} //mindig frissíti az input karaktereket
+                onChange={handleSearch} //mindig frissíti az input karaktereket
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
@@ -167,7 +166,7 @@ export default function GuestNav() {
                 type="button"
                 onClick={handleSearch}>
                 <Link className="search-btn" to= '/movie/title'>
-                  <FontAwesomeIcon icon={faSearch} />
+                  <FontAwesomeIcon icon={faSearch} className="search-icon" />
                 </Link>
               </button>
             </div>

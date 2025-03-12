@@ -64,7 +64,7 @@ export default function AdminUsers() {
       const updatedUsersToShow = usersToShow.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
 
       setUsersToShow(updatedUsersToShow) //frissítjük
-      getInActiveUsers()
+      getInActiveUsers()//frissíteni kell h látszódjon az inaktív usereknél
       setSelectedUsers([])
 
     } catch (error) {
@@ -99,7 +99,7 @@ export default function AdminUsers() {
 
       if(e.target.value == ""){
         if(selectedValue === 'active'){
-          setUsersToShow(activeUsers)
+          setUsersToShow(activeUsers) //visszakapjuk az input törlésénél az aktív suereket, és inaktívakat!!
         }else{
           setUsersToShow(inActiveUsers)
         }

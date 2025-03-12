@@ -4,7 +4,7 @@ import useAuthContext from '../../contexts/AuthContext'
 
 export default function AdminAside() {
 
-    const { selectedValue, setSelectedValue, activeUsers, inActiveUsers } = useAuthContext()
+    const { selectedValue, setSelectedValue} = useAuthContext()
     //console.log(activeUsers)
     //console.log(inActiveUsers)
     //console.log(selectedValue)
@@ -19,9 +19,7 @@ export default function AdminAside() {
                     type="radio" 
                     id="activeUser" 
                     name="customRadios"
-                    checked = {selectedValue === 'active'}
-                    value = 'active'
-                    onChange = {(e) => setSelectedValue(e.target.value)}
+                    value = 'active' //így frissül az állapot
                     
                     />
                 <label className="form-check-label input-label"
@@ -34,9 +32,7 @@ export default function AdminAside() {
                     type="radio" 
                     id="inactiveUser" 
                     name="customRadios" 
-                    checked = {selectedValue == 'inactive'}
                     value = 'inactive'
-                    onChange={(e) => setSelectedValue(e.target.value)}
 
                     />
                 <label className="form-check-label input-label"

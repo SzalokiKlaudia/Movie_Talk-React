@@ -12,6 +12,7 @@ import HomeGuest from './pages/HomeGuest';
 import ProfilUser from './pages/ProfilUser';
 import AdminUsers from './pages/AdminUsers';
 import GuestMoviesResults from './pages/GuestMoviesResults';
+import MovieDetails from './pages/MovieDetails';
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
                     <Route path="/" element={<HomeGuest />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Registration />} />
-                    <Route path='/movie/title' element={<GuestMoviesResults />}/>
+                    <Route path='/movie/:id/title' element={<GuestMoviesResults />}/>
                     
                 </Route>
             )}
@@ -36,9 +37,6 @@ function App() {
                     <Route path="/user" element={<ProfilUser />} />
                     <Route path="/admin/users" element={<AdminUsers />} />
 
-
-
-
                 </Route>
             )}
 
@@ -46,7 +44,9 @@ function App() {
                 <Route element={<UserLayout />}>
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
-                    {/*nem működik a profil mobilban */}
+                    <Route path='/movie/title' element={<GuestMoviesResults />}/>
+                    <Route path='/movie/:id/details/' element={<MovieDetails />}/>
+
 
 
                 </Route>

@@ -43,9 +43,16 @@
 
 }
 
-#btn-title{
+#btn-title-mobile, #btn-title-user-mobile{
   border-bottom-left-radius: 1rem;
   border-top-left-radius: 1rem;
+  border-right: 1px solid grey !important;
+  background-color:  var(--rest-btn-color) !important;
+  color: var(--font-color);
+}
+
+#search-input-guest, #search-input-user{
+  background-color: var(--profile-inp-bg-color);
 }
 
 
@@ -53,6 +60,12 @@
 #search{
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
+  background-color: var(--profile-inp-bg-color) !important;
+
+}
+
+.search-icon{
+  color: #000000;
 }
 
 #logo:hover, .nav-link:hover{

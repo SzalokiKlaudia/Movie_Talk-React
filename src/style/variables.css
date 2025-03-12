@@ -11,12 +11,17 @@
     --register-login-bg-color: #7e798e;
     --reg-hover-color:  #bdbebf;
     --log-reg-btn-color: #62568b;
-    --profile-inp-bg-color: #F3ECF4;
+    --profile-inp-bg-color: #e5e0e9;
     --radio-btn-color: #776f8f;
     --del-btn-color: #919497;
     --rest-btn-color: #9791ab;
     --btn-font-color: #222529;
     --profil-bg-color: #cdc9d8;
     --home-bg-color: #cdc9d8;
+    --table-cont-bg-color: #d9dddd;
+    --bs-table-border-color: #fbfbfb;
+    --search-input-bg-color:  #e2e3e4;
+    --container-bg-color: #fefbff;
+
     
 }

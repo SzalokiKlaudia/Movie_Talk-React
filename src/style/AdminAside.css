@@ -17,7 +17,8 @@
 
 .custom-aside{
     padding: 0 !important;
-    box-shadow: 6px 0px 6px rgba(191, 188, 188, 0.5);
+    box-shadow: 6px 0px 6px rgba(183, 186, 188, 0.5);
+
 
 } 
 
@@ -43,7 +44,7 @@
 
 .input-group .btn {
     border-left: 0; 
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
     border-radius: 0 25px 25px 0; 
   }
 

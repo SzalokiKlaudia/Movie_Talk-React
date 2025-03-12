@@ -1,0 +1,20 @@
+
+
+@media (max-width: 786px) {
+    .guest-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .advenced-search{
+        order: 1;
+        width: 100% !important;
+    }
+
+    .movie-results-container{
+        order: 2;
+        width: 100% !important;
+    }
+
+  }

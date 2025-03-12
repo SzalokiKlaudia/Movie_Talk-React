@@ -15,3 +15,8 @@
 
 
 }
+
+.user-cont, .guest-cont, .admin-cont{
+    background-color: var(--container-bg-color);
+    
+}
