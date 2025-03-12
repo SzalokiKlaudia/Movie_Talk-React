@@ -31,17 +31,16 @@ export default function MovieDetails() {
                 </div>
             </section>
 
-            <section className='movie-img-video-urls-wrapper m-0 row'>
-                <div className='movie-img-wrapper col-md-4 text-start p-0'>
+            <section className='movie-img-video-urls-wrapper w-100'>
+                <div className='movie-img-wrapper p-0'>
                     <img className='movie-poster' 
                         src={movie.image_url} 
                         alt={movie.title} />
-                </div>
-                <div className='movie-video-wrapper col-md-8 text-end p-0'>
-                    <div className='ratio ratio-16x9'>
-                        <iframe src={`https://www.youtube.com/embed/${videoId}`} >
-                        </iframe>
                     </div>
+               
+                <div className='movie-video-wrapper'>
+                        <iframe src={`https://www.youtube.com/embed/${videoId}`}>
+                        </iframe>
                 </div>
             </section>
 
