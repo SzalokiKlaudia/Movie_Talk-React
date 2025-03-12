@@ -26,7 +26,9 @@ function App() {
                     <Route path="/" element={<HomeGuest />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Registration />} />
-                    <Route path='/movie/:id/title' element={<GuestMoviesResults />}/>
+                    <Route path='/movie/title' element={<GuestMoviesResults />}/>
+                    <Route path='/movie/:id/details/' element={<MovieDetails />}/>
+
                     
                 </Route>
             )}

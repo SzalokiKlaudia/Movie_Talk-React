@@ -20,33 +20,22 @@ export default function GuestNav() {
     //egyszerű keresés!
     const { postSearchByTitle, setFoundMovies} = useMovieDataContext()
     const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
-    const [ typingTimeOut, setTypingTimeOut ] = useState(null)
 
-  
+    const handleInputChange = (e) => {
+      const value = e.target.value
+      setSearchTitle(value) //frissít input érték
 
-    //egyszerű kereséhez hozzárendeljük a button-höz, (nagyon lassan kell törölnöm karaktereket h ürítse  afoundmovies tömböt)
+    }
+
+    //egyszerű kereséhez hozzárendeljük a button-höz
       const handleSearch = (e) => {
-        const value = e.target.value
-        setSearchTitle(value) //frissít input érték
-
-        if (typingTimeOut) {//töröljük a korábbi állapotot
-          clearTimeout(typingTimeOut)
-        }
-
-        const timeout = setTimeout(() => {//késleltetett keresés, vár 500 ms-ig és csak utána megy az api hívás, így nem fog karakterenként api keresés történni
-          if (value === '') {
+      
+          if (searchTitle === '') {
             setFoundMovies([]) 
           } else {
-            postSearchByTitle(value)
+            postSearchByTitle(searchTitle)
           }
-        }, 2000)
-    
-        setTypingTimeOut(timeout)
-
-          //localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
-
-        
-     
+  
       }
 
     return (
@@ -94,7 +83,7 @@ export default function GuestNav() {
                 className="form-control flex-grow-1"
                 type="search"
                 value={searchTitle}
-                onChange={handleSearch} //mindig frissíti az input karaktereket
+                onChange={handleInputChange} //mindig frissíti az input karaktereket
                 placeholder="Search..."
                 aria-label="Search"
               />

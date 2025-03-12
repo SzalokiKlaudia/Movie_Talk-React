@@ -39,8 +39,7 @@ export default function MovieDetails() {
                 </div>
                 <div className='movie-video-wrapper col-md-8 text-end p-0'>
                     <div className='ratio ratio-16x9'>
-                        <iframe src={`https://www.youtube.com/embed/${videoId}`} 
-                            frameborder="0">
+                        <iframe src={`https://www.youtube.com/embed/${videoId}`} >
                         </iframe>
                     </div>
                 </div>

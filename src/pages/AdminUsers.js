@@ -18,9 +18,9 @@ export default function AdminUsers() {
   
 
   //itt jelenítem meg az aktív és  inaktív userek aszerint h melyik gombra kattintanak acitive vagy inakvtiv
-  useEffect(() => {
-    getActiveUsers()
-
+  //console.log(activeUsers)
+ useEffect(() => {
+   
     if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
       getActiveUsers()
       setUsersToShow(activeUsers)
@@ -32,7 +32,22 @@ export default function AdminUsers() {
 
   },[selectedValue])
 
-  //console.log(selectedValue)
+  /*useEffect(() => {
+    const fetchData = async () => {
+      if (selectedValue === 'active') {
+        const activeUsersData = await getActiveUsers();
+        setUsersToShow(activeUsersData);
+      } else if (selectedValue === 'inactive') {
+        const inactiveUsersData = await getInActiveUsers();
+        setUsersToShow(inactiveUsersData);
+      }
+    };
+   
+    fetchData();
+  }, []);*/
+
+  console.log(selectedValue)
+  //console.log(usersToShow)
   //console.log(activeUsers)
   //console.log(inActiveUsers)
 
@@ -193,7 +208,7 @@ export default function AdminUsers() {
                   </thead>
                 <tbody> 
 
-                  {usersToShow.length > 0 ? (
+                  {usersToShow ? (
                   usersToShow.map((user) => {
                     return <ActiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
                 
