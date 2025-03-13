@@ -1,14 +1,19 @@
 
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import '../style/MovieDetails.css'
 import useMovieDataContext from '../contexts/MovieDataContext'
+import { myAxios } from '../api/axios'
 
 export default function MovieDetails() {
+  
+
     const location = useLocation()
-    const { movie } = location.state
-    //const [  movieDetails, getMovieKeywordsAndGenres, setMovieDetails] = useMovieDataContext()
-    //console.log(movie)
+    const { movie } = location.state //megkaptuk az akt film adatait
+
+    //console.log(movie.genres)
+    //console.log(movie.keywords)
+    //console.log(movie.id)
 
     const videoId = movie.trailer_url.split('v=')[1].split('&')[0]
     let releaseDate = movie.release_date
@@ -21,14 +26,34 @@ export default function MovieDetails() {
     <div className='movie-wrapper'>
         <div className='movie-details-container container'>
             <section className='movie-small-details'>
-                <div className='movie-title'>
-                    <h2 className='movie-title-text'>{movie.title}</h2>
+                <div className='movie-title d-flex justify-content-between'>
+                    <div>
+                        <h2 className='movie-title-text'>{movie.title}</h2>
+                    </div>
+                    <div className='d-block text-end'>
+                    <Link>
+                        <button className='watch-btn'>WatcList</button>
+                    </Link>
+                    </div>
                 </div>
+              
                 <div className='movie-info'>
-                    <span className='me-5 release-date'>{newReleaseDate}.</span>
-                    <span className='duration-minute'>{movie.duration_minutes} minutes</span>
-                    <span className='movie-genres'></span>
+                    <div className='movie-dates'>
+                        <span className='me-5 release-date'>{newReleaseDate}.</span>
+                        <span className='duration-minute'>{movie.duration_minutes} minutes</span>
+                    </div>
+                 
+                    <div className='movie-genres'>
+                        <ul>
+                            {movie.genres.map((genre,id) => {
+                                return <li key={id}>{genre}, </li>
+                            })}
+                     
+                        </ul>
+                    </div>
+                   
                 </div>
+            
             </section>
 
             <section className='movie-img-video-urls-wrapper w-100'>
@@ -46,26 +71,35 @@ export default function MovieDetails() {
 
             <section className='movie-imp-details'>
                 <div className='movie-description'>
-                    <div className='description-wrapper'>
+                    <div className='description-wrapper d-flex pb-3'>
                          <p>{movie.description}</p>
+                         <p></p>
                     </div>
-                    <div className='movie-keywords-wrapper'>
-                        <div className='keywords'>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div className='movie-cast-url-wrapper'>
+                    <div className='movie-cast-url-wrapper'>
                     <span className='cast-url'>
                         <Link to={movie.cast_url}>Click to the cast</Link>
                     </span>
 
                 </div>
+                    <div className='movie-keywords-wrapper'>
+                           <ul>
+                           {movie.keywords.map((keyword,id) => {
+                                return <li key={id}>{keyword}</li>
+                            })}
+                         
+                           </ul>
+
+
+                    </div>
+                </div>
+            
+             
+             
                
 
 
             </section>
+      
 
         </div>
 

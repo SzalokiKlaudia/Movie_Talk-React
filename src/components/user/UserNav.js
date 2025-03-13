@@ -35,31 +35,26 @@ export default function UserNav() {
 
   const { postSearchByTitle, setFoundMovies } = useMovieDataContext()
   const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
-  const [ typingTimeOut, setTypingTimeOut ] = useState(null)
 
-  const handleSearch = (e) => {
+    //egyszerű kereséhez hozzárendeljük a button-höz
+    const handleSearch = (e) => {
+      
+      if (searchTitle === '') {
+        setFoundMovies([]) 
+      } else {
+        postSearchByTitle(searchTitle)
+      }
+
+    }
+
+
+  const handleInputChange = (e) => {
     const value = e.target.value
     setSearchTitle(value) //frissít input érték
 
-    if (typingTimeOut) {//töröljük a korábbi állapotot
-      clearTimeout(typingTimeOut)
-    }
-
-    const timeout = setTimeout(() => {//késleltetett keresés, vár 500 ms-ig és csak utána megy az api hívás, így nem fog karakterenként api keresés történni
-      if (value === '') {
-        setFoundMovies([]) 
-      } else {
-        postSearchByTitle(value)
-      }
-    }, 2000)
-
-    setTypingTimeOut(timeout)
-
-      localStorage.setItem('searchTitle', searchTitle) //lementjük az értékét h másik komponensben is használjuk
-
-    
- 
   }
+
+
 
 
   return (
@@ -106,7 +101,7 @@ export default function UserNav() {
             placeholder="Search..."
             aria-label="Search"
             value={searchTitle}
-            onChange={handleSearch}
+            onChange={handleInputChange}
           />
 
           {/* Kereső ikon */}
@@ -198,7 +193,7 @@ export default function UserNav() {
                 id="search-input-user"
                 className="form-control flex-grow-1"
                 value={searchTitle}
-                onChange={handleSearch}
+                onChange={handleInputChange}
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
@@ -207,8 +202,9 @@ export default function UserNav() {
               onClick={handleSearch}
                 className="btn btn-light" 
                 type="button">
-              
-                <FontAwesomeIcon icon={faSearch} className='search-icon' />
+                <Link to= '/movie/title'>
+                  <FontAwesomeIcon icon={faSearch} className='search-icon' />
+                </Link>
               </button>
             </div>
           </form>

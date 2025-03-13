@@ -8,8 +8,10 @@ import '../style/GuestMovieResults.css'
 
 
 export default function GuestMoviesResults() {
-    const { foundMovies } = useMovieDataContext() //áthozzuk a keresésnél a filmes találatokat megjelenítésre 
-    console.log(foundMovies)
+    const { foundMovies} = useMovieDataContext() //áthozzuk a keresésnél a filmes találatokat megjelenítésre 
+    //console.log(foundMovies)
+
+
 
 
 

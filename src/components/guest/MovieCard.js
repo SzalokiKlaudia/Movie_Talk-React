@@ -1,18 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import '../../style/MovieCard.css'
+import useMovieDataContext from '../../contexts/MovieDataContext'
 
 export default function MovieCard(props) {
 
+
   const navigate = useNavigate()
 
+  const handleClick = () => {
+    //át navigálunk másik url-be és átadjuk a film id-ját az útvonalnak
+    navigate(`/movie/${props.movie.id}/details`, { state: { movie: props.movie } })
+      //a film adatait a state objektumban küldjük át, dinamikus az id az urlben!!
+
+  }
+
+  console.log(props.movie.genres)
+  console.log(props.movie.keywords)
 
 
-  //a film adatait a state objektumban küldjük át, dinamikus az id az urlben!!
   return (
-    <li className='d-flex custom-list-border'>
-        <Link className='d-flex w-100 text-decoration-none text-dark' 
-          to={`/movie/${props.movie.id}/details`} state={{ movie: props.movie}}>
+    <li className='d-flex custom-list-border'
+      onClick={handleClick}>
             <div className='movie-image-wrapper mb-2'>
                 <img src={props.movie.image_url} 
                 alt={props.movie.title}
@@ -23,13 +32,8 @@ export default function MovieCard(props) {
                 <div className="movie-datas mb-2 d-flex flex-column justify-content-center ms-3">
                     <h5 className="card-title mb-3">{props.movie.id}. {props.movie.title}</h5>
                     <p className="card-release-date">{props.movie.release_date}</p>
-
                
                 </div>
-
-
-        </Link>
-    
     </li>
   )
 }

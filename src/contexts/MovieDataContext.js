@@ -56,35 +56,20 @@ export const MovieDataProvider = ({ children }) => {
             try{
                 const response = await myAxios.post('api/movie/title', {title})//mert tesztelésnél is megkell adni ezeket az adatokat
                 console.log(response.data.data)
-                setFoundMovies(response.data.data) //beállítjuk a találatokat a tömbünkbe
+                setFoundMovies(response.data.data) //beállítjuk a találatokat a tömbünkbe, már benne van a műfaj és a kulcsszavak
                 
             }catch(error){
                 console.log('No movies have been found')
                 setFoundMovies([])
             }
         }
-
-       /* const [movieDetails, setMovieDetails ] = useState([])
-
-        const getMovieKeywordsAndGenres = async (id) => {
-          try{
-            const response = await myAxios.get(`api/movie/${id}/details`)
-              console.log(response.data)
-              setMovieDetails(response.data)
-
-          }catch(error){
-            console.log('No datas have been found')
-          }
-        }*/
-
-
+     
         
         useEffect(() => {  
             getPremiers()
             getUsersTopMovies()
             getTopUsers()
             setFoundMovies([])
-            //getMovieKeywordsAndGenres()
            
         }, [])
 
@@ -100,5 +85,6 @@ export const MovieDataProvider = ({ children }) => {
 }
 
  export default function useMovieDataContext() {//egyedi hook az authcontext használatához
+      // console.log(useContext(MovieDataContext))
       return useContext(MovieDataContext)//így nem kell midnen komponensben importálni
     }

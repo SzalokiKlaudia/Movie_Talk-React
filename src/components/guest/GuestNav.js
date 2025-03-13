@@ -145,7 +145,7 @@ export default function GuestNav() {
                 className="form-control flex-grow-1"
                 id="search-input-guest"
                 value={searchTitle}
-                onChange={handleSearch} //mindig frissíti az input karaktereket
+                onChange={handleInputChange} //mindig frissíti az input karaktereket
                 type="search"
                 placeholder="Search..."
                 aria-label="Search"
