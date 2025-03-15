@@ -63,19 +63,35 @@ export const MovieDataProvider = ({ children }) => {
                 setFoundMovies([])
             }
         }
+
+        //összetett keresés
+
+        const postAdvancedSearch = async ({...data}, route) => {
+          try{
+            const response = await myAxios.post(route,data)
+            if(response.data.success) {
+              setFoundMovies(response.data.data)
+              console.log('Success')
+          }
+          }catch(error){
+          console.log(error)
+          setFoundMovies([])
+          }
+        }
      
         
         useEffect(() => {  
             getPremiers()
             getUsersTopMovies()
             getTopUsers()
-            setFoundMovies([])
+            //setFoundMovies([])
            
         }, [])
 
         
       return (
-        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, foundMovies}}>
+        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
+          foundMovies, postAdvancedSearch, setFoundMovies}}>
           {children}
         </MovieDataContext.Provider>
       )

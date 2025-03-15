@@ -5,6 +5,7 @@
     border: none;
     border-radius: 1.5rem;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: var(--font-color);
 }
 
 .res-btn:disabled{
@@ -15,7 +16,6 @@
 .res-btn:disabled:hover{
   color: var(--btn-font-color) !important;
 
-  
 
 }
 

@@ -15,8 +15,10 @@ export default function MovieCard(props) {
 
   }
 
-  console.log(props.movie.genres)
-  console.log(props.movie.keywords)
+  //onsole.log(props.movie.genres)
+  //console.log(props.movie.keywords)
+  let releaseDate = props.movie.release_date
+  let newReleaseDate = releaseDate.replace(/-/g,'.')
 
 
   return (
@@ -31,7 +33,7 @@ export default function MovieCard(props) {
             </div>
                 <div className="movie-datas mb-2 d-flex flex-column justify-content-center ms-3">
                     <h5 className="card-title mb-3">{props.movie.id}. {props.movie.title}</h5>
-                    <p className="card-release-date">{props.movie.release_date}</p>
+                    <p className="card-release-date">{newReleaseDate}</p>
                
                 </div>
     </li>

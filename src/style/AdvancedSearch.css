@@ -18,7 +18,7 @@
     border-radius: 1.5rem;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     background-color: var(--rest-btn-color) !important;
-    color: var(--btn-font-color) !important;
+    color: var(--btn-font-bg-color);
     border: none;
     background: none;
     padding: 0.3rem;
@@ -30,4 +30,13 @@
     background-color: var(--del-btn-color) !important;
     color: var(--font-color) !important;
 }
+
+.advan-input{
+    background-color: var(--advancedSerch-input-bg-color)!important;
+}
+
+.advan-label{
+    font-weight: 700;
+}
+
 

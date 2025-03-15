@@ -20,8 +20,6 @@ export default function MovieDetails() {
     let newReleaseDate = releaseDate.replace(/-/g,'.')
     //console.log(newReleaseDate)
     
-
-
   return (
     <div className='movie-wrapper'>
         <div className='movie-details-container container'>

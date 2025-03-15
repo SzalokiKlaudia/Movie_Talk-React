@@ -61,7 +61,7 @@ export default function Registration() {
                 type="text"
                 value={user_name}
                 onChange={(e) => {
-                  setUserName(e.target.value);
+                  setUserName(e.target.value)
                 }}
                 className="form-control reg-input"
                 id="user_name"

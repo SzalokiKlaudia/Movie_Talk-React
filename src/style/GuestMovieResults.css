@@ -1,4 +1,6 @@
-
+.result-text{
+    font-weight: 500;
+}
 
 @media (max-width: 786px) {
     .guest-container{

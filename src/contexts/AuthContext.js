@@ -57,8 +57,8 @@ export const AuthProvider = ({ children }) => {
           if (error.response.status === 401) {
             console.error("Unauthorized: Hibás bejelentkezési adatok")
             setErrors({
-                email: 'Invalid credentials',
-                password: 'Invalid credentials'
+                email: 'Invalid email address!',
+                password: 'Invalid password!'
             });
           }
         }
