@@ -34,7 +34,7 @@ export default function AdvancedSearch() {//öszetett kereső logikája
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        const adat = { // összegyűjtjük opbektumba az űrlap adatait
+        const data = { // összegyűjtjük opbektumba az űrlap adatait
             title: title,
             releaseFrom: releaseFrom,
             releaseTo: releaseTo,
@@ -45,8 +45,8 @@ export default function AdvancedSearch() {//öszetett kereső logikája
         //console.log("Sending data to API:", adat);
         //console.log(adat)
 
-        await postAdvancedSearch(adat, 'api/movie/advanced-search')
-        navigate('/movie/title')//átnavigálunk a találatos url path-ra ahol a GuestMoviesResults komponensben jelenítjük meg a filmes találatokat
+        await postAdvancedSearch(data, 'api/movie/advanced-search')
+        navigate('/movie/title')//átnavigálunk a találatos url path-ra ahol a MoviesResults komponensben jelenítjük meg a filmes találatokat
 
     }
 

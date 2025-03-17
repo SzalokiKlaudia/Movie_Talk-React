@@ -1,15 +1,32 @@
 
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import '../style/MovieDetails.css'
 import useMovieDataContext from '../contexts/MovieDataContext'
 import { myAxios } from '../api/axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 export default function MovieDetails() {
   
 
     const location = useLocation()
-    const { movie } = location.state //megkaptuk az akt film adatait
+    //const { movie } = location.state //megkaptuk az akt film adatait
+    const { getUserMovies, postUserAddMovie } = useMovieDataContext()
+    const [ isModalWatchAgainOpen, setIsModalWatchAgainOpen ] = useState(false)
+    const navigate = useNavigate()
+
+ 
+    const movie = location.state?.movie //location.state-ből kapjuk a movie adatt
+
+    if(!movie){
+        return <div className='loading'><FontAwesomeIcon icon={faSpinner} spin size="3x"/></div>
+
+
+    }
+
+    
+    console.log(movie)
 
     //console.log(movie.genres)
     //console.log(movie.keywords)
@@ -19,7 +36,32 @@ export default function MovieDetails() {
     let releaseDate = movie.release_date
     let newReleaseDate = releaseDate.replace(/-/g,'.')
     //console.log(newReleaseDate)
+    const handleClickWatching = async (event) => { //itt kezeljük a listába rakás logikát
+        //event.preventDefault()
+        setIsModalWatchAgainOpen(true)
+
+        const id = movie.id
+        console.log(id)
+        const data = { // összegyűjtjük opbektumba az űrlap adatait
+            movie_id: id,
+          
+        }
+        console.log(data)
+
+        try {
+            await postUserAddMovie(data, 'api/user/add-movies')
     
+            getUserMovies()
+        } catch (error) {
+            console.error('Error adding movie:', error)
+        }
+       
+        setIsModalWatchAgainOpen(false)
+
+        navigate('/user/movies/')
+
+
+    }
   return (
     <div className='movie-wrapper'>
         <div className='movie-details-container container'>
@@ -30,7 +72,9 @@ export default function MovieDetails() {
                     </div>
                     <div className='d-block text-end'>
                     <Link>
-                        <button className='watch-btn'>WatcList</button>
+                        <button className='watch-btn'
+                        onClick={handleClickWatching}
+                        >WatcList</button>
                     </Link>
                     </div>
                 </div>

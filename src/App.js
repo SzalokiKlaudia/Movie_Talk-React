@@ -13,6 +13,7 @@ import ProfilUser from './pages/ProfilUser';
 import AdminUsers from './pages/AdminUsers';
 import MoviesResults from './pages/MoviesResults';
 import MovieDetails from './pages/MovieDetails';
+import UserMovies from './pages/UserMovies';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
                     <Route path="/admin/users" element={<AdminUsers />} />
+                   
 
                 </Route>
             )}
@@ -48,6 +50,8 @@ function App() {
                     <Route path="/user" element={<ProfilUser />} />
                     <Route path='/movie/title' element={<MoviesResults />}/>
                     <Route path='/movie/:id/details/' element={<MovieDetails />}/>
+                    <Route path='/user/movies/' element={<UserMovies />}/>
+                    
 
 
 

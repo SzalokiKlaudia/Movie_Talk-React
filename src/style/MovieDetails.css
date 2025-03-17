@@ -142,6 +142,13 @@ iframe{
     height: 100px;
 }
 
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
 
 @media (max-width: 1010px) {
     .movie-details-container {

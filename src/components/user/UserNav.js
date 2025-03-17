@@ -33,7 +33,7 @@ export default function UserNav() {
 
   //egyszerű keresés
 
-  const { postSearchByTitle, setFoundMovies } = useMovieDataContext()
+  const { postSearchByTitle, setFoundMovies} = useMovieDataContext()
   const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
 
     //egyszerű kereséhez hozzárendeljük a button-höz
@@ -53,6 +53,7 @@ export default function UserNav() {
     setSearchTitle(value) //frissít input érték
 
   }
+
 
 
 
@@ -144,7 +145,8 @@ export default function UserNav() {
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover">
+                    <Link to="/user/movies" className="d-block px-4 py-2 text-white text-decoration-none hover"
+                    onClick={() => setIsOpen(false)}>
                         My Movies
                     </Link>
                 </li>
@@ -202,7 +204,7 @@ export default function UserNav() {
               onClick={handleSearch}
                 className="btn btn-light" 
                 type="button">
-                <Link to= '/movie/title'>
+                <Link to='/use/movies'>
                   <FontAwesomeIcon icon={faSearch} className='search-icon' />
                 </Link>
               </button>

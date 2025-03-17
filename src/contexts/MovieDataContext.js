@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { myAxios } from "../api/axios";
+import { ContactSupportTwoTone } from "@mui/icons-material";
 
 const MovieDataContext = createContext();
 
@@ -78,20 +79,82 @@ export const MovieDataProvider = ({ children }) => {
           setFoundMovies([])
           }
         }
+
+        //felh-k filmjeinek lekérése
+
+        const [userMovies, setUserMovies ] = useState([])
+
+        const getUserMovies = async () => {
+          try {
+            const response = await myAxios.get('api/user/movies')
+
+              if(!response.data){
+                console.log(response.message)
+
+              }else{
+                setUserMovies(response.data)
+                console.log('Success')
+              }
+            //console.log(data)
+          }catch (error) {
+            console.error("Could not find any data to the routes")
+          }
+
+        }
+
+        //értékelés
+
+        //const [ dataRating, setDataRating ] = useState([])
+
+        const patchRating = async ({...data}, route) => {
+          try{
+            const response = await myAxios.patch(route,data)
+            if(response.data){
+              //setDataRating(response.data)
+              console.log(response)
+              alert(response.data.message)
+              getUserMovies()
+            }
+          }catch(error){
+            console.error('Could not find the route')
+          }
+
+        }
+
+        //hozzáadás listához
+
+        const postUserAddMovie = async ({...data}, route) => {
+          try{
+            const response = await myAxios.post(route,data)
+            if(response.data){
+              console.log(response.data)
+              alert(response.data.message)
+              getUserMovies()
+            }
+          }catch(error){
+            console.error('Could not find the route')
+          }
+
+        }
+
+
      
         
         useEffect(() => {  
+
             getPremiers()
             getUsersTopMovies()
             getTopUsers()
             //setFoundMovies([])
+            
+            //getUserMovies()
            
         }, [])
 
         
       return (
         <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
-          foundMovies, postAdvancedSearch, setFoundMovies}}>
+          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie}}>
           {children}
         </MovieDataContext.Provider>
       )

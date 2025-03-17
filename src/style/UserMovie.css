@@ -1,0 +1,53 @@
+
+
+.fake-rate-modal {
+    width: 400px;
+    display: none;
+    position: fixed; 
+    top: 50%;/*középre poz*/
+    left: 50%; 
+    z-index: 1000;/*legfenti layer*/
+    transform: translate(-50%, -50%); /*középre*/
+    background: rgba(255, 255, 255, 1); /*picit átlátszó*/
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.fake-rate-modal.active{
+    display: block;
+   
+
+}
+
+.rate-btn, .watch-again-btn{
+    width: 100%;
+    width: 150px;
+    border-radius: 1.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--rest-btn-color) !important;
+    color: var(--btn-font-bg-color);
+    border: none;
+    background: none;
+    padding: 0.3rem;
+}
+
+.rate-btn:hover, .watch-again-btn:hover{
+    background-color: var(--del-btn-color) !important;
+    color: var(--font-color);
+}
+
+.x-icon{
+    width: 2rem;
+    height: 2rem;
+    color: white;
+}
+
+.close-btn{
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--del-btn-color) !important;
+    width: 2rem;
+    height: 2rem;
+
+}

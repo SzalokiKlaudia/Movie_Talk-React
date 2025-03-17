@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../style/MovieCard.css'
 import useMovieDataContext from '../../contexts/MovieDataContext'
 
-export default function MovieCard(props) {
+export default function MovieCard(props) { //filmes találatok példányosítása soronként
 
 
   const navigate = useNavigate()

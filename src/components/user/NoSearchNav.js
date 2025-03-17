@@ -87,7 +87,7 @@ export default function NoSearchNav() {
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="" className="d-block px-4 py-2 text-white text-decoration-none hover"
+                    <Link to="/user/movies" className="d-block px-4 py-2 text-white text-decoration-none hover"
                      onClick={() => setIsOpen(false)}>
                         My Movies
                     </Link>
@@ -119,7 +119,7 @@ export default function NoSearchNav() {
             </li>
             <li className="nav-item">
               <Link className="nav-link text-white" id="nav-reg"
-                to=""
+                to="/user/movies"
                onClick={() => setMenuOpen(false)}>
                 My Movies
               </Link>
