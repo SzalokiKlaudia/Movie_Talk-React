@@ -3,7 +3,7 @@ import useMovieDataContext from '../../contexts/MovieDataContext'
 import UserMovie from './UserMovie'
 import ModalOpen from './ModalOpen';
 
-export default function () {
+export default function (props) {
 
     const { userMovies } = useMovieDataContext()
     const [isModalOpenRate, setIsModalOpenRate] = useState(false)
@@ -12,11 +12,7 @@ export default function () {
     const [movieId, setMovieId] = useState(null) //itt tároljuk a usermovie id-t amit át kell adni a modalopen komp-nak
     const { patchRating, dataRating, getUserMovies,postUserAddMovie } = useMovieDataContext()
     
-
-    
-
-
-    console.log(userMovies.data)
+    console.log(props.userMovies)
 
     const handleRateToggle = (id) => { //itt kezeljük a modal komponens nyitását true, vagy false ha true active osztályt kap
         //console.log('nyitva')
@@ -40,8 +36,8 @@ export default function () {
         </thead>
         <tbody> 
             
-        {userMovies.data && userMovies.data.length > 0 ? (
-        userMovies.data.map((movie) => (
+        {props.userMovies && props.userMovies.length > 0 ? (
+        props.userMovies.map((movie) => (
             <UserMovie key={movie.id} movie={movie} handleRateToggle={handleRateToggle} isModalOpenRate={isModalOpenRate} />
             ))
             ) : (

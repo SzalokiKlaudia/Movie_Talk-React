@@ -25,7 +25,6 @@ export default function UserMovie(props) {
     }
 
  
-
     
     const handleClickWatching = async (event) => { //itt kezeljük az újra listába rakás logikát
         event.preventDefault()

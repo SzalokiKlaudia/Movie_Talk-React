@@ -139,15 +139,17 @@ export default function UserNav() {
           {isOpen && (
             <ul className="position-absolute top-100 w-100 shadow-lg rounded py-2 z-50 custom-bg mt-2 p-0">
                 <li className="list-unstyled">
-                    <Link to="/user" className="d-block px-4 py-2 text-white text-decoration-none hover">
-                        Profil
+                    <Link to="/user" 
+                      className="d-block px-4 py-2 text-white text-decoration-none hover">
+                      Profil
                     </Link>
                 </li>
 
                 <li className="list-unstyled">
-                    <Link to="/user/movies" className="d-block px-4 py-2 text-white text-decoration-none hover"
-                    onClick={() => setIsOpen(false)}>
-                        My Movies
+                    <Link to="/user/movies" 
+                      className="d-block px-4 py-2 text-white text-decoration-none hover"
+                      onClick={() => setIsOpen(false)}>
+                      My Movies
                     </Link>
                 </li>
 
@@ -170,13 +172,20 @@ export default function UserNav() {
        <div className={`mobile-menu d-lg-none ${menuOpen ? "active" : ""}`}>
           <ul className="navbar-nav flex-column align-items-center">
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-log" to="/user">Profil</Link>
+              <Link className="nav-link text-white" 
+                id="nav-log" 
+                to="/user">Profil
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white" id="nav-reg">My Movies</Link>
+              <Link className="nav-link text-white" 
+                to="/user/movies"
+                id="nav-reg">My Movies
+              </Link>
             </li>
             <li className="nav-item">
-            <button onClick={handleLogout} className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">
+            <button onClick={handleLogout} 
+              className="w-100 text-start px-4 py-2 text-white border-0 bg-transparent hover">
               Log out
             </button>
             </li>
@@ -204,7 +213,7 @@ export default function UserNav() {
               onClick={handleSearch}
                 className="btn btn-light" 
                 type="button">
-                <Link to='/use/movies'>
+                <Link to='/movie/title'>
                   <FontAwesomeIcon icon={faSearch} className='search-icon' />
                 </Link>
               </button>

@@ -188,11 +188,8 @@ export default function AdminUsers() {
         </div>
 
         <div className='col-md-10 table-responsive'>
-        <div>
         
-      </div>
-
-              <table className='table table-hover table-bordered custom-table'>
+            <table className='table table-hover table-bordered custom-table'>
                   <thead>
                       <tr className=''>
                           <th scope='col'>Choose</th>
@@ -222,10 +219,8 @@ export default function AdminUsers() {
             </table>
         </div>
 
-      
       </div>
       
-
     </div>
 
   )

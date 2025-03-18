@@ -6,6 +6,7 @@ import useMovieDataContext from '../contexts/MovieDataContext'
 import { myAxios } from '../api/axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import useAuthContext from '../contexts/AuthContext'
 
 export default function MovieDetails() {
   
@@ -13,6 +14,7 @@ export default function MovieDetails() {
     const location = useLocation()
     //const { movie } = location.state //megkaptuk az akt film adatait
     const { getUserMovies, postUserAddMovie } = useMovieDataContext()
+    const { getUser, user } = useAuthContext()
     const [ isModalWatchAgainOpen, setIsModalWatchAgainOpen ] = useState(false)
     const navigate = useNavigate()
 
@@ -36,7 +38,7 @@ export default function MovieDetails() {
     let releaseDate = movie.release_date
     let newReleaseDate = releaseDate.replace(/-/g,'.')
     //console.log(newReleaseDate)
-    const handleClickWatching = async (event) => { //itt kezeljük a listába rakás logikát
+    const handleClickWatching = async (event) => { //itt kezeljük a listába rakás logikát a gombnál
         //event.preventDefault()
         setIsModalWatchAgainOpen(true)
 
@@ -58,7 +60,15 @@ export default function MovieDetails() {
        
         setIsModalWatchAgainOpen(false)
 
-        navigate('/user/movies/')
+        if(user){
+            navigate('/user/movies/')
+
+        }else{
+            alert('Sorry, you have to be a member to create watch list! Please log in or sign up!')
+            navigate('/login')
+        }
+
+        
 
 
     }

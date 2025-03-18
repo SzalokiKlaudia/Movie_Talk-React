@@ -90,6 +90,8 @@
 
 .table-responsive{
   padding-right: 0 !important;
+  overflow-y: auto;
+  padding-left: 0  !important;
 }
 
 .custom-search-cont{
@@ -183,7 +185,7 @@
 
   @media (max-width: 795px) {
     .table-responsive {
-      max-height: 80vh;
+      /*max-height: 80vh;*/
       overflow-y: auto;
  
     }

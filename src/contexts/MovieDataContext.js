@@ -87,20 +87,22 @@ export const MovieDataProvider = ({ children }) => {
         const getUserMovies = async () => {
           try {
             const response = await myAxios.get('api/user/movies')
+            console.log(response)
 
-              if(!response.data){
-                console.log(response.message)
-
-              }else{
-                setUserMovies(response.data)
+             if(response.data.data.length > 0){
+                setUserMovies(response.data.data)
                 console.log('Success')
+              }else{
+                setUserMovies([])
               }
             //console.log(data)
           }catch (error) {
             console.error("Could not find any data to the routes")
+            setUserMovies([])
           }
 
         }
+        console.log(userMovies)
 
         //értékelés
 
@@ -147,14 +149,14 @@ export const MovieDataProvider = ({ children }) => {
             getTopUsers()
             //setFoundMovies([])
             
-            //getUserMovies()
+            getUserMovies()
            
         }, [])
 
         
       return (
         <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
-          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie}}>
+          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies}}>
           {children}
         </MovieDataContext.Provider>
       )

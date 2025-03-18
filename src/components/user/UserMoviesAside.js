@@ -1,33 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
+import '../../style/UserMovies.css'
 
-export default function UserMoviesAside() {
+export default function UserMoviesAside(props) {
+
+    //const { userMovies, getUserMovies } = useMovieDataContext()
+    
+
+    const movies = props.userMovies
+    console.log(props.userMovies)
+
+
+    if(!movies){
+        return null
+    }
+
+
+    const handleclickRated = () => {
+    
+        props.setFilteredMovies(movies.filter((movie => movie.rating !== null)))
+    
+    }
+
+    
+    const handleclickUnRated = () => {
+    
+        props.setFilteredMovies(movies.filter((movie => movie.rating === null)))
+              
+    }
+
+    const handleClickAllMovies = () => {
+
+        props.setFilteredMovies(movies)
+
+    }
+
   return (
     <>
-        <div className='options'
-             id='option1'>
-                //onClick={}
-                <input className="form-check" 
-                    type="radio" 
-                    id="" 
-                    name="customRadios"
-                    //value =  //így frissül az állapot
-                    
-                    />
-                <label className="form-check-label input-label"
-                    htmlFor="customRadio1">Rated movies</label>
+      <div className='options text-center'
+            id='filtered1'
+            onClick={handleClickAllMovies}
+        >
+            <span>All movies</span>
+                
         </div>
-            <div className=''
-                id='option2'
-                    >
-                <input className="form-check" 
-                    type="radio" 
-                    id="" 
-                    name="customRadios" 
-                    //value = 
-
-                    />
-                <label className="form-check-label input-label"
-                    htmlFor="customRadio2">Waiting for rate movies</label>
+        <div className='options text-center'
+            id='filtered1'
+            onClick={handleclickRated}
+        >
+            <span>Rated movies</span>
+                
+        </div>
+        <div className='options text-center'
+            id='filtered2'
+            onClick={handleclickUnRated}
+        >
+            <span>Unrated movies</span>
+              
         </div>
 
 
