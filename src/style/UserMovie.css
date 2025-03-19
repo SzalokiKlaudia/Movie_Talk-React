@@ -32,10 +32,6 @@
     padding: 0.3rem;
 }
 
-.rate-btn:hover, .watch-again-btn:hover{
-    background-color: var(--del-btn-color) !important;
-    color: var(--font-color);
-}
 
 .x-icon{
     width: 2rem;
@@ -46,8 +42,8 @@
 .close-btn{
     border: none;
     border-radius: 0.5rem;
-    background-color: var(--del-btn-color) !important;
     width: 2rem;
     height: 2rem;
 
 }
+

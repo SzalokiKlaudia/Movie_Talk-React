@@ -83,17 +83,22 @@ export const MovieDataProvider = ({ children }) => {
         //felh-k filmjeinek lekérése
 
         const [userMovies, setUserMovies ] = useState([])
+        const [ message, setMessage ] = useState('')
 
         const getUserMovies = async () => {
           try {
             const response = await myAxios.get('api/user/movies')
             console.log(response)
 
-             if(response.data.data.length > 0){
-                setUserMovies(response.data.data)
+             if(response.data.data && response.data.data.length > 0){
+              const sortedMovies = [...response.data.data].sort((a, b) => new Date(b.watching_date) - new Date(a.watching_date))//rendezzük csökkenő dátum sz
+              setUserMovies(sortedMovies)
+                //setUserMovies(response.data.data)
                 console.log('Success')
-              }else{
+              }else if (response.data){
                 setUserMovies([])
+                setMessage(response.data.message)
+
               }
             //console.log(data)
           }catch (error) {
@@ -149,14 +154,14 @@ export const MovieDataProvider = ({ children }) => {
             getTopUsers()
             //setFoundMovies([])
             
-            getUserMovies()
+            //getUserMovies()
            
         }, [])
 
         
       return (
         <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
-          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies}}>
+          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message}}>
           {children}
         </MovieDataContext.Provider>
       )

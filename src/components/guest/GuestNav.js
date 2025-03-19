@@ -1,4 +1,4 @@
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ export default function GuestNav() {
     //egyszerű keresés!
     const { postSearchByTitle, setFoundMovies} = useMovieDataContext()
     const [ searchTitle, setSearchTitle ] = useState('') //itt tároljuk el az input értékét
+    //const [loading, setLoading] = useState(true)
 
     const handleInputChange = (e) => {
       const value = e.target.value
@@ -28,15 +29,17 @@ export default function GuestNav() {
     }
 
     //egyszerű kereséhez hozzárendeljük a button-höz
-      const handleSearch = (e) => {
+      const handleSearch = async () => {
       
           if (searchTitle === '') {
             setFoundMovies([]) 
           } else {
-            postSearchByTitle(searchTitle)
+            await postSearchByTitle(searchTitle)
+
           }
   
       }
+
 
     return (
 

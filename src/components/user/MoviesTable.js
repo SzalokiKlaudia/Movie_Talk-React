@@ -5,7 +5,7 @@ import ModalOpen from './ModalOpen';
 
 export default function (props) {
 
-    const { userMovies } = useMovieDataContext()
+    const { userMovies, message } = useMovieDataContext()
     const [isModalOpenRate, setIsModalOpenRate] = useState(false)
     const [watching_date, setWatching_date] = useState('')
     const [rating, setRating] = useState('')
@@ -42,7 +42,7 @@ export default function (props) {
             ))
             ) : (
             <tr>
-                <td colSpan="8">{userMovies.message}</td>
+                <td colSpan="8" className='fw-medium'>{message}</td>
             </tr>
             )}
                

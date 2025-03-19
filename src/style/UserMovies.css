@@ -23,7 +23,7 @@
 }
 
 .user-aside{
-    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: none!important;
     padding: 1rem;
 }
 
@@ -32,7 +32,7 @@
 
 }
 
-.options{
+.movie-btn{
     background-color: var(--reg-hover-color);
     cursor: pointer;
     color:  var(--font-color);
@@ -40,13 +40,17 @@
 
 }
 
-.options:hover{
-    background-color:  var(--rest-btn-color);
+
+
+#filtered1, #filtered2, #filtered3 {
+    margin-bottom: 0.5rem;
 }
 
 
-#filtered1, #filtered2 {
-    border: 1px solid #808080;
+
+.movie-btn.active{
+    background-color: var(--rest-btn-color);
+
 }
 
 
