@@ -1,0 +1,15 @@
+
+
+.top-movies-wrapper {
+    width: 800px;
+    display: flex;
+    position: fixed; 
+    top: 50%;/*középre poz*/
+    left: 50%; 
+    z-index: 1000;/*legfenti layer*/
+    transform: translate(-50%, -50%); /*középre*/
+    background: rgba(255, 255, 255, 1); /*picit átlátszó*/
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

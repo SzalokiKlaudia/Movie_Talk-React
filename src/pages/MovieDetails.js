@@ -7,6 +7,8 @@ import { myAxios } from '../api/axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import useAuthContext from '../contexts/AuthContext'
+import Swal from 'sweetalert2'
+
 
 export default function MovieDetails() {
   
@@ -64,7 +66,8 @@ export default function MovieDetails() {
             navigate('/user/movies/')
 
         }else{
-            alert('Sorry, you have to be a member to create watch list! Please log in or sign up!')
+            Swal.fire("Sorry, you have to be a member to create watch list! Please log in or sign up!")
+            
             navigate('/login')
         }
 

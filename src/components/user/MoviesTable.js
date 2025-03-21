@@ -12,7 +12,7 @@ export default function (props) {
     const [movieId, setMovieId] = useState(null) //itt tároljuk a usermovie id-t amit át kell adni a modalopen komp-nak
     const { patchRating, dataRating, getUserMovies,postUserAddMovie } = useMovieDataContext()
     
-    console.log(props.userMovies)
+    //console.log(props.userMovies)
 
     const handleRateToggle = (id) => { //itt kezeljük a modal komponens nyitását true, vagy false ha true active osztályt kap
         //console.log('nyitva')

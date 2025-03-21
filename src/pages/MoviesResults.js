@@ -24,7 +24,7 @@ export default function MoviesResults() {
 
                 <ul className='results-movies'>
                     {(!foundMovies || foundMovies.length === 0) && 
-                    <p className='result-text'>No results have been found</p>}
+                    <p className='result-text text-center'>No results have been found!</p>}
                     {Array.isArray(foundMovies) &&  foundMovies.length > 0 && //azért h ne érezékelje az undefined tömböt Array.isArray
                         foundMovies.map((movie) => {
                         return <MovieCard movie={movie} key={movie.id}/>

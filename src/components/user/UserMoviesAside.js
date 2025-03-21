@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '../../style/UserMovies.css'
+import useMovieDataContext from '../../contexts/MovieDataContext'
+import useAuthContext from '../../contexts/AuthContext'
 
 export default function UserMoviesAside(props) {
 
-    //const { userMovies, getUserMovies } = useMovieDataContext()
     const [isClicked, setIsClicked] = useState('')//state a kattintásra, active osztályt kap, és all , rated, unrated állapototot gombok szerint
 
     useEffect(() => {
@@ -11,7 +12,7 @@ export default function UserMoviesAside(props) {
     }, [isClicked])
 
     const movies = props.userMovies
-    console.log(props.userMovies)
+    //console.log(props.userMovies)
 
 
     if(!movies){
@@ -40,6 +41,16 @@ export default function UserMoviesAside(props) {
         setIsClicked('all')
     }
 
+    const handleClickTop = () => {
+
+        //props.setFilteredMovies(movies)//csak visszaadjuk a user összes filmjét
+        setIsClicked('top')
+        props.handleToggle()
+        props.handleGetTopMovies()
+       
+
+    }
+
   return (
     <>
       <div className={`movie-btn text-center ${isClicked == 'all' ? 'active' : ''}`}
@@ -63,6 +74,14 @@ export default function UserMoviesAside(props) {
             <span>Unrated movies</span>
               
         </div>
+        <div className={`movie-btn text-center ${isClicked == 'top' ? 'active' : ''}`}
+            id='filtered4'
+            onClick={handleClickTop}
+        >
+            <span>My Top movies</span>
+
+        </div>
+
 
 
     </>

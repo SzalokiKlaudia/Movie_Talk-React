@@ -54,7 +54,7 @@ export default function AdvancedSearch() {//öszetett kereső logikája
 
   return (
     <div className='adven-search-container col-12'>
-        <h3 className='mb-3'>Advenced search</h3>
+        <h3 className='mb-3'>Advanced search</h3>
         <form onSubmit={handleSubmit}>
 
             <div className='mb-3'>

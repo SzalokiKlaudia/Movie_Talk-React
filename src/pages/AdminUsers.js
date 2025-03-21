@@ -12,7 +12,6 @@ import Swal from 'sweetalert2'
 export default function AdminUsers() {
 
   const { selectedValue, users,setUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers, user } = useAuthContext()
-  const [ usersToShow, setUsersToShow ] = useState([]) //ide mentjük az aktuálisan megjeleítendő usereket, aktív vagy inaktív
   //checkbox-ot kezeljük
   const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a userek id-ai checkbox miatt kell
   const [searchUser, setSearchUser] = useState("") // a keresett felh neve amit inputban adunk, itt tároljuk
@@ -20,12 +19,11 @@ export default function AdminUsers() {
   
 
   //itt jelenítem meg az aktív és  inaktív userek aszerint h melyik gombra kattintanak acitive vagy inakvtiv
-  //console.log(activeUsers)
  useEffect(() => {
    
     if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
       setUsers([])
-      setLoading(true)
+      setLoading(true)//adatok betöltése miatt kell
       //getActiveUsers()
       getActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
         setLoading(false) 
@@ -43,12 +41,10 @@ export default function AdminUsers() {
 
   },[selectedValue])
 
-
-
+  //betöltés állapotát jelző spinner
      if(loading){
          return <div className='loading'><FontAwesomeIcon icon={faSpinner} spin size="3x"/></div>
  
-
      }
  
 
@@ -106,7 +102,7 @@ export default function AdminUsers() {
 
       const updatedUsers = users.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
 
-      setUsersToShow(updatedUsers) //frissítjük
+      setUsers(updatedUsers) //frissítjük
       setSelectedUsers([])
 
     } catch (error) {

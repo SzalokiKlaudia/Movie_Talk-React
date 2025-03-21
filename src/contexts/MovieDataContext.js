@@ -26,7 +26,7 @@ export const MovieDataProvider = ({ children }) => {
         const getUsersTopMovies = async () => {
           try {
             const {data} = await myAxios.get('api/movie/top-rated-movies')
-            //console.log(data)
+            console.log(data)
             setUsersTopMovies(data)
     
           } catch (error) {
@@ -107,7 +107,7 @@ export const MovieDataProvider = ({ children }) => {
           }
 
         }
-        console.log(userMovies)
+        //console.log(userMovies)
 
         //értékelés
 
@@ -144,6 +144,26 @@ export const MovieDataProvider = ({ children }) => {
 
         }
 
+        //Top filmek
+
+
+        const [ topMovies, setTopMovies ] = useState([])
+
+        const getMyTopMovies = async (userId) => {
+          try{
+            const response = await myAxios.get(`/api/user/${userId}/favorite-movies`)
+            if(response.data){
+              console.log(response)
+              setTopMovies(response.data)
+            }
+          }catch(error){
+            console.error('Could not find the route')
+          }
+
+
+        }
+
+
 
      
         
@@ -161,7 +181,7 @@ export const MovieDataProvider = ({ children }) => {
         
       return (
         <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
-          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message}}>
+          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message, getMyTopMovies, topMovies}}>
           {children}
         </MovieDataContext.Provider>
       )
