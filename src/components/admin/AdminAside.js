@@ -9,34 +9,30 @@ export default function AdminAside() {
     //console.log(inActiveUsers)
     //console.log(selectedValue)
 
+    const handleClickActive = () => {
+        setSelectedValue('active')
+
+    }
+
+    const handleClickInactive = () => {
+        setSelectedValue('inactive')
+
+    }
+
 
   return (
         <>
-           <div className={`form-check custom-radio option-hover ${selectedValue === 'active' ? 'active' : 'inactive'}`}
+           <div className={`form-check custom-radio option-hover text-center ${selectedValue === 'active' ? 'active' : 'inactive'}`} //megkapja a selectedvalue állapot szerint az aktív vagy inaktív osztályt
              id='option1'
-                onClick={() => setSelectedValue('active')}>
-                <input className="form-check-input input-custom" 
-                    type="radio" 
-                    id="activeUser" 
-                    name="customRadios"
-                    value = 'active' //így frissül az állapot
-                    
-                    />
-                <label className="form-check-label input-label"
-                    htmlFor="customRadio1">Active Users</label>
+                onClick={handleClickActive}>
+                <span>Active users</span>
+                
             </div>
-            <div className={`form-check custom-radio option-hover ${selectedValue === 'inactive' ? 'active' : 'inactive'}`} 
+            <div className={`form-check custom-radio option-hover text-center ${selectedValue === 'inactive' ? 'active' : 'inactive'}`} 
                 id='option2'
-                onClick={() => setSelectedValue('inactive')} >
-                <input className="form-check-input input-custom" 
-                    type="radio" 
-                    id="inactiveUser" 
-                    name="customRadios" 
-                    value = 'inactive'
-
-                    />
-                <label className="form-check-label input-label"
-                    htmlFor="customRadio2">Inactive Users</label>
+                onClick={handleClickInactive} >
+                 <span>Inactive users</span>
+                
             </div>
         </>
 

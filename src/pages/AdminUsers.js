@@ -5,16 +5,18 @@ import AdminAside from '../components/admin/AdminAside'
 import '../style/AdminAside.css'
 import '../style/AdminUsers.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ActiveUser from '../components/admin/ActiveUser'
+import Swal from 'sweetalert2'
 
 export default function AdminUsers() {
 
-  const { selectedValue, activeUsers,inActiveUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers, user } = useAuthContext()
+  const { selectedValue, users,setUsers, deleteUser, restoreUser, getActiveUsers,getInActiveUsers, user } = useAuthContext()
   const [ usersToShow, setUsersToShow ] = useState([]) //ide mentjük az aktuálisan megjeleítendő usereket, aktív vagy inaktív
   //checkbox-ot kezeljük
   const [selectedUsers, setSelectedUsers] = useState([]) //itt tárolódnak a userek id-ai checkbox miatt kell
   const [searchUser, setSearchUser] = useState("") // a keresett felh neve amit inputban adunk, itt tároljuk
+  const [loading, setLoading] = useState(true) //kell a loading az előző userek adatai miatt, h frissen töltődjenek be
   
 
   //itt jelenítem meg az aktív és  inaktív userek aszerint h melyik gombra kattintanak acitive vagy inakvtiv
@@ -22,31 +24,36 @@ export default function AdminUsers() {
  useEffect(() => {
    
     if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
-      getActiveUsers()
-      setUsersToShow(activeUsers)
+      setUsers([])
+      setLoading(true)
+      //getActiveUsers()
+      getActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
+        setLoading(false) 
+    })
+      //setUsersToShow(users)
     }else if(selectedValue == 'inactive'){
-      getInActiveUsers()
-      setUsersToShow(inActiveUsers)
+      setUsers([])
+      setLoading(true)
+      //getInActiveUsers()
+      getInActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
+        setLoading(false) 
+    })
     }
 
 
   },[selectedValue])
 
-  /*useEffect(() => {
-    const fetchData = async () => {
-      if (selectedValue === 'active') {
-        const activeUsersData = await getActiveUsers();
-        setUsersToShow(activeUsersData);
-      } else if (selectedValue === 'inactive') {
-        const inactiveUsersData = await getInActiveUsers();
-        setUsersToShow(inactiveUsersData);
-      }
-    };
-   
-    fetchData();
-  }, []);*/
 
-  console.log(selectedValue)
+
+     if(loading){
+         return <div className='loading'><FontAwesomeIcon icon={faSpinner} spin size="3x"/></div>
+ 
+
+     }
+ 
+
+  //console.log(users)
+  //console.log(selectedValue)
   //console.log(usersToShow)
   //console.log(activeUsers)
   //console.log(inActiveUsers)
@@ -68,23 +75,24 @@ export default function AdminUsers() {
       console.log(selectedUsers)
       for (const userId of selectedUsers) {
         if(userId == currentUserId){
-          alert('Sorry, you can not delete yourself!')
+          Swal.fire("Sorry, you can not delete yourself!!")
+          setSelectedUsers([])
+
           return
         }
         await deleteUser(userId) // vár amíg midnen törlés befejeződik
       }
   
-      alert('User is succesfully deleted!')
+      Swal.fire("User is succesfully deleted!")
 
-      const updatedUsersToShow = usersToShow.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
+      const updatedUsers = users.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
 
-      setUsersToShow(updatedUsersToShow) //frissítjük
-      getInActiveUsers()//frissíteni kell h látszódjon az inaktív usereknél
+      setUsers(updatedUsers) //frissítjük
       setSelectedUsers([])
 
     } catch (error) {
-      console.error(error);
-      alert('Find an error during the delete proccess.')
+      console.error(error)
+      Swal.fire("Find an error during the delete proccess.")
     }
   }
 
@@ -94,16 +102,16 @@ export default function AdminUsers() {
       for (const userId of selectedUsers) {
         await restoreUser(userId)// vár amíg midnen törlés befejeződik
       }
-      alert('The user is succesfully restored!')
-      const updatedUsersToShow = usersToShow.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
+      Swal.fire("The user is succesfully restored!")
 
-      setUsersToShow(updatedUsersToShow) //frissítjük
-      getActiveUsers()
+      const updatedUsers = users.filter((user) =>!selectedUsers.includes(user.id))//kiszedjük a törölt id-kat
+
+      setUsersToShow(updatedUsers) //frissítjük
       setSelectedUsers([])
 
     } catch (error) {
-      console.error(error);
-      alert('Find an error during the restore proccess.')
+      Swal.fire("Find an error during the delete proccess.")
+
     }
   }
 
@@ -114,20 +122,24 @@ export default function AdminUsers() {
 
       if(e.target.value == ""){
         if(selectedValue === 'active'){
-          setUsersToShow(activeUsers) //visszakapjuk az input törlésénél az aktív suereket, és inaktívakat!!
+          setUsers(users)
+          getActiveUsers() //visszakapjuk az input törlésénél az aktív suereket, és inaktívakat!!
         }else{
-          setUsersToShow(inActiveUsers)
+          setUsers(users)
+          getInActiveUsers()
         }
       }else{
            //console.log(e.target.value)
-           const filteredUsers = usersToShow.filter(user => {
+           const filteredUsers = users.filter(user => {
             return user.user_name.toLowerCase().includes(searchUser.toLowerCase())
           })
     
-          setUsersToShow(filteredUsers) //itt állítjuk be a megjelenítést
+          setUsers(filteredUsers) //itt állítjuk be a megjelenítést
       }
 
     }
+
+    console.log(users)
 
   let restoreButtonDisabled = false
   let deleteButtonDisabled = false
@@ -205,13 +217,13 @@ export default function AdminUsers() {
                   </thead>
                 <tbody> 
 
-                  {usersToShow ? (
-                  usersToShow.map((user) => {
+                  {users.length > 0 ? (
+                  users.map((user) => {
                     return <ActiveUser key={user.id} user={user} handleCheckBoxChange={handleCheckBoxChange} />
                 
                   })
                   ) : (
-                  <tr><td colSpan="8">No users found</td></tr> //kitölti a táblázatot
+                  <tr><td className='fw-bold text-center'colSpan="8">Sorry, No users found!</td></tr> //kitölti a táblázatot
                   )}
                
               </tbody>

@@ -2,6 +2,7 @@
 .custom-radio{
     padding: 0.5rem;
     cursor: pointer;
+    font-weight: 600;
 
 }
 
@@ -22,9 +23,7 @@
 } 
 
 
-.form-check{
-    padding-left: 2rem !important;
-}
+
 
 .input-custom{
     display: none;

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { myAxios } from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const AuthContext = createContext();
@@ -78,37 +79,43 @@ export const AuthProvider = ({ children }) => {
     const [selectedValue, setSelectedValue] = useState("active")//ő tartalmazza h aktív vagy nem aktív egy user
 
 
-    const [activeUsers, setActiveUsers] = useState([]) //itt tárolódnak az aktív felhazsnálók
+    const [ users, setUsers ] = useState([])
 
     const getActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/0')
         //console.log(data)
-        setActiveUsers(data) //frissítsük az aktív user lsitánkat
-        //console.log(activeUsers)
-   
+
+        if(data.length > 0){
+        const sortedUsers = [...data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))//rendezzük csökkenő dátum sz
+
+        setUsers(sortedUsers) //frissítsük az aktív user lsitánkat
+        }
 
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
     }
-    //console.log(activeUsers)
+    console.log(users)
 
   
-
-    const [inActiveUsers, setInActiveUsers] = useState([]) //itt tároljuk az inaktív usereket
-
     const getInActiveUsers = async () => {
       try {
         const {data} = await myAxios.get('api/admin/users/1')
         //console.log(data)
-        setInActiveUsers(data)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
-        //console.log(inActiveUsers)
-        //console.log(selectedValue)
+        if(data.length > 0){
+          const sortedUsers = [...data].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))//rendezzük csökkenő dátum sz
+          setUsers(sortedUsers)  //frissítsük a lsitánkat ami az inactive usereket tartalmazza
+        }
+
       } catch (error) {
         console.error("Could not find any data to the routes")
       }
     }
+
+    //console.log(inActiveUsers)
+      console.log(selectedValue)
+      console.log(users)
 
     
     const deleteUser = async (id) => {
@@ -116,8 +123,6 @@ export const AuthProvider = ({ children }) => {
       try{
           const response = await myAxios.delete(`api/admin/users/${id}`)
           console.log(response.data)
-          
-          alert("User is succesfully deleted")
           getActiveUsers()
 
       } catch (error){
@@ -130,9 +135,7 @@ export const AuthProvider = ({ children }) => {
 
       try{
           const response = await myAxios.patch(`api/admin/users/${id}/restore`)
-          console.log(response.data)
-          
-          alert("User is succesfully restored")
+          console.log(response.data)    
           getInActiveUsers()
 
       } catch (error){
@@ -149,8 +152,8 @@ export const AuthProvider = ({ children }) => {
         }, [])
 
       return (
-        <AuthContext.Provider value={{ errors,user,loginReg, logOut,selectedValue, setSelectedValue, activeUsers, 
-        inActiveUsers, deleteUser, restoreUser,getActiveUsers, getInActiveUsers}}>
+        <AuthContext.Provider value={{ errors,user,loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
+        deleteUser, restoreUser,getActiveUsers, getInActiveUsers}}>
           {children}
         </AuthContext.Provider>
       )
