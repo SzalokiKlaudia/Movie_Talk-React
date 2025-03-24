@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import '../../style/UserMovies.css'
 import useMovieDataContext from '../../contexts/MovieDataContext'
 import useAuthContext from '../../contexts/AuthContext'
@@ -9,6 +9,7 @@ export default function UserMoviesAside(props) {
 
     useEffect(() => {
         console.log("isClicked state is:", isClicked)
+      
     }, [isClicked])
 
     const movies = props.userMovies
@@ -43,11 +44,10 @@ export default function UserMoviesAside(props) {
 
     const handleClickTop = () => {
 
-        //props.setFilteredMovies(movies)//csak visszaadjuk a user összes filmjét
-        setIsClicked('top')
         props.handleToggle()
         props.handleGetTopMovies()
-       
+        setIsClicked('top')
+
 
     }
 
@@ -74,7 +74,7 @@ export default function UserMoviesAside(props) {
             <span>Unrated movies</span>
               
         </div>
-        <div className={`movie-btn text-center ${isClicked == 'top' ? 'active' : ''}`}
+        <div className='movie-btn top text-center'
             id='filtered4'
             onClick={handleClickTop}
         >

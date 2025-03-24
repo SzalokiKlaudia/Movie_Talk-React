@@ -61,7 +61,7 @@ export default function UserNav() {
   return (
     <header className="navbar navbar-dark bg-dark navbar-expand-lg h-navbar p-3">
     {/*desktop nézet*/}
-    <nav className="container-xxl flex-lg-nowrap custom-navbar">
+    <nav className="container flex-lg-nowrap custom-navbar">
 
       <div>
         <Link className="navbar-brand" to="/" id="logo">

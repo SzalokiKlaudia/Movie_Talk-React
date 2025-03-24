@@ -63,6 +63,7 @@ export default function MovieDetails() {
         setIsModalWatchAgainOpen(false)
 
         if(user){
+
             navigate('/user/movies/')
 
         }else{

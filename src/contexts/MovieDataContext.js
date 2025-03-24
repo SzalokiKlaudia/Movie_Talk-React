@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { myAxios } from "../api/axios";
 import { ContactSupportTwoTone } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 const MovieDataContext = createContext();
 
@@ -107,11 +108,7 @@ export const MovieDataProvider = ({ children }) => {
           }
 
         }
-        //console.log(userMovies)
-
-        //értékelés
-
-        //const [ dataRating, setDataRating ] = useState([])
+       
 
         const patchRating = async ({...data}, route) => {
           try{
@@ -119,7 +116,7 @@ export const MovieDataProvider = ({ children }) => {
             if(response.data){
               //setDataRating(response.data)
               console.log(response)
-              alert(response.data.message)
+              Swal.fire("You have succesfully rated the selected movie!")
               getUserMovies()
             }
           }catch(error){
@@ -135,11 +132,14 @@ export const MovieDataProvider = ({ children }) => {
             const response = await myAxios.post(route,data)
             if(response.data){
               console.log(response.data)
-              alert(response.data.message)
+              //alert(response.data.message)
+              Swal.fire("The movie is added to your list!")
+
               getUserMovies()
             }
           }catch(error){
-            console.error('Could not find the route')
+            Swal.fire("Sorry, but you can't mark the movie for rewatching until you have rated it before!")
+
           }
 
         }

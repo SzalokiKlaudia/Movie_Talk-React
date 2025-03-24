@@ -71,6 +71,9 @@ ol{
     font-weight: 700;
 }
 
+
+
+
 @media (max-width: 1000px) {
     .user-list{
         padding-left: 0 !important;

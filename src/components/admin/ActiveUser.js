@@ -20,13 +20,13 @@ export default function ActiveUser(props) {
               onChange={(e) => props.handleCheckBoxChange(e, props.user.id)} //átadjuk a user id-ját ha ki. be pipálunk egy usert
         />
       </td>
-      <td>{props.user.id}</td>
+      <td>{props.user.id}.</td>
       <td>{props.user.user_name}</td>
       <td>{props.user.email}</td>
       <td>{props.user.name}</td>
       <td>{props.user.gender}</td>
       <td>{props.user.birth_year}</td>
-      <td>{formattedText}</td>
+      <td>{formattedText}.</td>
   
     </tr>
     </>

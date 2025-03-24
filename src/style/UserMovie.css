@@ -47,3 +47,6 @@
 
 }
 
+.watch-again-btn{
+    background-color: var(--del-btn-color) !important;
+}

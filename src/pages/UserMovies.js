@@ -13,7 +13,8 @@ export default function UserMovies() {
     const { user } = useAuthContext()
     const [ filteredMovies, setFilteredMovies ] = useState([])//ide settelünk szűrt filmeket az asideból a gyerek végzi a logikát, átadjuk az aside-nak, tablenak megjelenítésre
     const [loading, setLoading] = useState(true) //kell a loading az előző userek adatai miatt, h frissen töltődjenek be
-    const [ isModalOpen, setIsModalOpen ] = useState(false)
+    const [ isModalOpen, setIsModalOpen ] = useState(true)
+
 
     useEffect(() => {
         if (user) {
@@ -37,10 +38,13 @@ export default function UserMovies() {
         }
     
     }, [userMovies])//enélkül nem frissíti az új filmekkel a usermovies-t ha hozzáteszek 1-et
+
+
+
     console.log(topMovies.data)
     //console.log(filteredMovies)
 
-    const handleToggle = () => { //itt kezeljük a modal komponens nyitását true, vagy false ha true active osztályt kap
+    const handleToggle = () => { //itt kezeljük a modal komponens nyitásánál false, zárás true
         console.log(isModalOpen)
         setIsModalOpen(!isModalOpen)
     }
@@ -49,8 +53,7 @@ export default function UserMovies() {
         const id = user.id
         setLoading(true)
         getMyTopMovies(id).then(() => {
-            setIsModalOpen(true)//betöltés állapotát kell kezelni
-            setLoading(false)
+            setLoading(false)//betöltés állapotát kell kezelni az aszinkron miatt
         })
 
     }
@@ -63,6 +66,10 @@ export default function UserMovies() {
 
 
     }
+
+  
+
+    
 
   return (
     <div className='user-movies-container container'>
@@ -81,7 +88,7 @@ export default function UserMovies() {
                     
             </div>
 
-            {isModalOpen && topMovies.data.length > 0 && (
+            {isModalOpen && topMovies.data && topMovies.data.length > 0 && (
                 <TopMovieModal
                     topMovies={topMovies.data} 
                     genres={topMovies.genres}

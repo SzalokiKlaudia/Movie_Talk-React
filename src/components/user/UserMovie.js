@@ -6,12 +6,11 @@ import ModalOpen from './ModalOpen'
 
 export default function UserMovie(props) {
 
-    const { patchRating, dataRating, getUserMovies,postUserAddMovie } = useMovieDataContext()
-    const [ isModalOpenRate, setIsModalOpenRate ] = useState(false)
+    const { getUserMovies,postUserAddMovie } = useMovieDataContext()
     const [ isModalWatchAgainOpen, setIsModalWatchAgainOpen ] = useState(false)
 
 
-    //console.log(props.movie)
+    console.log(props.movie)
 
     const actionButton = () => { //a gombok létrehozása attól függően milyen a filmek rétékelésének állapota
         if(props.movie.rating === null){
@@ -49,6 +48,35 @@ export default function UserMovie(props) {
         setIsModalWatchAgainOpen(false)
 
     }
+
+    const defWatchDate = () => {
+      let nulldate = null
+
+      if (props.movie.watching_date === nulldate){
+        return <p>Date is not provided</p>
+      }else{
+        const text = props.movie.watching_date
+        const data = new Date(text)
+        const formattedText = data.toISOString().split("T")[0].replace(/-/g, ". ")
+        return formattedText + '.'
+      }
+    }
+
+    
+
+
+    const defRate = () => {
+      let nullRating = null
+
+      if(props.movie.rating === null){
+        return nullRating = 0
+      }else{
+        return props.movie.rating 
+      }
+
+    }
+
+   
  
   return (
     <>
@@ -56,10 +84,10 @@ export default function UserMovie(props) {
 
     <tr>
  
-      <td>{props.movie.id}</td>
+      <td>{props.movie.id}.</td>
       <td>{props.movie.title}</td>
-      <td>{props.movie.watching_date}</td>
-      <td>{props.movie.rating}</td>
+      <td>{defWatchDate()}</td>
+      <td>{defRate()}/5</td>
       <td>
         {actionButton()}
       </td>

@@ -1,15 +1,49 @@
 
 
 .top-movies-wrapper {
-    width: 800px;
-    display: flex;
+    display: block;
+    width: 80vw;
+    /*min-height: auto;
+    height: 80vh;*/
+    max-height: 100vh;
     position: fixed; 
-    top: 50%;/*középre poz*/
+    top: 40%;
     left: 50%; 
-    z-index: 1000;/*legfenti layer*/
+    z-index: 101;/*legfenti layer*/
     transform: translate(-50%, -50%); /*középre*/
     background: rgba(255, 255, 255, 1); /*picit átlátszó*/
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
 }
+
+.top-movie-cards-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 10px;
+}
+
+.x-icon{
+    background-color: var(--register-login-bg-color);
+    border-radius: 0.5rem;
+}
+
+.card-wrapper{
+    max-height: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 6px #9E9E9E;
+    border-radius: 0.5rem;
+}
+@media screen and (max-width: 768px) {
+    .top-movies-wrapper {
+        width: 100vw; 
+        height: 100vh;
+        padding: 15px; 
+        top: 50%;
+        
+    }
+}
+
