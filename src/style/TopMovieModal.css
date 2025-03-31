@@ -36,6 +36,7 @@
     overflow: hidden;
     box-shadow: 0 4px 6px #9E9E9E;
     border-radius: 0.5rem;
+    cursor: pointer;
 }
 @media screen and (max-width: 768px) {
     .top-movies-wrapper {

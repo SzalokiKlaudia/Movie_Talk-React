@@ -1,18 +1,20 @@
 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../../style/MovieCard.css'
 
 export default function UserTopMovie(props) {
   const navigate = useNavigate()
 
 
   const handleClick = () => {
-    navigate(`/movie/${props.movie.id}/details`, { state: { movie: props.movie } })
+    console.log(props.movie)
+    navigate(`/movie/${props.movie.movie_id}/details`, { state: { movie: props.movie } })
 
   }
   return (
 
-    <div className="col-6 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-center"
+    <div className="col-6 col-sm-4 col-md-4 col-lg-2 d-flex justify-content-center top-movie-users"
     onClick={handleClick}>
      
         <div className="card h-100">

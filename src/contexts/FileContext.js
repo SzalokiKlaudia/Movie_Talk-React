@@ -56,7 +56,7 @@ export const FileProvider = ({ children }) => {
   
 
     return (
-        <FileContext.Provider value={{profilPicture,uploadProfilePicture, setProfilePicture}}>
+        <FileContext.Provider value={{profilPicture,uploadProfilePicture, setProfilePicture, getProfilPicture}}>
         {children}
         </FileContext.Provider>
     )

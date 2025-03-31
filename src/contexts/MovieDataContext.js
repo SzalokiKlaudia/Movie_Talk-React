@@ -27,8 +27,8 @@ export const MovieDataProvider = ({ children }) => {
         const getUsersTopMovies = async () => {
           try {
             const {data} = await myAxios.get('api/movie/top-rated-movies')
-            console.log(data)
-            setUsersTopMovies(data)
+            console.log(data.data)
+            setUsersTopMovies(data.data)
     
           } catch (error) {
             console.error("Could not find any data to the routes")
@@ -109,7 +109,7 @@ export const MovieDataProvider = ({ children }) => {
 
         }
        
-
+        //érétkelés
         const patchRating = async ({...data}, route) => {
           try{
             const response = await myAxios.patch(route,data)
@@ -153,7 +153,7 @@ export const MovieDataProvider = ({ children }) => {
           try{
             const response = await myAxios.get(`/api/user/${userId}/favorite-movies`)
             if(response.data){
-              console.log(response)
+              console.log(response.data)
               setTopMovies(response.data)
             }
           }catch(error){

@@ -23,8 +23,8 @@ export default function AdminUsers() {
    
     if(selectedValue == 'active'){ //api hívás a selectedvalue változásakor
       setUsers([])
-      setLoading(true)//adatok betöltése miatt kell
-      //getActiveUsers()
+      setLoading(true)//adatok betöltése miatt kell, hogy jelenjen meg a spinner inkább
+      getActiveUsers()
       getActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
         setLoading(false) 
     })
@@ -32,9 +32,9 @@ export default function AdminUsers() {
     }else if(selectedValue == 'inactive'){
       setUsers([])
       setLoading(true)
-      //getInActiveUsers()
+      getInActiveUsers()
       getInActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
-        setLoading(false) 
+      setLoading(false) 
     })
     }
 

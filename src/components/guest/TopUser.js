@@ -18,7 +18,7 @@ export default function TopUser(props) {
   return (
     <li className='user'>
         <span className='avatar'>
-            <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="" />
+            <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="picture" />
 
         </span>
         <div className='data'>

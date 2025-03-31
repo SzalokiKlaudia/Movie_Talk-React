@@ -133,7 +133,7 @@ export default function MovieDetails() {
                     </div>
                     <div className='movie-cast-url-wrapper'>
                     <span className='cast-url'>
-                        <Link to={movie.cast_url}>Click to the cast</Link>
+                        <Link to={movie.cast_url} target='blank'>Click to the cast</Link>
                     </span>
 
                 </div>

@@ -7,10 +7,12 @@ import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useMovieDataContext from '../../contexts/MovieDataContext';
 import '../../style/GuestNav.css'
+import useFileContext from '../../contexts/FileContext';
 
 export default function UserNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
+  const { profilPicture } = useFileContext()
   const [menuOpen, setMenuOpen] = useState(false) //hamburger menühöz kell beállítani a state-jéz klikkre
 
   const navigate = useNavigate() // Navigációhoz szükséges hook
@@ -28,6 +30,9 @@ export default function UserNav() {
     await logOut() // Kijelentkeztet
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
+
+   const baseUrl = "http://localhost:8000/storage"
+  const imageUrl = baseUrl + `/${profilPicture}`
 
   //console.log(user)
 
@@ -53,6 +58,10 @@ export default function UserNav() {
     setSearchTitle(value) //frissít input érték
 
   }
+
+  //alapért kép
+  const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+
 
 
 
@@ -127,7 +136,7 @@ export default function UserNav() {
             aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
             onClick={toggleMenuProfil}>
              
-            <FontAwesomeIcon icon={faUserCircle} />  {/* felhasználó kör ikonja */}
+            <img className='avatar' src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
                
             <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 
