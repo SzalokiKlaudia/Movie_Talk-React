@@ -17,10 +17,10 @@ export default function TopUser(props) {
 
   return (
     <li className='user'>
-        <span className='avatar'>
+        <div className='avatar'>
             <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="picture" />
 
-        </span>
+        </div>
         <div className='data'>
             <h4>{props.user.user_name}</h4>
             <div className='meter-all'>

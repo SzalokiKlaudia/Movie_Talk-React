@@ -144,6 +144,17 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
+    const postUserDataModify = async ({...data}, route) => {
+      try{
+        const response = await myAxios.patch(route, data)
+        console.log(response)
+        Swal.fire("You have succesfully updated your datas!")
+        
+      }catch (error){
+        console.error('Could not update the user datas')
+      }
+    }
+
         useEffect(() => {
           if (!user) {
             getUser()
@@ -153,7 +164,7 @@ export const AuthProvider = ({ children }) => {
 
       return (
         <AuthContext.Provider value={{ errors,user,loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
-        deleteUser, restoreUser,getActiveUsers, getInActiveUsers}}>
+        deleteUser, restoreUser,getActiveUsers, getInActiveUsers, postUserDataModify}}>
           {children}
         </AuthContext.Provider>
       )

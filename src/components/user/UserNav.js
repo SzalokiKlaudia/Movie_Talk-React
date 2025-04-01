@@ -135,9 +135,9 @@ export default function UserNav() {
           <div className="d-flex align-items-center gap-2 bg-dark text-white py-2 px-4 rounded-pill custom"
             aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
             onClick={toggleMenuProfil}>
-             
-            <img className='avatar' src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
-               
+             <div className='avatar'>
+              <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+            </div>
             <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 
                 {/* nyíl,nyíl, ha isOpen true állapot  akkor hozzáadja a rotated osztályt és elforgatja a nyilat 180 %-ban */}

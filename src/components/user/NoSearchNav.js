@@ -3,13 +3,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useFileContext from '../../contexts/FileContext';
 
 
 export default function NoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
+  const { profilPicture } = useFileContext()
 
   const navigate = useNavigate() // Navigációhoz szükséges hook
+  const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+
 
   const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
   const toggleMenuProfil = () => {
@@ -68,7 +72,9 @@ export default function NoSearchNav() {
           <div className="d-flex align-items-center gap-2 bg-dark text-white py-2 px-4 rounded-pill custom"
              onClick={toggleMenuProfil}>
              
-              <FontAwesomeIcon icon={faUserCircle} />  {/* felhasználó kör ikonja */}
+             <div className='avatar'>
+              <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+              </div>
                
               <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 
