@@ -1,9 +1,11 @@
 import React from 'react'
 import '../../style/TopUsers.css'
 import useFileContext from '../../contexts/FileContext';
+import useAuthContext from '../../contexts/AuthContext';
 
 
 export default function TopUser(props) {
+    
     //console.log(props.user)
     //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
     const baseUrl = "http://localhost:8000/storage"

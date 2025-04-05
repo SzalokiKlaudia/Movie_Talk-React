@@ -152,6 +152,9 @@ export const AuthProvider = ({ children }) => {
         
       }catch (error){
         console.error('Could not update the user datas')
+        const errorMessage = error.response.data.message
+        Swal.fire(errorMessage,'You have added invalid data! Plese try again!')
+
       }
     }
 
@@ -163,7 +166,7 @@ export const AuthProvider = ({ children }) => {
         }, [])
 
       return (
-        <AuthContext.Provider value={{ errors,user,loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
+        <AuthContext.Provider value={{ errors,user,getUser, loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
         deleteUser, restoreUser,getActiveUsers, getInActiveUsers, postUserDataModify}}>
           {children}
         </AuthContext.Provider>

@@ -1,6 +1,6 @@
 
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import useAuthContext from '../contexts/AuthContext'
 import Premiers from '../components/guest/Premiers'
 import UsersTopMovies from '../components/guest/UsersTopMovies'
@@ -10,10 +10,19 @@ import useMovieDataContext from '../contexts/MovieDataContext'
 
 
 export default function HomeUser() {
-
   const {user} = useAuthContext()
-  const { pMovies, usersTopMovies, topUsers } = useMovieDataContext() // Nem kell useContext-et újra meghívni
+  const { pMovies, usersTopMovies, topUsers, getTopUsers } = useMovieDataContext() // Nem kell useContext-et újra meghívni
  
+  
+
+  useEffect(() => {//frissítse a topuser-eket ha változtatjuk a nevüket pl
+    getTopUsers()
+
+
+  }, [user])
+
+ 
+
 
   //console.log(user)
 

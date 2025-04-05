@@ -34,7 +34,7 @@ function App() {
                 </Route>
             )}
 
-            {user?.is_admin === 1 && (
+            {user?.is_admin === 1 && (// Admin nézet
                 <Route element={<AdminLayout />}>
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />
@@ -44,7 +44,7 @@ function App() {
                 </Route>
             )}
 
-            {user?.is_admin === 0 && (
+            {user?.is_admin === 0 && (// User nézet
                 <Route element={<UserLayout />}>
                     <Route index element={<HomeUser />} />
                     <Route path="/user" element={<ProfilUser />} />

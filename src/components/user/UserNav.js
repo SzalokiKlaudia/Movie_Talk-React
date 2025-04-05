@@ -73,7 +73,9 @@ export default function UserNav() {
     <nav className="container flex-lg-nowrap custom-navbar">
 
       <div>
-        <Link className="navbar-brand" to="/" id="logo">
+        <Link className="navbar-brand" 
+          to="/" 
+          id="logo">
             Movie Track
         </Link>
         
@@ -136,7 +138,7 @@ export default function UserNav() {
             aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
             onClick={toggleMenuProfil}>
              <div className='avatar'>
-              <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+                <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
             </div>
             <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 

@@ -4,11 +4,14 @@ import useAuthContext from '../../contexts/AuthContext'
 import { faBars, faSearch, faChevronDown, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../style/AdminNav.css'
+import useFileContext from '../../contexts/FileContext';
 
 export default function AdminNoSearchNav() {
 
   const {user, logOut} = useAuthContext()//meghívtuk 
   const navigate = useNavigate() // Navigációhoz szükséges hook
+  const { profilPicture } = useFileContext()
+  
 
   const [isOpen, setIsOpen] = useState(false) // Lenyíló menü állapota
   const toggleMenuProfil = () => {
@@ -24,6 +27,9 @@ export default function AdminNoSearchNav() {
     await logOut() // Kijelentkeztet
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
+
+  const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+
 
   //console.log(user)
 
@@ -66,7 +72,9 @@ export default function AdminNoSearchNav() {
 
              onClick={toggleMenuProfil}>
              
-              <FontAwesomeIcon icon={faUserCircle} />  {/* felhasználó kör ikonja */}
+             <div className='avatar'>
+                <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+              </div>
                
               <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 

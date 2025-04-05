@@ -127,7 +127,7 @@ export default function MovieDetails() {
 
             <section className='movie-imp-details'>
                 <div className='movie-description'>
-                    <div className='description-wrapper d-flex pb-3'>
+                    <div className='description-wrapper d-flex pb-3 pt-3'>
                          <p>{movie.description}</p>
                          <p></p>
                     </div>

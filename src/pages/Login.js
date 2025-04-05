@@ -91,7 +91,7 @@ export default function Login() {
         </div>
         <div className='d-flex justify-content-center mt-5 custom-info'>
             <p className='text-log-reg'>
-              New to Movie Tack?
+              New to Movie Track?
                 <Link className="nav-link text-info text-center" to="/register">
                   Join now
                 </Link>

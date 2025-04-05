@@ -32,6 +32,8 @@ export default function NoSearchNav() {
 
   //console.log(user)
 
+ 
+
 
   return (
     <header className="navbar navbar-dark bg-dark navbar-expand-lg h-navbar p-3">
@@ -39,7 +41,9 @@ export default function NoSearchNav() {
     <nav className="container-xxl flex-lg-nowrap custom-navbar">
 
       <div>
-        <Link className="navbar-brand" to="/" id="logo">
+        <Link className="navbar-brand" 
+          to="/" 
+          id="logo">
             Movie Track
         </Link>
         

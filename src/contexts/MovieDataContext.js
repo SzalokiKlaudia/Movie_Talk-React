@@ -180,7 +180,7 @@ export const MovieDataProvider = ({ children }) => {
 
         
       return (
-        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
+        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, getTopUsers, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
           foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message, getMyTopMovies, topMovies}}>
           {children}
         </MovieDataContext.Provider>

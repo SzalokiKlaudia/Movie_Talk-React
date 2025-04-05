@@ -1,18 +1,21 @@
 
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Premiers from '../components/guest/Premiers'
 import '../style/Premiers.css';
 import UsersTopMovies from '../components/guest/UsersTopMovies';
 import TopUsers from '../components/guest/TopUsers';
 import useMovieDataContext from '../contexts/MovieDataContext';
+import useAuthContext from '../contexts/AuthContext';
 
 
 export default function HomeGuest() {
 
 //meghívódik a Context-ből az apiData, és a kategoriaData, hogfy megtudjuk jeleníteni  a termékeket, és a kategóriákat a komponenseken keresztül
-const { pMovies, usersTopMovies,topUsers } = useMovieDataContext() // Nem kell useContext-et újra meghívni
+const { pMovies, usersTopMovies,topUsers  } = useMovieDataContext() // Nem kell useContext-et újra meghívni
   //console.log(usersTopMovies)
+
+
 
 
   return (
