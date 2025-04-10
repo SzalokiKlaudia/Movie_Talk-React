@@ -9,6 +9,7 @@ const FileContext = createContext()
 export const FileProvider = ({ children }) => {
 
     const [profilPicture, setProfilePicture] = useState(null)
+    
     const { user } = useAuthContext()
 
     const getProfilPicture = async () => {

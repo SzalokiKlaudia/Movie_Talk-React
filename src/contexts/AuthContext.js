@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 
    //bejelentkezett felhasználó adatainak lekérdezése
    const getUser = async () => {
+    setErrors({})
       try{
         const { data } = await myAxios.get("/api/user")
         setUser(data)
@@ -46,23 +47,22 @@ export const AuthProvider = ({ children }) => {
           await myAxios.post(route, data)
           console.log("Succes!!")
           //sikeres bejelentkezés/regisztráció esetén
-          setErrors({})
           getUser()//frissítjük a feh-i adatokat
           navigate("/")//átírányítás a főoldalra
     
         } catch (error) {
           console.log(error)
           if (error.response.status === 422) {
+            console.log(error.response.data.errors)
             setErrors(error.response.data.errors)
-            //Swal.fire(error.response.data.message)
             
           }
           if (error.response.status === 401) {
             console.error("Unauthorized user!")
-            setErrors({
+            /*setErrors({
                 email: 'Invalid email address!',
                 password: 'Invalid password!'
-            });
+            });*/
           }
         }
     }
@@ -141,17 +141,30 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
+    const [userErrors, setUserErrors] = useState({
+      user_name: '',
+      email: '',
+      birth_year: ''
+    })
+
     const postUserDataModify = async ({...data}, route) => {
       try{
         const response = await myAxios.patch(route, data)
         console.log(response)
         Swal.fire("You have succesfully updated your datas!")
-        
+        setUserErrors({})
+
       }catch (error){
         console.error('Could not update the user datas')
-        const errorMessage = error.response.data.message
-        Swal.fire(errorMessage,'You have added invalid data! Plese try again!')
+       
+        console.log(error.response.data.errors.user_name)
+        setUserErrors({
+          user_name: error.response.data.errors.user_name,
+          email: error.response.data.errors.email,
+          birth_year: error.response.data.errors.birth_year
+        })
 
+       
       }
     }
 
@@ -162,8 +175,9 @@ export const AuthProvider = ({ children }) => {
 
         }, [])
 
+
       return (
-        <AuthContext.Provider value={{ errors,user,getUser, loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
+        <AuthContext.Provider value={{ errors,user,userErrors, getUser, loginReg, logOut,selectedValue, setSelectedValue, users,setUsers, 
         deleteUser, restoreUser,getActiveUsers, getInActiveUsers, postUserDataModify}}>
           {children}
         </AuthContext.Provider>

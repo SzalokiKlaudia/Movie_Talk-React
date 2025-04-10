@@ -175,7 +175,7 @@ export default function Registration() {
                   setName(e.target.value);
                 }}
                 className="form-control reg-input"
-                id="pwd2"
+                id="bthdn"
                 placeholder="Name"
                 name="name"
               />
