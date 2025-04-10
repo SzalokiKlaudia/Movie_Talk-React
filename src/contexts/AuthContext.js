@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
           await myAxios.post(route, data)
           console.log("Succes!!")
           //sikeres bejelentkezés/regisztráció esetén
-        
+          setErrors({})
           getUser()//frissítjük a feh-i adatokat
           navigate("/")//átírányítás a főoldalra
     
@@ -54,9 +54,11 @@ export const AuthProvider = ({ children }) => {
           console.log(error)
           if (error.response.status === 422) {
             setErrors(error.response.data.errors)
+            //Swal.fire(error.response.data.message)
+            
           }
           if (error.response.status === 401) {
-            console.error("Unauthorized: Hibás bejelentkezési adatok")
+            console.error("Unauthorized user!")
             setErrors({
                 email: 'Invalid email address!',
                 password: 'Invalid password!'
@@ -96,7 +98,7 @@ export const AuthProvider = ({ children }) => {
         console.error("Could not find any data to the routes")
       }
     }
-    console.log(users)
+    //console.log(users)
 
   
     const getInActiveUsers = async () => {
@@ -113,11 +115,6 @@ export const AuthProvider = ({ children }) => {
       }
     }
 
-    //console.log(inActiveUsers)
-      console.log(selectedValue)
-      console.log(users)
-
-    
     const deleteUser = async (id) => {
 
       try{

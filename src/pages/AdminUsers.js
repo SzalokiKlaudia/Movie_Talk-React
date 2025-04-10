@@ -135,7 +135,7 @@ export default function AdminUsers() {
 
     }
 
-    console.log(users)
+    //console.log(users)
 
   let restoreButtonDisabled = false
   let deleteButtonDisabled = false

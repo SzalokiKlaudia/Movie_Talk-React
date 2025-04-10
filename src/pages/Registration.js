@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthContext from '../contexts/AuthContext'
 import '../style/LoginRegistration.css'
+import Swal from 'sweetalert2'
 
 
 
@@ -25,28 +26,51 @@ export default function Registration() {
   const navigate = useNavigate()//hook segítségével msá oldalra navigálhatsz
 
   const { loginReg, errors } = useAuthContext();
+  const [ showNoValidEmail, setShowNovalidEmail ] = useState(false) 
+  const isValidateEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g
+      
+      //validálás regex-el
+  
+      const validateEmail = (e) => {
+        const value = e.target.value //hogy módosítható legyen az input értéke
+        setEmail(value)
+  
+        if(e.target?.value && e.target.value.match(isValidateEmail)){
+          setShowNovalidEmail(false)//ne jelenjen meg hibaüzenet ha valid az email
+  
+        }else{
+          setShowNovalidEmail(true)
+        }
+      }
 
   const handleSubmit = async (e) => { // az oldal újratöltését akadályozza meg
     e.preventDefault()
+    console.log('beléptem')
+    if(email.length && email.match(isValidateEmail)){
+      setEmail(email)
 
-  const adat = { // összegyűjtjük opbektumba az űrlap adatait
-      user_name: user_name,
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation,
-      name: name,
-      gender: gender,
-      birth_year: birth_year,
+      const adat = { // összegyűjtjük opbektumba az űrlap adatait
+        user_name: user_name,
+        email: email,
+        password: password,
+        password_confirmation: password_confirmation,
+        name: name,
+        gender: gender,
+        birth_year: birth_year,
+      }
+      console.log(adat)
+
+      loginReg(adat, "/register")//átadjuk az objektumot és az űtvonalat, hogy postolja az adatokat
+    }else{
+      Swal.fire("Please, add a valid email!")
+      
     }
 
-    console.log(adat)
 
-    loginReg(adat, "/register")//átadjuk az objektumot és az űtvonalat, hogy postolja az adatokat
+
+
   } 
-
-
-
-
+  
 
   return (
     <main className='main-reg'>
@@ -82,9 +106,7 @@ export default function Registration() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={validateEmail}
                 className="form-control reg-input"
                 id="email"
                 placeholder="email"
