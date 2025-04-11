@@ -25,7 +25,7 @@ export default function AdminUsers() {
       setUsers([])
       setLoading(true)//adatok betöltése miatt kell, hogy jelenjen meg a spinner inkább
       getActiveUsers()
-      getActiveUsers().then(() => {//a then megvárja h megérkezzen a promiset mert ez egy aszinkron fgv
+      getActiveUsers().then(() => {//a then megvárja h megérkezzen a promise mert ez egy aszinkron fgv, csak esztétikai megoldás
         setLoading(false) 
     })
       //setUsersToShow(users)

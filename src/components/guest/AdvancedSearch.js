@@ -18,11 +18,7 @@ export default function AdvancedSearch() {//öszetett kereső logikája
     const handleToChangeGender = (event) => {
         setGenre(event.target.value)
     }
-    //console.log(dateFrom)
-    //console.log(releaseTo)
-    //console.log(keyword)
-    //console.log(title)
-    //console.log(genre)
+ 
 
     const genres = [
         'Action', 'Comedy', 'Drama', 'Thriller', 'Horror', 'Science Fiction', 'Romance', 

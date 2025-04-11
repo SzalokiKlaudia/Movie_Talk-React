@@ -194,6 +194,7 @@ export default function Registration() {
               </label>
               <select class="form-select reg-input" aria-label="gender" value={gender}
                 onChange={handleGenderChange}>
+                <option selected>Choose...</option>
                 <option value="female">female</option>
                 <option value="male">male</option>
               </select>

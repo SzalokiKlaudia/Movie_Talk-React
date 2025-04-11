@@ -93,7 +93,6 @@ export default function UserMovies() {
                     topMovies={topMovies.data} 
                     genres={topMovies.genres}
                     handleToggle={handleToggle} 
-                    isModalOpan={isModalOpen}
                 />
             )}
 

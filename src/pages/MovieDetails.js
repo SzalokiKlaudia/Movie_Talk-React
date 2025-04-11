@@ -14,22 +14,16 @@ export default function MovieDetails() {
   
 
     const location = useLocation()
-    //const { movie } = location.state //megkaptuk az akt film adatait
     const { getUserMovies, postUserAddMovie } = useMovieDataContext()
-    const { getUser, user } = useAuthContext()
-    const [ isModalWatchAgainOpen, setIsModalWatchAgainOpen ] = useState(false)
+    const { user } = useAuthContext()
     const navigate = useNavigate()
 
- 
     const movie = location.state?.movie //location.state-ből kapjuk a movie adatt
 
     if(!movie){
         return <div className='loading'><FontAwesomeIcon icon={faSpinner} spin size="3x"/></div>
 
-
     }
-
-    
     console.log(movie)
 
     //console.log(movie.genres)
@@ -42,15 +36,13 @@ export default function MovieDetails() {
     //console.log(newReleaseDate)
     const handleClickWatching = async (event) => { //itt kezeljük a listába rakás logikát a gombnál
         //event.preventDefault()
-        setIsModalWatchAgainOpen(true)
-
         const id = movie.id
-        console.log(id)
+        //console.log(id)
         const data = { // összegyűjtjük opbektumba az űrlap adatait
             movie_id: id,
           
         }
-        console.log(data)
+        //console.log(data)
 
         try {
             await postUserAddMovie(data, 'api/user/add-movies')
@@ -59,8 +51,6 @@ export default function MovieDetails() {
         } catch (error) {
             console.error('Error adding movie:', error)
         }
-       
-        setIsModalWatchAgainOpen(false)
 
         if(user){
 
@@ -71,9 +61,6 @@ export default function MovieDetails() {
             
             navigate('/login')
         }
-
-        
-
 
     }
   return (

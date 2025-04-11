@@ -62,9 +62,6 @@ export default function UserMovie(props) {
       }
     }
 
-    
-
-
     const defRate = () => {
       let nullRating = null
 
@@ -76,8 +73,6 @@ export default function UserMovie(props) {
 
     }
 
-   
- 
   return (
     <>
 
@@ -92,14 +87,7 @@ export default function UserMovie(props) {
         {actionButton()}
       </td>
    
-  
     </tr>
-
-
-      
-
- 
-
     </>
 
 
