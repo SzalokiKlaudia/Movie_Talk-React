@@ -68,16 +68,32 @@ export const MovieDataProvider = ({ children }) => {
 
         //összetett keresés
 
+        const [searchErrors, setSearchErrors] = useState({
+            title: '',
+            releaseFrom: '',
+            releaseTo: '',
+            genre: '',
+            keyword: ''
+        })
+
         const postAdvancedSearch = async ({...data}, route) => {
           try{
             const response = await myAxios.post(route,data)
             if(response.data.success) {
               setFoundMovies(response.data.data)
               console.log('Success')
+              setSearchErrors({})
           }
           }catch(error){
           console.log(error)
           setFoundMovies([])
+          setSearchErrors({
+            title: error.response.data.errors.title,
+            releaseFrom: error.response.data.errors.releaseFrom,
+            releaseTo: error.response.data.errors.releaseTo,
+            genre: error.response.data.errors.genre,
+            keyword: error.response.data.errors.keyword
+          })
           }
         }
 
@@ -110,6 +126,11 @@ export const MovieDataProvider = ({ children }) => {
         }
        
         //érétkelés
+        const [ errors, setErrors ] = useState({
+          rating: '',
+          watching_date: ''
+        })
+  
         const patchRating = async ({...data}, route) => {
           try{
             const response = await myAxios.patch(route,data)
@@ -118,9 +139,15 @@ export const MovieDataProvider = ({ children }) => {
               console.log(response)
               Swal.fire("You have succesfully rated the selected movie!")
               getUserMovies()
+              setErrors({})
             }
           }catch(error){
             console.error('Could not find the route')
+            console.log(error.response.data.errors.watching_date)
+            setErrors({
+              rating: error.response.data.errors.rating,
+              watching_date: error.response.data.errors.watching_date
+            })
           }
 
         }
@@ -180,8 +207,8 @@ export const MovieDataProvider = ({ children }) => {
 
         
       return (
-        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, getTopUsers, topUsers,foundMovies, setFoundMovies, postSearchByTitle, 
-          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message, getMyTopMovies, topMovies}}>
+        <MovieDataContext.Provider value={{ pMovies, usersTopMovies, getTopUsers, topUsers,foundMovies,searchErrors, setFoundMovies, postSearchByTitle, 
+          foundMovies, postAdvancedSearch, setFoundMovies, userMovies, getUserMovies, patchRating, postUserAddMovie, setUserMovies, message, getMyTopMovies, topMovies, errors}}>
           {children}
         </MovieDataContext.Provider>
       )

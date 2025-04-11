@@ -2,14 +2,21 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../style/MovieCard.css'
+import useAuthContext from '../../contexts/AuthContext'
 
 export default function UserTopMovie(props) {
+  const {user} = useAuthContext()
+
+  console.log(user)
   const navigate = useNavigate()
 
 
   const handleClick = () => {
     console.log(props.movie)
-    navigate(`/movie/${props.movie.movie_id}/details`, { state: { movie: props.movie } })
+    if(!user || user.is_admin == 0){
+      navigate(`/movie/${props.movie.movie_id}/details`, { state: { movie: props.movie } })
+    }
+    
 
   }
   return (

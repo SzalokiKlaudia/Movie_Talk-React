@@ -85,6 +85,7 @@ export default function ProfilUser() {
   
           try{
             await postUserDataModify(postData, 'api/user/update')
+            console.log('itt vagyok')
             await getUser()
 
             console.log(postData)
@@ -92,11 +93,15 @@ export default function ProfilUser() {
             setUserErrors({})
     
           }catch(error){
-            setUser_name(user.user_name)
-            setBirth_year(user.birth_year)
-    
-            console.error('No datas')
+            if(error.response){
+              setUser_name(user.user_name)
+              setBirth_year(user.birth_year)
+
+            }
+           
           }
+          console.log(user.user_name)
+            
 
         }else{
         Swal.fire("Please, add a valid email!")

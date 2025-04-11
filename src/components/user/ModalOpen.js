@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../style/UserMovie.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark, faTimes, faTimesCircle, faWindowClose, faX, faXmark } from '@fortawesome/free-solid-svg-icons'
+import useMovieDataContext from '../../contexts/MovieDataContext'
 
 export default function ModalOpen(props) {
-
+    const {errors } = useMovieDataContext()
+    
+   
     const handleSubmitRate = async (event) => { //itt gyűjti össze az adatokat és küldi a backendnek
         event.preventDefault()
 
@@ -28,6 +31,8 @@ export default function ModalOpen(props) {
     const handleCloseRateModalIcon = () => {
         props.setIsModalOpenRate(false)
     }
+
+    console.log(errors.watching_date)
 
   return (
     <>
@@ -53,6 +58,11 @@ export default function ModalOpen(props) {
                         }}
                     />
                 </div>
+                <div>
+                  {errors.watching_date && (
+                    <span className="text-danger">{errors.watching_date[0]}</span>
+                  )}
+                </div>
                 <div className='rate w-100 d-flex justify-content-center'>
                     <label className='mx-2' htmlFor="tentacles">Add your rating:</label>
     
@@ -66,6 +76,11 @@ export default function ModalOpen(props) {
                         min="1"
                         max="5" />
     
+                </div>
+                <div>
+                  {errors.rating && (
+                    <span className="text-danger">{errors.rating[0]}</span>
+                  )}
                 </div>
                 <div className='w-100 d-flex justify-content-center mt-2'>
                     <button

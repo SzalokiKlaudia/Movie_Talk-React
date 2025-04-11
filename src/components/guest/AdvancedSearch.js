@@ -5,7 +5,7 @@ import useMovieDataContext from '../../contexts/MovieDataContext'
 
 export default function AdvancedSearch() {//öszetett kereső logikája
 
-    const { postAdvancedSearch, foundMovies} = useMovieDataContext()
+    const { postAdvancedSearch, searchErrors } = useMovieDataContext()
     
     const [title, setTitle] = useState('') //beállítjuk az állapotukat
     const [releaseFrom, setReleaseFrom] = useState('')
@@ -72,6 +72,11 @@ export default function AdvancedSearch() {//öszetett kereső logikája
                     placeholder='Movie title'
                 />
             </div>
+            <div>
+                  {searchErrors.title && (
+                    <span className="text-danger">{searchErrors.title}</span>
+                  )}
+            </div>
 
             <div className='mb-3'>
                 <label htmlFor="releaseFrom" className="form-label advan-label">
@@ -86,6 +91,12 @@ export default function AdvancedSearch() {//öszetett kereső logikája
                     }}
                 />
             </div>
+            <div>
+                  {searchErrors.releaseFrom && (
+                    <span className="text-danger">{searchErrors.releaseFrom}</span>
+                  )}
+            </div>
+
 
             <div className='mb-3'>
                 <label htmlFor="releaseTo" className="form-label advan-label">
@@ -100,6 +111,12 @@ export default function AdvancedSearch() {//öszetett kereső logikája
                     }}
                 />
             </div>
+            <div>
+                  {searchErrors.releaseTo && (
+                    <span className="text-danger">{searchErrors.releaseTo}</span>
+                  )}
+            </div>
+
 
             <div className="mb-3">
     
@@ -117,6 +134,12 @@ export default function AdvancedSearch() {//öszetett kereső logikája
                 
                 </select>
             </div>
+            <div>
+                  {searchErrors.genre && (
+                    <span className="text-danger">{searchErrors.genre}</span>
+                  )}
+            </div>
+
 
             <div className='mb-3'>
                 <label htmlFor="keyword"
@@ -133,6 +156,12 @@ export default function AdvancedSearch() {//öszetett kereső logikája
                     placeholder='Keyword'
                 />
             </div>
+            <div>
+                  {searchErrors.keyword && (
+                    <span className="text-danger">{searchErrors.keyword}</span>
+                  )}
+            </div>
+
 
 
                 <div className='btn-search-container d-block mt-5'>
