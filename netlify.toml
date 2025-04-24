@@ -1,18 +1,26 @@
-# netlify.toml
+# netlify.toml (a projekt gyökerében)
+
 [build]
   command = "npm run build"
   publish = "build"
 
-# 1) Statikus asseteket hagyjuk a Netlify-ra (CSS/JS/képek stb.)
+# 1) Statikus assetek (js, css, képek stb.)
 [[redirects]]
-  from   = "/static/"
+  from   = "/static/*"
   to     = "/static/:splat"
   status = 200
   force  = false
 
-# 2) Minden többi hívást proxyzunk az EC2 API-dra
+# 2) Csak az API végpontok proxyzása
 [[redirects]]
-  from   = "/"
-  to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/:splat"
+  from   = "/api/*"
+  to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/api/:splat"
   status = 200
   force  = true
+
+# 3) Minden más URL (pl. '/', '/login', '/movies/123') → index.html
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+  force  = false
