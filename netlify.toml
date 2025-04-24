@@ -1,26 +1,50 @@
-# netlify.toml (a projekt gyökerében)
+# netlify.toml
 
 [build]
   command = "npm run build"
   publish = "build"
 
-# 1) Statikus assetek (js, css, képek stb.)
+# 1) Statisztikus fájlok Netlify-ról
 [[redirects]]
   from   = "/static/*"
   to     = "/static/:splat"
   status = 200
   force  = false
 
-# 2) Csak az API végpontok proxyzása
+# 2) Külön POST proxy a regisztrációhoz
+[[redirects]]
+  from    = "/register"
+  to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/register"
+  status  = 200
+  force   = true
+  methods = ["POST","OPTIONS"]
+
+# 3) Külön POST proxy a bejelentkezéshez
+[[redirects]]
+  from    = "/login"
+  to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/login"
+  status  = 200
+  force   = true
+  methods = ["POST","OPTIONS"]
+
+# 4) Külön POST proxy a kijelentkezéshez
+[[redirects]]
+  from    = "/logout"
+  to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/logout"
+  status  = 200
+  force   = true
+  methods = ["POST","OPTIONS"]
+
+# 5) Minden egyéb /api/* hívás proxyzása
 [[redirects]]
   from   = "/api/*"
   to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/api/:splat"
   status = 200
   force  = true
 
-# 3) Minden más URL (pl. '/', '/login', '/movies/123') → index.html
+# 6) Minden más útvonal – SPA-fallback React-nek
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
   status = 200
-  force  = false
+  force  = true
