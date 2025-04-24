@@ -31,8 +31,9 @@ export default function UserNav() {
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
 
-   const baseUrl = "http://localhost:8000/storage"
-  const imageUrl = baseUrl + `/${profilPicture}`
+  const baseURL= process.env.NODE_ENV === 'production' ? '/' : process.env.REACT_APP_API_URL || 'http://localhost:8000/storage'
+
+  const imageUrl = baseURL + `/${profilPicture}`
 
   //console.log(user)
 

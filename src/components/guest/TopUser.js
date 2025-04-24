@@ -8,7 +8,8 @@ export default function TopUser(props) {
     
     //console.log(props.user)
     //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
-    const baseUrl = "http://localhost:8000/storage"
+    const baseUrl = process.env.NODE_ENV === 'production' ? '/' : process.env.REACT_APP_API_URL || 'http://localhost:8000/storage'
+
     const imageUrl = baseUrl + `/${props.user.profile_picture_name}`
     //console.log(props.user.profile_picture_name)
     const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
