@@ -1,0 +1,18 @@
+# netlify.toml
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# 1) Statikus asseteket hagyjuk a Netlify-ra (CSS/JS/képek stb.)
+[[redirects]]
+  from   = "/static/"
+  to     = "/static/:splat"
+  status = 200
+  force  = false
+
+# 2) Minden többi hívást proxyzunk az EC2 API-dra
+[[redirects]]
+  from   = "/"
+  to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/:splat"
+  status = 200
+  force  = true
