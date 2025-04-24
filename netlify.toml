@@ -4,14 +4,14 @@
   command = "npm run build"
   publish = "build"
 
-# 1) Statisztikus fájlok Netlify-ról
+# 1) Statisztikus assetek
 [[redirects]]
   from   = "/static/*"
   to     = "/static/:splat"
   status = 200
   force  = false
 
-# 2) Külön POST proxy a regisztrációhoz
+# 2) Auth-végpontok proxy
 [[redirects]]
   from    = "/register"
   to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/register"
@@ -19,7 +19,6 @@
   force   = true
   methods = ["POST","OPTIONS"]
 
-# 3) Külön POST proxy a bejelentkezéshez
 [[redirects]]
   from    = "/login"
   to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/login"
@@ -27,7 +26,6 @@
   force   = true
   methods = ["POST","OPTIONS"]
 
-# 4) Külön POST proxy a kijelentkezéshez
 [[redirects]]
   from    = "/logout"
   to      = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/logout"
@@ -35,14 +33,21 @@
   force   = true
   methods = ["POST","OPTIONS"]
 
-# 5) Minden egyéb /api/* hívás proxyzása
+# 3) API-hívások proxy
 [[redirects]]
   from   = "/api/*"
   to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/api/:splat"
   status = 200
   force  = true
 
-# 6) Minden más útvonal – SPA-fallback React-nek
+# 4) Képek (storage) proxy
+[[redirects]]
+  from   = "/storage/*"
+  to     = "http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com/storage/:splat"
+  status = 200
+  force  = true
+
+# 5) SPA-fallback (minden más -> index.html)
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
