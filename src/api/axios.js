@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const  myAxios=axios.create({
 
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000/',
 
 
     withCredentials: true, //kérések atzonosítása cookie-k segítségével

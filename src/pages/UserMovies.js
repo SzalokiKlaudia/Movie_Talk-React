@@ -16,7 +16,7 @@ export default function UserMovies() {
     const [ isModalOpen, setIsModalOpen ] = useState(true)
 
 
-    useEffect(() => {
+    useEffect(() => {// mindig az aktuálisan bej-ett user film adatai látszódjanak
         if (user) {
             setUserMovies([]) //régi adatok töröl
             setFilteredMovies([])// szürteket is
