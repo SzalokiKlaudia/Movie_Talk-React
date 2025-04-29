@@ -7,7 +7,7 @@ import useAuthContext from '../../contexts/AuthContext'
 export default function UserTopMovie(props) {
   const {user} = useAuthContext()
 
-  console.log(user)
+  //console.log(user)
   const navigate = useNavigate()
 
 

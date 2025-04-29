@@ -4,7 +4,7 @@ import '../../style/TopUsers.css'
 
 export default function TopUser(props) {
     
-    //console.log(props.user)
+    console.log(props.user)
     //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
     const baseUrl = (process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API_URL)
 

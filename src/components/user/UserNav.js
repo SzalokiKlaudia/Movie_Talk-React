@@ -31,11 +31,12 @@ export default function UserNav() {
     navigate("/") // Átirányít a főoldalra (vendég kezdőoldal)
   }
 
+  console.log(user)
+
   const baseUrl = (process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API_URL)
+  const imageUrl = baseUrl + `${profilPicture}`
 
-  const imageUrl = baseUrl + `/${profilPicture}`
-
-  //console.log(user)
+  console.log(profilPicture)
 
   //egyszerű keresés
 
@@ -139,7 +140,7 @@ export default function UserNav() {
             aria-expanded={isOpen ? "true" : "false"} //itt látjuk h a menü nyitva van-e vagy sem, a isOpen értékét ami false alapban
             onClick={toggleMenuProfil}>
              <div className='avatar'>
-                <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+                <img src={imageUrl || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
             </div>
             <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
 

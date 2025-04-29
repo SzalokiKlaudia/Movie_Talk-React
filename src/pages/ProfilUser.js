@@ -20,7 +20,8 @@ export default function ProfilUser() {
     const [ isEdit, setIsEdit ] = useState(false)//ikonok láthatóságáért felel ha true active lesz, és a gomb feliratért false-ként edit, true-ként save, input szerkesztéséért felel
 
     const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-    const profileImage = profilPicture ? profilPicture : defaultProfilePicture
+    const baseUrl = (process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API_URL)
+    const imageUrl = baseUrl + `${profilPicture}`
     //ha nincs kiválasztott kép a default kép lesz, ha van akkor a kiválasztott lesz
 
 
@@ -158,7 +159,7 @@ export default function ProfilUser() {
                       component="span">
                       <Avatar id="avatar"
                         className='profile-avatar' 
-                        src={profileImage}
+                        src={imageUrl || defaultProfilePicture}
                       />
 
                     </IconButton>

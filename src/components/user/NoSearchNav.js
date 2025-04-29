@@ -13,6 +13,9 @@ export default function NoSearchNav() {
   //console.log(user)
 
   const navigate = useNavigate() // Navigációhoz szükséges hook
+
+  const baseUrl = (process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API_URL)
+  const imageUrl = baseUrl + `${profilPicture}`
   const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
 
 
@@ -78,7 +81,7 @@ export default function NoSearchNav() {
              onClick={toggleMenuProfil}>
              
              <div className='avatar'>
-              <img src={profilPicture || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
+              <img src={imageUrl || defaultProfilePicture}/>  {/* felhasználó kör ikonja */}
               </div>
                
               <span className="fw-semibold">{user.user_name}</span>  {/* felh neve */}
