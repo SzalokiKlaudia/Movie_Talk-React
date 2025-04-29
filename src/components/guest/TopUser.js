@@ -1,16 +1,14 @@
 import React from 'react'
 import '../../style/TopUsers.css'
-import useFileContext from '../../contexts/FileContext';
-import useAuthContext from '../../contexts/AuthContext';
 
 
 export default function TopUser(props) {
     
     //console.log(props.user)
     //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
-    const baseUrl = (process.env.NODE_ENV === 'production' ? 'http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com' : process.env.REACT_APP_API_URL) + '/storage'
+    const baseUrl = (process.env.NODE_ENV === 'production' ? 'http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com' : process.env.REACT_APP_API_URL)
 
-    const imageUrl = baseUrl + `/${props.user.profile_picture_name}`
+    const imageUrl = baseUrl + `${props.user.profile_picture_name}`
     //console.log(props.user.profile_picture_name)
     const defaultProfilePicture = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
 
@@ -21,7 +19,7 @@ export default function TopUser(props) {
   return (
     <li className='user'>
         <div className='avatar'>
-            <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="picture" />
+            <img src={props.user.profile_picture_name ? imageUrl : defaultProfilePicture}  alt="picture_profile" />
 
         </div>
         <div className='data'>
