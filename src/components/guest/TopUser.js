@@ -6,7 +6,7 @@ export default function TopUser(props) {
     
     //console.log(props.user)
     //áthoztuk a lekérdezésből a számot h mely felh hányszor szavazott és abból top 5 ez a number
-    const baseUrl = (process.env.NODE_ENV === 'production' ? 'http://ec2-16-171-241-40.eu-north-1.compute.amazonaws.com' : process.env.REACT_APP_API_URL)
+    const baseUrl = (process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_API_URL)
 
     const imageUrl = baseUrl + `${props.user.profile_picture_name}`
     //console.log(props.user.profile_picture_name)
