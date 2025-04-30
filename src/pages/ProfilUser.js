@@ -143,6 +143,7 @@ export default function ProfilUser() {
       <div className="container p-0 custom-border-user">
         <div className='profil-cont'>
           <form className='form' onSubmit={handleSubmit}>
+            <span className='mini-text'>Upload an image  in JPG or PNG or JPEG format with a max size of 2MB.</span>
 
               <div className='update-image-section d-flex align-items-center'>
                   <input type="file" 
